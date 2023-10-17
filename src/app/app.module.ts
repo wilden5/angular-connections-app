@@ -9,6 +9,9 @@ import { SearchResultsComponent } from './search/search-results/search-results.c
 import { SearchItemComponent } from './search/search-item/search-item.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
+import { AuthModule } from './auth/auth.module';
+import { HeaderModule } from './header/header.module';
+import { SearchModule } from './search/search.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,7 @@ import { RegistrationComponent } from './auth/registration/registration.componen
     LoginComponent,
     RegistrationComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, AuthModule, HeaderModule, SearchModule],
   providers: [],
   bootstrap: [AppComponent],
 })
