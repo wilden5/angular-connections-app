@@ -1,1 +1,10 @@
-<p>header works!</p>
+<div class="header-container">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <img class="app-logo" [ngSrc]="'./assets/app-logo.png'" alt="app-logo" height="50" width="50" priority="true" />
+      <div class="search-container"></div>
+      <input class="header-input" type="text" />
+      <button class="search-button" mat-raised-button color="accent">Search</button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

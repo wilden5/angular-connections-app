@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { NgOptimizedImage } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header/header.component';
@@ -24,7 +27,17 @@ import { SearchModule } from './search/search.module';
     LoginComponent,
     RegistrationComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, AuthModule, HeaderModule, SearchModule, BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AuthModule,
+    HeaderModule,
+    SearchModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    NgOptimizedImage,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
