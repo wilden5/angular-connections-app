@@ -1,1 +1,5 @@
-<p>search-results works!</p>
+<div class="search-results-container">
+  <div *ngFor="let item of mockArray">
+    <app-search-item [searchItem]="item"></app-search-item>
+  </div>
+</div>
