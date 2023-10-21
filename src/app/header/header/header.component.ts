@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  showFilter = false;
+
+  toggleFilter(): void {
+    this.showFilter = !this.showFilter;
+  }
+}
