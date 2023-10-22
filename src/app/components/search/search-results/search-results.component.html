@@ -1,5 +1,8 @@
 <div>
-  <app-filter (sortByViews)="sortByViewsCount()" (sortByDate)="sortByDate()"></app-filter>
+  <app-filter
+    (sortByViewsRequested)="sortByViewsCount()"
+    (sortByDateRequested)="sortByDate()"
+    (sortByKeyWordRequested)="sortByKeyword($event)"></app-filter>
 </div>
 <div class="search-results-container">
   <div *ngFor="let item of filteredItemsArray">

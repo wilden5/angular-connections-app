@@ -6,15 +6,22 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./filter.component.scss'],
 })
 export class FilterComponent {
-  @Output() sortByViews = new EventEmitter<void>();
+  @Output() sortByViewsRequested = new EventEmitter<void>();
 
-  @Output() sortByDate = new EventEmitter<void>();
+  @Output() sortByDateRequested = new EventEmitter<void>();
 
-  onSortByViews(): void {
-    this.sortByViews.emit();
+  @Output() sortByKeyWordRequested = new EventEmitter<string>();
+
+  onSortByViewsClick(): void {
+    this.sortByViewsRequested.emit();
   }
 
-  onSortByDate(): void {
-    this.sortByDate.emit();
+  onSortByDateClick(): void {
+    this.sortByDateRequested.emit();
+  }
+
+  onSortByKeywordInputChange(event: Event): void {
+    const searchTerm = (event.target as HTMLInputElement).value;
+    this.sortByKeyWordRequested.emit(searchTerm);
   }
 }

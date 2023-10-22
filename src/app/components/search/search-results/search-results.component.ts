@@ -62,4 +62,12 @@ export class SearchResultsComponent implements OnInit {
     }
     this.isSortAscDate = !this.isSortAscDate;
   }
+
+  sortByKeyword(searchTerm: string): void {
+    const loweredSearchTerm = searchTerm.toLowerCase();
+
+    this.filteredItemsArray = this.itemsArray.filter((item) =>
+      item.snippet.title.toLowerCase().includes(loweredSearchTerm)
+    );
+  }
 }
