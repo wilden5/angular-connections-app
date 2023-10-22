@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ISearchItem } from '../../models/search-item.model';
-import { YoutubeItemService } from '../../services/youtube-item.service';
+import { ISearchItem } from '../../../models/search-item.model';
+import { YoutubeItemService } from '../../../services/youtube-item.service';
 
 @Component({
   selector: 'app-search-results',

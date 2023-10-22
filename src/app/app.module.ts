@@ -9,15 +9,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header/header.component';
-import { FilterComponent } from './header/filter/filter.component';
-import { SearchResultsComponent } from './search/search-results/search-results.component';
-import { SearchItemComponent } from './search/search-item/search-item.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegistrationComponent } from './auth/registration/registration.component';
-import { AuthModule } from './auth/auth.module';
-import { HeaderModule } from './header/header.module';
-import { SearchModule } from './search/search.module';
+import { HeaderComponent } from './components/header/header/header.component';
+import { FilterComponent } from './components/header/filter/filter.component';
+import { SearchResultsComponent } from './components/search/search-results/search-results.component';
+import { SearchItemComponent } from './components/search/search-item/search-item.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegistrationComponent } from './components/auth/registration/registration.component';
 import { ColoredBorderDirective } from './directives/colored-border.directive';
 
 @NgModule({
@@ -34,9 +31,6 @@ import { ColoredBorderDirective } from './directives/colored-border.directive';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AuthModule,
-    HeaderModule,
-    SearchModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
