@@ -12,11 +12,11 @@ export class FilterComponent {
 
   @Output() sortByKeyWordRequested = new EventEmitter<string>();
 
-  onSortByViewsClick(): void {
+  onSortByViewsButtonClick(): void {
     this.sortByViewsRequested.emit();
   }
 
-  onSortByDateClick(): void {
+  onSortByDateButtonClick(): void {
     this.sortByDateRequested.emit();
   }
 

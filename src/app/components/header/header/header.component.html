@@ -10,7 +10,7 @@
         priority="true" />
       <input class="header-input" type="text" />
       <button class="search-button" mat-raised-button color="primary">Search</button>
-      <button (click)="toggleFilter()" class="filter-button" mat-mini-fab color="primary">
+      <button (click)="onToggleFiltersButtonClick()" class="filter-button" mat-mini-fab color="primary">
         <mat-icon>settings</mat-icon>
       </button>
       <div class="login-information">
@@ -19,9 +19,6 @@
           <mat-icon>supervised_user_circle</mat-icon>
         </button>
       </div>
-    </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="showFilter">
-      <app-filter></app-filter>
     </mat-toolbar-row>
   </mat-toolbar>
 </div>

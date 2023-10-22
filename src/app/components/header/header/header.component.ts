@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FiltersVisibilityService } from '../../../services/filters-visibility.service';
 
 @Component({
   selector: 'app-header',
@@ -6,9 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  showFilter = false;
+  constructor(private filtersVisibilityService: FiltersVisibilityService) {}
 
-  toggleFilter(): void {
-    this.showFilter = !this.showFilter;
+  onToggleFiltersButtonClick(): void {
+    this.filtersVisibilityService.toggleFiltersVisibility();
   }
 }

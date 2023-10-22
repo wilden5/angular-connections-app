@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ISearchItem } from '../../../models/search-item.model';
 import { YoutubeItemService } from '../../../services/youtube-item.service';
 import { SortByKeywordPipe } from '../../../pipes/sort-by-keyword.pipe';
+import { FiltersVisibilityService } from '../../../services/filters-visibility.service';
 
 @Component({
   selector: 'app-search-results',
@@ -21,7 +22,8 @@ export class SearchResultsComponent implements OnInit {
   constructor(
     private youtubeItemService: YoutubeItemService,
     private snackBar: MatSnackBar,
-    private sortByKeywordPipe: SortByKeywordPipe
+    private sortByKeywordPipe: SortByKeywordPipe,
+    public filtersVisibilityService: FiltersVisibilityService
   ) {}
 
   setSnackBar(customMsg: string): void {
