@@ -1,3 +1,6 @@
+<div>
+  <app-filter (sortByViews)="sortByViewsCount()" (sortByDate)="sortByDate()"></app-filter>
+</div>
 <div class="search-results-container">
   <div *ngFor="let item of filteredItemsArray">
     <app-search-item [searchItem]="item"></app-search-item>

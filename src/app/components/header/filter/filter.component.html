@@ -1,7 +1,7 @@
 <div class="sort-container">
   <span class="sort-label">Sorting by:</span>
-  <button mat-button color="primary">date</button>
-  <button mat-button color="primary">count of views</button>
+  <button mat-button color="primary" (click)="onSortByDate()">date</button>
+  <button mat-button color="primary" (click)="onSortByViews()">count of views</button>
   <span class="by-word-or-sentence">by word or sentence</span>
   <input class="filter-input" type="text" />
 </div>
