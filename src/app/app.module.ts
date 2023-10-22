@@ -18,6 +18,7 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { AuthModule } from './auth/auth.module';
 import { HeaderModule } from './header/header.module';
 import { SearchModule } from './search/search.module';
+import { ColoredBorderDirective } from './directives/colored-border.directive';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SearchModule } from './search/search.module';
     SearchItemComponent,
     LoginComponent,
     RegistrationComponent,
+    ColoredBorderDirective,
   ],
   imports: [
     BrowserModule,

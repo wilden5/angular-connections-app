@@ -26,5 +26,6 @@
     </div>
     <mat-card-title class="item-title">{{searchItem.snippet.title}}</mat-card-title>
     <button class="more-button" mat-raised-button color="primary">more...</button>
+    <div [appColoredBorder]="searchItem.snippet.publishedAt" class="item-border"></div>
   </mat-card>
 </div>
