@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ISearchItem } from '../../../models/search-item.model';
 import { YoutubeItemService } from '../../../services/youtube-item.service';
+import { SortByKeywordPipe } from '../../../pipes/sort-by-keyword.pipe';
 
 @Component({
   selector: 'app-search-results',
@@ -19,7 +20,8 @@ export class SearchResultsComponent implements OnInit {
 
   constructor(
     private youtubeItemService: YoutubeItemService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private sortByKeywordPipe: SortByKeywordPipe
   ) {}
 
   setSnackBar(customMsg: string): void {
@@ -64,10 +66,6 @@ export class SearchResultsComponent implements OnInit {
   }
 
   sortByKeyword(searchTerm: string): void {
-    const loweredSearchTerm = searchTerm.toLowerCase();
-
-    this.filteredItemsArray = this.itemsArray.filter((item) =>
-      item.snippet.title.toLowerCase().includes(loweredSearchTerm)
-    );
+    this.filteredItemsArray = this.sortByKeywordPipe.transform(this.itemsArray, searchTerm);
   }
 }

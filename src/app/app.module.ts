@@ -17,6 +17,7 @@ import { SearchItemComponent } from './components/search/search-item/search-item
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegistrationComponent } from './components/auth/registration/registration.component';
 import { ColoredBorderDirective } from './directives/colored-border.directive';
+import { SortByKeywordPipe } from './pipes/sort-by-keyword.pipe';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ColoredBorderDirective } from './directives/colored-border.directive';
     LoginComponent,
     RegistrationComponent,
     ColoredBorderDirective,
+    SortByKeywordPipe,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,7 @@ import { ColoredBorderDirective } from './directives/colored-border.directive';
     MatCardModule,
     MatSnackBarModule,
   ],
-  providers: [],
+  providers: [SortByKeywordPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
