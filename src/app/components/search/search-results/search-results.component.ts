@@ -5,6 +5,7 @@ import { YoutubeItemService } from '../../../services/youtube-item.service';
 import { SortByKeywordPipe } from '../../../pipes/sort-by-keyword.pipe';
 import { FiltersVisibilityService } from '../../../services/filters-visibility.service';
 import { SearchService } from '../../../services/search.service';
+import { projectConstants } from '../../../utils/project-constants';
 
 @Component({
   selector: 'app-search-results',
@@ -36,7 +37,7 @@ export class SearchResultsComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  performSearchQuery(): void {
     if (this.searchService.getSearchQuery()) {
       this.youtubeItemService
         .getYoutubeItemsBySearchQuery(this.searchService.getSearchQuery() as string)
@@ -52,13 +53,17 @@ export class SearchResultsComponent implements OnInit {
     }
   }
 
+  ngOnInit(): void {
+    this.performSearchQuery();
+  }
+
   sortByViewsCount(): void {
     if (this.isSortAscViews) {
       this.filteredItemsArray.sort((a, b) => Number(a.statistics.viewCount) - Number(b.statistics.viewCount));
-      this.setSnackBar('Sorted by views count in ascending order!');
+      this.setSnackBar(projectConstants.SORT_BY_VIEWS_ASC);
     } else {
       this.filteredItemsArray.sort((a, b) => Number(b.statistics.viewCount) - Number(a.statistics.viewCount));
-      this.setSnackBar('Sorted by views count in descending order!');
+      this.setSnackBar(projectConstants.SORT_BY_VIEWS_DESC);
     }
     this.isSortAscViews = !this.isSortAscViews;
   }
@@ -68,12 +73,12 @@ export class SearchResultsComponent implements OnInit {
       this.filteredItemsArray.sort(
         (a, b) => new Date(a.snippet.publishedAt).getTime() - new Date(b.snippet.publishedAt).getTime()
       );
-      this.setSnackBar('Sorted by published date in ascending order!');
+      this.setSnackBar(projectConstants.SORT_BY_DATE_ASC);
     } else {
       this.filteredItemsArray.sort(
         (a, b) => new Date(b.snippet.publishedAt).getTime() - new Date(a.snippet.publishedAt).getTime()
       );
-      this.setSnackBar('Sorted by published date in descending order!');
+      this.setSnackBar(projectConstants.SORT_BY_DATE_DESC);
     }
     this.isSortAscDate = !this.isSortAscDate;
   }
