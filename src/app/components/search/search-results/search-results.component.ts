@@ -4,6 +4,7 @@ import { ISearchItem } from '../../../models/search-item.model';
 import { YoutubeItemService } from '../../../services/youtube-item.service';
 import { SortByKeywordPipe } from '../../../pipes/sort-by-keyword.pipe';
 import { FiltersVisibilityService } from '../../../services/filters-visibility.service';
+import { SearchService } from '../../../services/search.service';
 
 @Component({
   selector: 'app-search-results',
@@ -23,7 +24,8 @@ export class SearchResultsComponent implements OnInit {
     private youtubeItemService: YoutubeItemService,
     private snackBar: MatSnackBar,
     private sortByKeywordPipe: SortByKeywordPipe,
-    public filtersVisibilityService: FiltersVisibilityService
+    protected filtersVisibilityService: FiltersVisibilityService,
+    protected searchService: SearchService
   ) {}
 
   setSnackBar(customMsg: string): void {
@@ -35,10 +37,19 @@ export class SearchResultsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.youtubeItemService.getYoutubeItems().subscribe((data) => {
-      this.itemsArray = data;
-      this.filteredItemsArray = data;
-    });
+    if (this.searchService.getSearchQuery()) {
+      this.youtubeItemService
+        .getYoutubeItemsBySearchQuery(this.searchService.getSearchQuery() as string)
+        .subscribe((data) => {
+          this.itemsArray = data;
+          this.filteredItemsArray = data;
+        });
+    } else {
+      this.youtubeItemService.getYoutubeItems().subscribe((data) => {
+        this.itemsArray = data;
+        this.filteredItemsArray = data;
+      });
+    }
   }
 
   sortByViewsCount(): void {

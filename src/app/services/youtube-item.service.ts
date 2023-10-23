@@ -7,8 +7,11 @@ import { youtubeResponse } from '../../mocks/youtube.mock';
   providedIn: 'root',
 })
 export class YoutubeItemService {
-  // eslint-disable-next-line class-methods-use-this
   getYoutubeItems(): Observable<ISearchItem[]> {
     return of(youtubeResponse.items);
+  }
+
+  getYoutubeItemsBySearchQuery(query: string): Observable<ISearchItem[]> {
+    return of(youtubeResponse.items.filter((item) => item.snippet.title.toLowerCase().includes(query.toLowerCase())));
   }
 }

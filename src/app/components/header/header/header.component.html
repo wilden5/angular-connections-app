@@ -8,8 +8,10 @@
         height="50"
         width="50"
         priority="true" />
-      <input class="header-input" type="text" />
-      <button class="search-button" mat-raised-button color="primary">Search</button>
+      <input class="header-input" type="text" #searchInput />
+      <button (click)="onSearchButtonClick(searchInput.value)" class="search-button" mat-raised-button color="primary">
+        Search
+      </button>
       <button (click)="onToggleFiltersButtonClick()" class="filter-button" mat-mini-fab color="primary">
         <mat-icon>settings</mat-icon>
       </button>
