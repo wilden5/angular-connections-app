@@ -9,7 +9,11 @@
         width="50"
         priority="true" />
       <input class="header-input" type="text" #searchInput />
-      <button (click)="onSearchButtonClick(searchInput.value)" class="search-button" mat-raised-button color="primary">
+      <button
+        (click)="onSearchButtonClick(searchInput.value ? searchInput.value : ' ')"
+        class="search-button"
+        mat-raised-button
+        color="primary">
         Search
       </button>
       <button (click)="onToggleFiltersButtonClick()" class="filter-button" mat-mini-fab color="primary">
