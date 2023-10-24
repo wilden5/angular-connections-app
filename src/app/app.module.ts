@@ -18,6 +18,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegistrationComponent } from './components/auth/registration/registration.component';
 import { ColoredBorderDirective } from './directives/colored-border.directive';
 import { SortByKeywordPipe } from './pipes/sort-by-keyword.pipe';
+import { CustomButtonComponent } from './components/custom-button/custom-button.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { SortByKeywordPipe } from './pipes/sort-by-keyword.pipe';
     RegistrationComponent,
     ColoredBorderDirective,
     SortByKeywordPipe,
+    CustomButtonComponent,
   ],
   imports: [
     BrowserModule,
