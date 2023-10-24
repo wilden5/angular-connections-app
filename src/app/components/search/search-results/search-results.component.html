@@ -7,8 +7,10 @@
     </app-filter>
   </mat-toolbar-row>
 </mat-toolbar>
-<div class="search-results-container">
-  <div *ngFor="let item of filteredItemsArray">
-    <app-search-item [searchItem]="item"></app-search-item>
+<div *ngIf="searchService.getSearchQueryObservable() | async">
+  <div class="search-results-container">
+    <div *ngFor="let item of filteredItemsArray">
+      <app-search-item [searchItem]="item"></app-search-item>
+    </div>
   </div>
 </div>

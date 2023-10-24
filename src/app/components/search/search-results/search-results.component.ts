@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 import { ISearchItem } from '../../../models/search-item.model';
 import { YoutubeItemService } from '../../../services/youtube-item.service';
 import { SortByKeywordPipe } from '../../../pipes/sort-by-keyword.pipe';
@@ -12,7 +13,7 @@ import { projectConstants } from '../../../utils/project-constants';
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss'],
 })
-export class SearchResultsComponent implements OnInit {
+export class SearchResultsComponent implements OnInit, OnDestroy {
   itemsArray: ISearchItem[] = [];
 
   filteredItemsArray: ISearchItem[] = [];
@@ -20,6 +21,8 @@ export class SearchResultsComponent implements OnInit {
   isSortAscViews = true;
 
   isSortAscDate = true;
+
+  private searchQuerySubscription?: Subscription;
 
   constructor(
     private youtubeItemService: YoutubeItemService,
@@ -37,24 +40,21 @@ export class SearchResultsComponent implements OnInit {
     });
   }
 
-  performSearchQuery(): void {
-    if (this.searchService.getSearchQuery()) {
-      this.youtubeItemService
-        .getYoutubeItemsBySearchQuery(this.searchService.getSearchQuery() as string)
-        .subscribe((data) => {
+  ngOnInit(): void {
+    this.searchQuerySubscription = this.searchService.getSearchQueryObservable().subscribe((query) => {
+      if (query) {
+        this.youtubeItemService.getYoutubeItemsBySearchQuery(query).subscribe((data) => {
           this.itemsArray = data;
           this.filteredItemsArray = data;
         });
-    } else {
-      this.youtubeItemService.getYoutubeItems().subscribe((data) => {
-        this.itemsArray = data;
-        this.filteredItemsArray = data;
-      });
-    }
+      }
+    });
   }
 
-  ngOnInit(): void {
-    this.performSearchQuery();
+  ngOnDestroy(): void {
+    if (this.searchQuerySubscription) {
+      this.searchQuerySubscription.unsubscribe();
+    }
   }
 
   sortByViewsCount(): void {

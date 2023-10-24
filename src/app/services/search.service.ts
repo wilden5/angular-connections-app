@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
-  private searchQuery: string | undefined;
+  private searchQuerySubject = new BehaviorSubject<string | undefined>(undefined);
 
-  isSearchTriggered = false;
-
-  getSearchQuery(): string | undefined {
-    return this.searchQuery;
+  setSearchObservable(query: string): void {
+    this.searchQuerySubject.next(query);
   }
 
-  setSearchQuery(query: string): void {
-    this.searchQuery = query;
+  getSearchQueryObservable(): Observable<string | undefined> {
+    return this.searchQuerySubject.asObservable();
   }
 }

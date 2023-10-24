@@ -18,7 +18,6 @@ export class HeaderComponent {
   }
 
   onSearchButtonClick(searchQuery: string): void {
-    this.searchService.isSearchTriggered = true;
-    this.searchService.setSearchQuery(searchQuery);
+    this.searchService.setSearchObservable(searchQuery);
   }
 }
