@@ -31,7 +31,6 @@ import { CustomButtonComponent } from './components/custom-button/custom-button.
     RegistrationComponent,
     ColoredBorderDirective,
     SortByKeywordPipe,
-    CustomButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +42,7 @@ import { CustomButtonComponent } from './components/custom-button/custom-button.
     MatIconModule,
     MatCardModule,
     MatSnackBarModule,
+    CustomButtonComponent,
   ],
   providers: [SortByKeywordPipe],
   bootstrap: [AppComponent],
