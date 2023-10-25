@@ -8,6 +8,11 @@
   justify-content: center;
 }
 
+.gear-icon {
+  margin-top: 1rem;
+  color: #ffff;
+}
+
 .app-logo {
   margin-right: 1.3rem;
 }
@@ -25,16 +30,11 @@
   box-shadow: 0.2rem 0 0.4rem 0 #3f51b5;
 }
 
-.filter-button,
 .login-button {
   border-radius: 0.5rem !important;
   height: 3rem;
   width: 3rem;
   box-shadow: 0.2rem 0 0.4rem 0 #3f51b5;
-}
-
-.filter-button {
-  margin-right: 14.8rem;
 }
 
 .login-information {

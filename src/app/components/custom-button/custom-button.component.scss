@@ -1,0 +1,15 @@
+.filter-button {
+  margin-bottom: 0.2rem;
+  background-color: #3f51b5;
+  margin-right: 14.8rem;
+  border-radius: 0.5rem !important;
+  box-shadow: 0.2rem 0 0.4rem 0 #3f51b5;
+  min-width: unset!important;
+  width: 3rem;
+  height: 3rem;
+  transition: box-shadow 0.3s;
+
+  &:hover {
+    box-shadow: 0 0.2rem 0.4rem 0 #3f51b5;
+  }
+}

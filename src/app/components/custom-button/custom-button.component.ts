@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -10,6 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class CustomButtonComponent {
   @Output() buttonClickRequested = new EventEmitter<void>();
+
+  @Input() customClass: string | undefined;
 
   onButtonClick(): void {
     this.buttonClickRequested.emit();
