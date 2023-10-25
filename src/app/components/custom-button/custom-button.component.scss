@@ -13,3 +13,18 @@
     box-shadow: 0 0.2rem 0.4rem 0 #3f51b5;
   }
 }
+
+.search-button {
+  margin-right: 1rem;
+  height: 2.9rem;
+  border-radius: 0;
+  box-shadow: 0.2rem 0 0.4rem 0 #3f51b5;
+  background-color: #3f51b5;
+  margin-bottom: 0.25rem;
+  transition: box-shadow 0.3s;
+  color: #ffff !important;
+
+  &:hover {
+    box-shadow: 0 0.2rem 0.4rem 0 #3f51b5;
+  }
+}

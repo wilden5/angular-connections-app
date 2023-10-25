@@ -9,13 +9,11 @@
         width="50"
         priority="true" />
       <input class="header-input" type="text" #searchInput />
-      <button
-        (click)="onSearchButtonClick(searchInput.value ? searchInput.value : ' ')"
-        class="search-button"
-        mat-raised-button
-        color="primary">
-        Search
-      </button>
+      <app-custom-button
+        (buttonClickRequested)="onSearchButtonClick(searchInput.value ? searchInput.value : ' ')"
+        customClass="search-button"
+        >Search</app-custom-button
+      >
       <app-custom-button (buttonClickRequested)="onToggleFiltersButtonClick()" customClass="filter-button">
         <mat-icon class="gear-icon">settings</mat-icon>
       </app-custom-button>
