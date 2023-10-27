@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { HeaderComponent } from './components/header/header.component';
-import { CustomButtonComponent } from '../shared/components/custom-button.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -14,9 +14,9 @@ import { CustomButtonComponent } from '../shared/components/custom-button.compon
     MatSnackBarModule,
     MatToolbarModule,
     NgOptimizedImage,
-    CustomButtonComponent,
     MatIconModule,
     MatButtonModule,
+    SharedModule,
   ],
   exports: [HeaderComponent],
 })

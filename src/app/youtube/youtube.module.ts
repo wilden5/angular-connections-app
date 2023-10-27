@@ -8,8 +8,8 @@ import { SearchResultsComponent } from './pages/search/search-results/search-res
 import { SearchItemComponent } from './pages/search/search-item/search-item.component';
 import { ColoredBorderDirective } from './directives/colored-border.directive';
 import { FilterComponent } from './components/filter/filter.component';
-import { CustomButtonComponent } from '../shared/components/custom-button.component';
 import { SortByKeywordPipe } from './pipes/sort-by-keyword.pipe';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { SortByKeywordPipe } from './pipes/sort-by-keyword.pipe';
     FilterComponent,
     SortByKeywordPipe,
   ],
-  imports: [CommonModule, MatCardModule, MatIconModule, MatToolbarModule, CustomButtonComponent, MatButtonModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule, SharedModule],
   exports: [SearchResultsComponent],
   providers: [SortByKeywordPipe],
 })
