@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
-import { projectConstants } from '../utils/project-constants';
+import { projectConstants } from '../../utils/project-constants';
 
 @Directive({
   selector: '[appColoredBorder]',
