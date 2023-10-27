@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
 import { SearchResultsComponent } from './pages/search/search-results/search-results.component';
 import { SearchItemComponent } from './pages/search/search-item/search-item.component';
 import { ColoredBorderDirective } from './directives/colored-border.directive';
@@ -20,15 +16,7 @@ import { YoutubeRoutingModule } from './youtube-routing.module';
     FilterComponent,
     SortByKeywordPipe,
   ],
-  imports: [
-    CommonModule,
-    YoutubeRoutingModule,
-    MatCardModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatButtonModule,
-    SharedModule,
-  ],
+  imports: [CommonModule, YoutubeRoutingModule, SharedModule],
   exports: [SearchResultsComponent],
   providers: [SortByKeywordPipe],
 })

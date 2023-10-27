@@ -6,4 +6,5 @@ export const projectConstants = {
   SIX_MONTHS_IN_SECONDS: 15552000000,
   ONE_MONTH_IN_SECONDS: 2592000000,
   SEVEN_DAYS_IN_SECONDS: 604800000,
+  INACTIVE_FILTERS_WARNING: 'Please use search first to enable query filters!',
 };
