@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { FiltersVisibilityService } from '../../../youtube/services/filters-visibility.service';
 import { SearchService } from '../../../youtube/services/search.service';
 import { projectConstants } from '../../../utils/project-constants';
+import { SnackBarService } from '../../services/snack-bar.service';
 
 @Component({
   selector: 'app-header',
@@ -15,18 +15,14 @@ export class HeaderComponent {
     private filtersVisibilityService: FiltersVisibilityService,
     private searchService: SearchService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBarService: SnackBarService
   ) {}
 
   onToggleFiltersButtonClick(): void {
     if (this.filtersVisibilityService.isSearchUsed) {
       this.filtersVisibilityService.toggleFiltersVisibility();
     } else {
-      this.snackBar.open(projectConstants.INACTIVE_FILTERS_WARNING, '', {
-        duration: 1500,
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-      });
+      this.snackBarService.setSnackBar(projectConstants.INACTIVE_FILTERS_WARNING);
     }
   }
 
