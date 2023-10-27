@@ -10,6 +10,7 @@ import { ColoredBorderDirective } from './directives/colored-border.directive';
 import { FilterComponent } from './components/filter/filter.component';
 import { SortByKeywordPipe } from './pipes/sort-by-keyword.pipe';
 import { SharedModule } from '../shared/shared.module';
+import { YoutubeRoutingModule } from './youtube-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,15 @@ import { SharedModule } from '../shared/shared.module';
     FilterComponent,
     SortByKeywordPipe,
   ],
-  imports: [CommonModule, MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule, SharedModule],
+  imports: [
+    CommonModule,
+    YoutubeRoutingModule,
+    MatCardModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    SharedModule,
+  ],
   exports: [SearchResultsComponent],
   providers: [SortByKeywordPipe],
 })

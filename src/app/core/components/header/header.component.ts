@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FiltersVisibilityService } from '../../../youtube/services/filters-visibility.service';
 import { SearchService } from '../../../youtube/services/search.service';
 
@@ -10,7 +11,8 @@ import { SearchService } from '../../../youtube/services/search.service';
 export class HeaderComponent {
   constructor(
     private filtersVisibilityService: FiltersVisibilityService,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private router: Router
   ) {}
 
   onToggleFiltersButtonClick(): void {
@@ -18,6 +20,7 @@ export class HeaderComponent {
   }
 
   onSearchButtonClick(searchQuery: string): void {
+    this.router.navigate(['/search']);
     this.searchService.setSearchObservable(searchQuery);
   }
 }
