@@ -9,25 +9,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SearchResultsComponent } from './components/search/search-results/search-results.component';
-import { SearchItemComponent } from './components/search/search-item/search-item.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegistrationComponent } from './components/auth/registration/registration.component';
-import { ColoredBorderDirective } from './directives/colored-border.directive';
 import { SortByKeywordPipe } from './pipes/sort-by-keyword.pipe';
 import { CustomButtonComponent } from './components/custom-button/custom-button.component';
 import { CoreModule } from './core/core.module';
+import { YoutubeModule } from './youtube/youtube.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SearchResultsComponent,
-    SearchItemComponent,
-    LoginComponent,
-    RegistrationComponent,
-    ColoredBorderDirective,
-    SortByKeywordPipe,
-  ],
+  declarations: [AppComponent, LoginComponent, RegistrationComponent, SortByKeywordPipe],
   imports: [
     CoreModule,
     BrowserModule,
@@ -39,6 +29,7 @@ import { CoreModule } from './core/core.module';
     MatIconModule,
     MatSnackBarModule,
     CustomButtonComponent,
+    YoutubeModule,
   ],
   providers: [SortByKeywordPipe],
   bootstrap: [AppComponent],

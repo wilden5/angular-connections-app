@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FiltersVisibilityService } from '../../../services/filters-visibility.service';
-import { SearchService } from '../../../../services/search.service';
+import { FiltersVisibilityService } from '../../services/filters-visibility.service';
+import { SearchService } from '../../../services/search.service';
 
 @Component({
   selector: 'app-header',
