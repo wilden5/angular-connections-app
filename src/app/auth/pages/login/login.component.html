@@ -3,21 +3,22 @@
   <div class="login-form">
     <mat-form-field>
       <mat-label>Enter your email</mat-label>
-      <input matInput placeholder="pat@example.com" required />
-      <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+      <input [(ngModel)]="user.email" matInput placeholder="pat@example.com" required />
     </mat-form-field>
     <mat-form-field>
       <mat-label>Enter your password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" required />
+      <input [(ngModel)]="user.password" matInput [type]="hidePassword ? 'password' : 'text'" required />
       <button
         mat-icon-button
         matSuffix
-        (click)="hide = !hide"
+        (click)="hidePassword = !hidePassword"
         [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        [attr.aria-pressed]="hidePassword">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
-    <app-custom-button class="abc" customClass="login-button button">Login</app-custom-button>
+    <app-custom-button (buttonClickRequested)="onLoginClick()" class="login-button" customClass="login-button button"
+      >Login</app-custom-button
+    >
   </div>
 </div>

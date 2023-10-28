@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LoginService } from '../../services/login.service';
+import { IUser } from '../../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  hide = true;
+  hidePassword = true;
+
+  user: IUser = {
+    email: '',
+    password: '',
+  };
+
+  constructor(private loginService: LoginService) {}
+
+  onLoginClick(): void {
+    this.loginService.login(this.user);
+  }
 }
