@@ -18,6 +18,7 @@
   height: 3rem;
 }
 
+.more-button,
 .login-button,
 .search-button {
   border-radius: 0;
@@ -33,4 +34,11 @@
 
 .login-cb {
   margin-right: 1rem;
+}
+
+.more-button {
+  width: 12rem;
+  height: 3.2rem;
+  margin-top: auto;
+  border-radius: 0.5rem;
 }

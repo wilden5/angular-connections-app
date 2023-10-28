@@ -8,6 +8,7 @@ import { SortByKeywordPipe } from './pipes/sort-by-keyword.pipe';
 import { SharedModule } from '../shared/shared.module';
 import { YoutubeRoutingModule } from './youtube-routing.module';
 import { CustomButtonComponent } from '../shared/components/custom-button.component';
+import { DetailedInformationComponent } from './pages/detailed-information/detailed-information.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { CustomButtonComponent } from '../shared/components/custom-button.compon
     ColoredBorderDirective,
     FilterComponent,
     SortByKeywordPipe,
+    DetailedInformationComponent,
   ],
   imports: [CommonModule, CustomButtonComponent, YoutubeRoutingModule, SharedModule],
   exports: [SearchResultsComponent],
