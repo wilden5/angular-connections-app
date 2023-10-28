@@ -17,7 +17,7 @@ export class LoginComponent {
 
   constructor(private loginService: LoginService) {}
 
-  onLoginClick(): void {
+  onLoginButtonClick(): void {
     this.loginService.login(this.user);
   }
 }

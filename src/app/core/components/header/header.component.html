@@ -15,13 +15,18 @@
         >Search</app-custom-button
       >
       <app-custom-button (buttonClickRequested)="onToggleFiltersButtonClick()" customClass="filter-button button">
-        <mat-icon class="gear-icon">settings</mat-icon>
+        <mat-icon class="gear-icon icon">settings</mat-icon>
       </app-custom-button>
       <div class="login-information">
         <span class="user-name">Your Name</span>
-        <button class="login-button" mat-mini-fab color="primary">
-          <mat-icon>supervised_user_circle</mat-icon>
-        </button>
+        <div class="login-button-container">
+          <app-custom-button customClass="login-cb button">
+            <mat-icon class="login-icon icon">supervised_user_circle</mat-icon>
+          </app-custom-button>
+          <app-custom-button (buttonClickRequested)="onLogoutButtonClick()" customClass="login-cb button">
+            <mat-icon class="login-icon icon">logout</mat-icon>
+          </app-custom-button>
+        </div>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>

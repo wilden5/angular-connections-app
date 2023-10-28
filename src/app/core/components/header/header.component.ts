@@ -4,6 +4,7 @@ import { FiltersVisibilityService } from '../../../youtube/services/filters-visi
 import { SearchService } from '../../../youtube/services/search.service';
 import { projectConstants } from '../../../utils/project-constants';
 import { SnackBarService } from '../../services/snack-bar.service';
+import { LoginService } from '../../../auth/services/login.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,8 @@ export class HeaderComponent {
     private filtersVisibilityService: FiltersVisibilityService,
     private searchService: SearchService,
     private router: Router,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private loginService: LoginService
   ) {}
 
   onToggleFiltersButtonClick(): void {
@@ -30,5 +32,9 @@ export class HeaderComponent {
     this.filtersVisibilityService.toggleSearchUsed();
     this.router.navigate(['/search']);
     this.searchService.setSearchObservable(searchQuery);
+  }
+
+  onLogoutButtonClick(): void {
+    this.loginService.logout();
   }
 }

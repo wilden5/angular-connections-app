@@ -18,6 +18,7 @@ export class LoginService {
 
   logout(): void {
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userCredentials');
     this.router.navigate(['/login']);
   }
 }

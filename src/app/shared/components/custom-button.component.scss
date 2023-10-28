@@ -9,6 +9,7 @@
   box-shadow: 0 0.2rem 0.4rem 0 #3f51b5;
 }
 
+.login-cb,
 .filter-button {
   margin-bottom: 0.2rem;
   margin-right: 14.8rem;
@@ -28,4 +29,8 @@
 .login-button {
   width: 100%;
   margin: 0;
+}
+
+.login-cb {
+  margin-right: 1rem;
 }

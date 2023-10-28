@@ -8,6 +8,7 @@
   justify-content: center;
 }
 
+.icon,
 .gear-icon {
   margin-top: 1rem;
   color: #ffff;
@@ -41,4 +42,8 @@
   text-align: right;
   font-size: 1.2rem;
   font-weight: 400;
+}
+
+.login-button-container {
+  display: flex;
 }
