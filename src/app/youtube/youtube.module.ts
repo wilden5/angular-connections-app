@@ -7,6 +7,7 @@ import { FilterComponent } from './components/filter/filter.component';
 import { SortByKeywordPipe } from './pipes/sort-by-keyword.pipe';
 import { SharedModule } from '../shared/shared.module';
 import { YoutubeRoutingModule } from './youtube-routing.module';
+import { CustomButtonComponent } from '../shared/components/custom-button.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { YoutubeRoutingModule } from './youtube-routing.module';
     FilterComponent,
     SortByKeywordPipe,
   ],
-  imports: [CommonModule, YoutubeRoutingModule, SharedModule],
+  imports: [CommonModule, CustomButtonComponent, YoutubeRoutingModule, SharedModule],
   exports: [SearchResultsComponent],
   providers: [SortByKeywordPipe],
 })
