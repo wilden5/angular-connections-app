@@ -1,3 +1,9 @@
+<app-custom-button
+  (buttonClickRequested)="onBackButtonClick()"
+  class="back-button"
+  [appColoredBorder]="searchItem?.snippet?.publishedAt">
+  <mat-icon class="back-button-icon">arrow_back_ios</mat-icon>
+</app-custom-button>
 <div class="image-container">
   <img
     class="item-image"

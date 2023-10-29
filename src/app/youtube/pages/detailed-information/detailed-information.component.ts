@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { ISearchItem } from '../../models/search-item.model';
 import { YoutubeItemService } from '../../services/youtube-item.service';
 
@@ -13,7 +14,8 @@ export class DetailedInformationComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private youtubeItemService: YoutubeItemService
+    private youtubeItemService: YoutubeItemService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -23,5 +25,9 @@ export class DetailedInformationComponent implements OnInit {
         this.searchItem = data;
       });
     }
+  }
+
+  onBackButtonClick(): void {
+    this.location.back();
   }
 }

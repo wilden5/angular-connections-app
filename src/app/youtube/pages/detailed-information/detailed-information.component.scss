@@ -76,3 +76,16 @@
   -webkit-line-clamp: 7;
   -webkit-box-orient: vertical;
 }
+
+.back-button {
+  height: 3.2rem;
+  border: none;
+  border-bottom-left-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+}
+
+.back-button-icon {
+  margin-top: 0.3rem;
+  margin-left: 1rem;
+  color: #ffffff;
+}
