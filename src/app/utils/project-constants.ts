@@ -7,4 +7,5 @@ export const projectConstants = {
   ONE_MONTH_IN_SECONDS: 2592000000,
   SEVEN_DAYS_IN_SECONDS: 604800000,
   INACTIVE_FILTERS_WARNING: 'Please use search first to enable query filters!',
+  CLICK_ON_LOGIN_BUTTON: 'Login button has been clicked!',
 };
