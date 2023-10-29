@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { YoutubeRoutingModule } from './youtube-routing.module';
 import { CustomButtonComponent } from '../shared/components/custom-button.component';
 import { DetailedInformationComponent } from './pages/detailed-information/detailed-information.component';
+import { ColoredItemFilterDirective } from './directives/colored-item-filter.directive';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { DetailedInformationComponent } from './pages/detailed-information/detai
     FilterComponent,
     SortByKeywordPipe,
     DetailedInformationComponent,
+    ColoredItemFilterDirective,
   ],
   imports: [CommonModule, CustomButtonComponent, YoutubeRoutingModule, SharedModule],
   exports: [SearchResultsComponent],

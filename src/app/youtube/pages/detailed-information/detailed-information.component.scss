@@ -1,4 +1,4 @@
-:host {
+.item-wrapper {
   display: flex;
   width: 120rem;
   min-height: 46rem;
@@ -38,9 +38,9 @@
 .item-date {
   width: 50%;
   color: #828282;
-  text-align: right;
   font-size: 1.2rem;
   font-weight: 400;
+  text-align: center;
 }
 
 .icons-container {
@@ -82,6 +82,11 @@
   border: none;
   border-bottom-left-radius: 0.5rem;
   border-top-left-radius: 0.5rem;
+  transition: ease-in-out 0.5s;
+
+  &:hover {
+    box-shadow: 0 0.1rem 0.2rem 0 #000000;
+  }
 }
 
 .back-button-icon {

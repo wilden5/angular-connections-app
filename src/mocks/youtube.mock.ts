@@ -314,7 +314,7 @@ export const youtubeResponse: ISearchResponse = {
       etag: '"Fznwjl6JEQdo1MGvHOGaz_YanRU/_99tEunMszVYvCj2-1aUTKgOoSY"',
       id: 'm0yGx2MGZWg',
       snippet: {
-        publishedAt: '2018-05-13T07:44:08.000Z',
+        publishedAt: '2023-10-29T07:44:08.000Z',
         channelId: 'UCe_H8hzx9WV7Ca7Ps5gt72Q',
         title: 'Что такое Angular. Обзор возможностей',
         description:

@@ -1,43 +1,45 @@
-<app-custom-button
-  (buttonClickRequested)="onBackButtonClick()"
-  class="back-button"
-  [appColoredBorder]="searchItem?.snippet?.publishedAt">
-  <mat-icon class="back-button-icon">arrow_back_ios</mat-icon>
-</app-custom-button>
-<div class="image-container">
-  <img
-    class="item-image"
-    src="{{searchItem?.snippet?.thumbnails?.maxres?.url}}"
-    alt="video-thumbnail"
-    height="461"
-    width="729" />
-</div>
-<div class="item-information-container">
-  <div class="information-header">
-    <div class="item-title">{{searchItem?.snippet?.title}}</div>
-    <div class="item-date">{{searchItem?.snippet?.publishedAt | date: 'fullDate'}}</div>
+<div [appColoredItemFilter]="searchItem?.snippet?.publishedAt" class="item-wrapper">
+  <app-custom-button
+    (buttonClickRequested)="onBackButtonClick()"
+    class="back-button"
+    [appColoredBorder]="searchItem?.snippet?.publishedAt">
+    <mat-icon class="back-button-icon">arrow_back_ios</mat-icon>
+  </app-custom-button>
+  <div class="image-container">
+    <img
+      class="item-image"
+      src="{{searchItem?.snippet?.thumbnails?.maxres?.url}}"
+      alt="video-thumbnail"
+      height="461"
+      width="729" />
   </div>
-  <div class="description-container">
-    Description
-    <p class="item-description-text">{{searchItem?.snippet?.description}}</p>
+  <div class="item-information-container">
+    <div class="information-header">
+      <div class="item-title">{{searchItem?.snippet?.title}}</div>
+      <div class="item-date">{{searchItem?.snippet?.publishedAt | date: 'fullDate'}}</div>
+    </div>
+    <div class="description-container">
+      Description
+      <p class="item-description-text">{{searchItem?.snippet?.description}}</p>
+    </div>
+    <div class="icons-container">
+      <span class="item-stat item">
+        <mat-icon class="item-icon">remove_red_eye</mat-icon>
+        {{searchItem?.statistics?.viewCount}}
+      </span>
+      <span class="item-stat item">
+        <mat-icon class="item-icon">thumb_up</mat-icon>
+        {{searchItem?.statistics?.likeCount}}
+      </span>
+      <span class="item-stat item">
+        <mat-icon class="item-icon">thumb_down</mat-icon>
+        {{searchItem?.statistics?.dislikeCount}}
+      </span>
+      <span class="item-stat item">
+        <mat-icon class="item-icon">comment</mat-icon>
+        {{searchItem?.statistics?.commentCount}}
+      </span>
+    </div>
+    <div [appColoredBorder]="searchItem?.snippet?.publishedAt" class="item-border"></div>
   </div>
-  <div class="icons-container">
-    <span class="item-stat item">
-      <mat-icon class="item-icon">remove_red_eye</mat-icon>
-      {{searchItem?.statistics?.viewCount}}
-    </span>
-    <span class="item-stat item">
-      <mat-icon class="item-icon">thumb_up</mat-icon>
-      {{searchItem?.statistics?.likeCount}}
-    </span>
-    <span class="item-stat item">
-      <mat-icon class="item-icon">thumb_down</mat-icon>
-      {{searchItem?.statistics?.dislikeCount}}
-    </span>
-    <span class="item-stat item">
-      <mat-icon class="item-icon">comment</mat-icon>
-      {{searchItem?.statistics?.commentCount}}
-    </span>
-  </div>
-  <div [appColoredBorder]="searchItem?.snippet?.publishedAt" class="item-border"></div>
 </div>
