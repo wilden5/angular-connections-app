@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -6,13 +7,13 @@ import { Injectable } from '@angular/core';
 export class FiltersVisibilityService {
   isFiltersVisible = false;
 
-  isSearchUsed = false;
+  constructor(private router: Router) {}
 
   toggleFiltersVisibility(): void {
     this.isFiltersVisible = !this.isFiltersVisible;
   }
 
-  toggleSearchUsed(): void {
-    this.isSearchUsed = !this.isSearchUsed;
+  isItemOrMainRoute(): boolean {
+    return this.router.url.includes('/item/') || this.router.url === '/';
   }
 }

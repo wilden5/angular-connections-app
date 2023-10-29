@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FiltersVisibilityService } from '../../../youtube/services/filters-visibility.service';
 import { SearchService } from '../../../youtube/services/search.service';
-import { projectConstants } from '../../../utils/project-constants';
-import { SnackBarService } from '../../services/snack-bar.service';
 import { LoginService } from '../../../auth/services/login.service';
 
 @Component({
@@ -13,23 +11,17 @@ import { LoginService } from '../../../auth/services/login.service';
 })
 export class HeaderComponent {
   constructor(
-    private filtersVisibilityService: FiltersVisibilityService,
+    protected filtersVisibilityService: FiltersVisibilityService,
     private searchService: SearchService,
     private router: Router,
-    private snackBarService: SnackBarService,
     private loginService: LoginService
   ) {}
 
   onToggleFiltersButtonClick(): void {
-    if (this.filtersVisibilityService.isSearchUsed) {
-      this.filtersVisibilityService.toggleFiltersVisibility();
-    } else {
-      this.snackBarService.setSnackBar(projectConstants.INACTIVE_FILTERS_WARNING);
-    }
+    this.filtersVisibilityService.toggleFiltersVisibility();
   }
 
   onSearchButtonClick(searchQuery: string): void {
-    this.filtersVisibilityService.toggleSearchUsed();
     this.router.navigate(['/search']);
     this.searchService.setSearchObservable(searchQuery);
   }

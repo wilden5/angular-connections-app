@@ -14,7 +14,10 @@
         customClass="search-button button"
         >Search</app-custom-button
       >
-      <app-custom-button (buttonClickRequested)="onToggleFiltersButtonClick()" customClass="filter-button button">
+      <app-custom-button
+        *ngIf="!filtersVisibilityService.isItemOrMainRoute()"
+        (buttonClickRequested)="onToggleFiltersButtonClick()"
+        customClass="filter-button button">
         <mat-icon class="gear-icon icon">settings</mat-icon>
       </app-custom-button>
       <div class="login-information">
