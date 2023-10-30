@@ -7,9 +7,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { SortByKeywordPipe } from './pipes/sort-by-keyword.pipe';
+import { ColoredBorderDirective } from './directives/colored-border.directive';
+import { ColoredItemFilterDirective } from './directives/colored-item-filter.directive';
 
 @NgModule({
-  declarations: [],
+  declarations: [SortByKeywordPipe, ColoredBorderDirective, ColoredItemFilterDirective],
   imports: [
     CommonModule,
     MatSnackBarModule,
@@ -28,6 +31,9 @@ import { MatInputModule } from '@angular/material/input';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    ColoredBorderDirective,
+    ColoredItemFilterDirective,
   ],
+  providers: [SortByKeywordPipe],
 })
 export class SharedModule {}

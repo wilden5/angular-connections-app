@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ISearchItem } from '../../../models/search-item.model';
 import { YoutubeItemService } from '../../../services/youtube-item.service';
-import { SortByKeywordPipe } from '../../../pipes/sort-by-keyword.pipe';
+import { SortByKeywordPipe } from '../../../../shared/pipes/sort-by-keyword.pipe';
 import { FiltersVisibilityService } from '../../../services/filters-visibility.service';
 import { SearchService } from '../../../services/search.service';
 import { projectConstants } from '../../../../utils/project-constants';

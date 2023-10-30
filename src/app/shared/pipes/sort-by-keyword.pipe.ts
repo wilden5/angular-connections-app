@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ISearchItem } from '../models/search-item.model';
+import { ISearchItem } from '../../youtube/models/search-item.model';
 
 @Pipe({
   name: 'sortByKeyword',
