@@ -5,13 +5,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class SearchService {
-  private searchQuerySubject = new BehaviorSubject<string | undefined>(undefined);
+  private searchQuerySubject = new BehaviorSubject<string>('');
 
   setSearchObservable(query: string): void {
     this.searchQuerySubject.next(query);
   }
 
-  getSearchQueryObservable(): Observable<string | undefined> {
+  getSearchQueryObservable(): Observable<string> {
     return this.searchQuerySubject.asObservable();
   }
 }

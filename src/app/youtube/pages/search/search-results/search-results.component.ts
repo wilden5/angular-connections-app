@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ISearchItem } from '../../../models/search-item.model';
 import { YoutubeItemService } from '../../../services/youtube-item.service';
-import { SortByKeywordPipe } from '../../../../shared/pipes/sort-by-keyword.pipe';
 import { FiltersVisibilityService } from '../../../services/filters-visibility.service';
 import { SearchService } from '../../../services/search.service';
 import { projectConstants } from '../../../../utils/project-constants';
@@ -22,12 +21,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   isSortAscDate = true;
 
+  searchTerm = '';
+
   private searchQuerySubscription?: Subscription;
 
   constructor(
     private youtubeItemService: YoutubeItemService,
     private snackBarService: SnackBarService,
-    private sortByKeywordPipe: SortByKeywordPipe,
     protected filtersVisibilityService: FiltersVisibilityService,
     protected searchService: SearchService
   ) {}
@@ -73,9 +73,5 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       this.snackBarService.setSnackBar(projectConstants.SORT_BY_DATE_DESC);
     }
     this.isSortAscDate = !this.isSortAscDate;
-  }
-
-  sortByKeyword(searchTerm: string): void {
-    this.filteredItemsArray = this.sortByKeywordPipe.transform(this.itemsArray, searchTerm);
   }
 }

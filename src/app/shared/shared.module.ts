@@ -33,6 +33,7 @@ import { ColoredItemFilterDirective } from './directives/colored-item-filter.dir
     MatInputModule,
     ColoredBorderDirective,
     ColoredItemFilterDirective,
+    SortByKeywordPipe,
   ],
   providers: [SortByKeywordPipe],
 })
