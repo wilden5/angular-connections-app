@@ -4,7 +4,7 @@ export interface ISearchResponse {
   kind: string;
   etag: string;
   pageInfo: IPageInfo;
-  items: ISearchItem;
+  items: ISearchItem[];
 }
 
 interface IPageInfo {

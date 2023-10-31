@@ -1,7 +1,8 @@
 {
   "root": true,
   "ignorePatterns": [
-    "projects/**/*"
+    "projects/**/*",
+    "*.mock.ts"
   ],
   "overrides": [
     {
@@ -23,6 +24,7 @@
         "import/prefer-default-export": "off",
         "no-console": "off",
         "import/first": "error",
+        "class-methods-use-this": "off",
         "import/newline-after-import": "error",
         "import/no-duplicates": "error",
         "max-len": [

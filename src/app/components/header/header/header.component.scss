@@ -1,0 +1,44 @@
+@use '../../../../../node_modules/@angular/material/index' as mat;
+
+.mat-toolbar {
+  min-width: 85rem;
+}
+
+.mat-toolbar-row {
+  justify-content: center;
+}
+
+.gear-icon {
+  margin-top: 1rem;
+  color: #ffff;
+}
+
+.app-logo {
+  margin-right: 1.3rem;
+}
+
+.header-input {
+  height: 2.4rem;
+  width: 39.6rem;
+  max-width: 100%;
+}
+
+.login-button {
+  border-radius: 0.5rem !important;
+  height: 3rem;
+  width: 3rem;
+  box-shadow: 0.2rem 0 0.4rem 0 #3f51b5;
+}
+
+.login-information {
+  display: flex;
+  align-items: center;
+}
+
+.user-name {
+  margin-right: 0.8rem;
+  color: #4F4F4F;
+  text-align: right;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
