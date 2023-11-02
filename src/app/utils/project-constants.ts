@@ -9,3 +9,8 @@ export const projectConstants = {
   INACTIVE_FILTERS_WARNING: 'Please use search first to enable query filters!',
   CLICK_ON_LOGIN_BUTTON: 'Login button has been clicked!',
 };
+
+export const httpConstants = {
+  YOUTUBE_API_KEY: 'AIzaSyDHIENt4zqMyRvGz1ZI9ULzZGJNU0iw_iE',
+  YOUTUBE_SEARCH_URL: 'https://www.googleapis.com/youtube/v3',
+};
