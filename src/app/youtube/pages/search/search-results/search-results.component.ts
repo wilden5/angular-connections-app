@@ -50,28 +50,29 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   sortByViewsCount(): void {
+    const sortedArray = this.filteredItemsArray.slice();
     if (this.isSortAscViews) {
-      this.filteredItemsArray.sort((a, b) => Number(a.statistics.viewCount) - Number(b.statistics.viewCount));
+      sortedArray.sort((a, b) => Number(a.statistics.viewCount) - Number(b.statistics.viewCount));
       this.snackBarService.setSnackBar(projectConstants.SORT_BY_VIEWS_ASC);
+      console.log(this.filteredItemsArray);
     } else {
-      this.filteredItemsArray.sort((a, b) => Number(b.statistics.viewCount) - Number(a.statistics.viewCount));
+      sortedArray.sort((a, b) => Number(b.statistics.viewCount) - Number(a.statistics.viewCount));
       this.snackBarService.setSnackBar(projectConstants.SORT_BY_VIEWS_DESC);
     }
     this.isSortAscViews = !this.isSortAscViews;
+    this.filteredItemsArray = sortedArray;
   }
 
   sortByDate(): void {
+    const sortedArray = this.filteredItemsArray.slice();
     if (this.isSortAscDate) {
-      this.filteredItemsArray.sort(
-        (a, b) => new Date(a.snippet.publishedAt).getTime() - new Date(b.snippet.publishedAt).getTime()
-      );
+      sortedArray.sort((a, b) => new Date(a.snippet.publishedAt).getTime() - new Date(b.snippet.publishedAt).getTime());
       this.snackBarService.setSnackBar(projectConstants.SORT_BY_DATE_ASC);
     } else {
-      this.filteredItemsArray.sort(
-        (a, b) => new Date(b.snippet.publishedAt).getTime() - new Date(a.snippet.publishedAt).getTime()
-      );
+      sortedArray.sort((a, b) => new Date(b.snippet.publishedAt).getTime() - new Date(a.snippet.publishedAt).getTime());
       this.snackBarService.setSnackBar(projectConstants.SORT_BY_DATE_DESC);
     }
     this.isSortAscDate = !this.isSortAscDate;
+    this.filteredItemsArray = sortedArray;
   }
 }
