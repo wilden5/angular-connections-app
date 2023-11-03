@@ -11,6 +11,6 @@ export const projectConstants = {
 };
 
 export const httpConstants = {
-  YOUTUBE_API_KEY: 'AIzaSyDHIENt4zqMyRvGz1ZI9ULzZGJNU0iw_iE',
-  YOUTUBE_SEARCH_URL: 'https://www.googleapis.com/youtube/v3',
+  YOUTUBE_API_KEY: 'AIzaSyDSIJ6lp3Vo97Re-2Ml_EIk0MIB3kwhFYg',
+  YOUTUBE_BASE_URL: 'https://www.googleapis.com/youtube/v3',
 };
