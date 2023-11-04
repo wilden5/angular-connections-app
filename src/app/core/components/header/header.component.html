@@ -8,12 +8,7 @@
         height="50"
         width="50"
         priority="true" />
-      <input class="header-input" type="text" #searchInput />
-      <app-custom-button
-        (buttonClickRequested)="onSearchButtonClick(searchInput.value ? searchInput.value : ' ')"
-        customClass="search-button button"
-        >Search</app-custom-button
-      >
+      <input class="header-input" type="text" #searchInput (input)="onSearchInputChange(searchInput.value)" />
       <app-custom-button
         *ngIf="!filtersVisibilityService.isItemOrMainRoute()"
         (buttonClickRequested)="onToggleFiltersButtonClick()"

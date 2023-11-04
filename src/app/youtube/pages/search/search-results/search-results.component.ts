@@ -34,12 +34,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.searchQuerySubscription = this.searchService.getSearchQueryObservable().subscribe((query) => {
-      if (query) {
-        this.youtubeItemService.getYoutubeItemsBySearchQuery(query).subscribe((data) => {
-          this.itemsArray = data;
-          this.filteredItemsArray = data;
-        });
-      }
+      this.youtubeItemService.getYoutubeItemsBySearchQuery(query).subscribe((data) => {
+        this.itemsArray = data;
+        this.filteredItemsArray = data;
+      });
     });
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { debounceTime, Subject } from 'rxjs';
 import { FiltersVisibilityService } from '../../../youtube/services/filters-visibility.service';
 import { SearchService } from '../../../youtube/services/search.service';
 import { LoginService } from '../../../auth/services/login.service';
@@ -12,6 +13,8 @@ import { LoginService } from '../../../auth/services/login.service';
 export class HeaderComponent implements OnInit {
   isLoggedIn = false;
 
+  searchQuerySubject = new Subject<string>();
+
   constructor(
     protected filtersVisibilityService: FiltersVisibilityService,
     private searchService: SearchService,
@@ -20,6 +23,11 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.searchQuerySubject.pipe(debounceTime(1000)).subscribe((searchQuery) => {
+      this.router.navigate(['/search']);
+      this.searchService.setSearchObservable(searchQuery);
+    });
+
     this.loginService.isLoggedIn$.subscribe((data: boolean) => {
       this.isLoggedIn = data;
     });
@@ -29,9 +37,10 @@ export class HeaderComponent implements OnInit {
     this.filtersVisibilityService.toggleFiltersVisibility();
   }
 
-  onSearchButtonClick(searchQuery: string): void {
-    this.router.navigate(['/search']);
-    this.searchService.setSearchObservable(searchQuery);
+  onSearchInputChange(searchQuery: string): void {
+    if (searchQuery && searchQuery.length > 2) {
+      this.searchQuerySubject.next(searchQuery);
+    }
   }
 
   onLogoutButtonClick(): void {
