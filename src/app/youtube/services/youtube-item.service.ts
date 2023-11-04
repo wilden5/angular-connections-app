@@ -11,7 +11,7 @@ export class YoutubeItemService {
   constructor(private http: HttpClient) {}
 
   getYoutubeItemsBySearchQuery(query: string): Observable<ISearchItem[]> {
-    return this.http.get<ISearchResponse>(`search?part=snippet&q=${query}&maxResults=5&`).pipe(
+    return this.http.get<ISearchResponse>(`search?part=snippet&q=${query}&maxResults=12&`).pipe(
       concatMap((response) => {
         const itemsWithStats = response.items.map((item) => this.getYoutubeItemStatistics(item));
         return forkJoin(itemsWithStats);

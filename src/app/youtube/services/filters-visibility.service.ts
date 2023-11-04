@@ -14,6 +14,6 @@ export class FiltersVisibilityService {
   }
 
   isItemOrMainRoute(): boolean {
-    return this.router.url.includes('/item/') || this.router.url === '/';
+    return this.router.url.includes('/item/') || this.router.url === '/' || this.router.url.includes('/login');
   }
 }
