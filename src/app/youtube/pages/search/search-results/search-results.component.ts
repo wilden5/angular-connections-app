@@ -54,7 +54,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     if (this.isSortAscViews) {
       sortedArray.sort((a, b) => Number(a.statistics.viewCount) - Number(b.statistics.viewCount));
       this.snackBarService.setSnackBar(projectConstants.SORT_BY_VIEWS_ASC);
-      console.log(this.filteredItemsArray);
     } else {
       sortedArray.sort((a, b) => Number(b.statistics.viewCount) - Number(a.statistics.viewCount));
       this.snackBarService.setSnackBar(projectConstants.SORT_BY_VIEWS_DESC);

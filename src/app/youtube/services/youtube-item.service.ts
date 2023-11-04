@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, concatMap, forkJoin, map, Observable, tap, throwError } from 'rxjs';
+import { catchError, concatMap, forkJoin, map, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ISearchItem } from '../models/search-item.model';
 import { ISearchResponse } from '../models/search-response.model';
@@ -12,7 +12,6 @@ export class YoutubeItemService {
 
   getYoutubeItemsBySearchQuery(query: string): Observable<ISearchItem[]> {
     return this.http.get<ISearchResponse>(`search?part=snippet&q=${query}&maxResults=5&`).pipe(
-      tap((response) => console.log(response)),
       concatMap((response) => {
         const itemsWithStats = response.items.map((item) => this.getYoutubeItemStatistics(item));
         return forkJoin(itemsWithStats);
@@ -26,8 +25,7 @@ export class YoutubeItemService {
 
   getSpecificItemById(id: string): Observable<ISearchItem> {
     return this.http.get<ISearchResponse>(`videos?part=snippet,statistics&id=${id}`).pipe(
-      tap((response) => console.log(response)),
-      map((itemResponse) => ({ ...itemResponse.items[0], id: { kind: 'youtube#video', videoId: id } })),
+      map((itemResponse) => ({ ...itemResponse.items[0] })),
       catchError((error) => {
         return throwError(() => error);
       })
@@ -36,7 +34,6 @@ export class YoutubeItemService {
 
   getYoutubeItemStatistics(item: ISearchItem): Observable<ISearchItem> {
     return this.http.get<ISearchResponse>(`videos?part=snippet,statistics&id=${item.id.videoId}`).pipe(
-      tap((response) => console.log(response)),
       map((statsResponse) => {
         const statistics = statsResponse.items[0]?.statistics;
         return { ...item, statistics: statistics || {} };
