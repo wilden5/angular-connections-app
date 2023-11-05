@@ -8,6 +8,8 @@ export const projectConstants = {
   SEVEN_DAYS_IN_SECONDS: 604800000,
   INACTIVE_FILTERS_WARNING: 'Please use search first to enable query filters!',
   CLICK_ON_LOGIN_BUTTON: 'Login button has been clicked!',
+  EMPTY_EMAIL_FIELD_MESSAGE: 'Please enter a login email!',
+  INVALID_EMAIL_FIELD_MESSAGE: 'The login email is invalid!',
 };
 
 export const httpConstants = {
