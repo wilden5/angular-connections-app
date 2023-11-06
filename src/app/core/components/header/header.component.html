@@ -1,0 +1,36 @@
+<div class="header-container">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <img
+        class="app-logo"
+        [ngSrc]="'./assets/youtube-logo.png'"
+        alt="app-logo"
+        height="50"
+        width="50"
+        priority="true" />
+      <input class="header-input" type="text" #searchInput />
+      <app-custom-button
+        (buttonClickRequested)="onSearchButtonClick(searchInput.value ? searchInput.value : ' ')"
+        customClass="search-button button"
+        >Search</app-custom-button
+      >
+      <app-custom-button
+        *ngIf="!filtersVisibilityService.isItemOrMainRoute()"
+        (buttonClickRequested)="onToggleFiltersButtonClick()"
+        customClass="filter-button button">
+        <mat-icon class="gear-icon icon">settings</mat-icon>
+      </app-custom-button>
+      <div class="login-information">
+        <span class="user-name">Your Name</span>
+        <div class="login-button-container">
+          <app-custom-button customClass="login-cb button">
+            <mat-icon class="login-icon icon">supervised_user_circle</mat-icon>
+          </app-custom-button>
+          <app-custom-button (buttonClickRequested)="onLogoutButtonClick()" customClass="login-cb button">
+            <mat-icon class="login-icon icon">logout</mat-icon>
+          </app-custom-button>
+        </div>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

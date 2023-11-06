@@ -1,0 +1,16 @@
+<mat-toolbar *ngIf="filtersVisibilityService.isFiltersVisible">
+  <mat-toolbar-row>
+    <app-filter
+      (sortByViewsRequested)="sortByViewsCount()"
+      (sortByDateRequested)="sortByDate()"
+      (sortByKeyWordRequested)="searchTerm = $event">
+    </app-filter>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div *ngIf="searchService.getSearchQueryObservable() | async">
+  <div class="search-results-container">
+    <div *ngFor="let item of filteredItemsArray | sortByKeyword:searchTerm">
+      <app-search-item [searchItem]="item"></app-search-item>
+    </div>
+  </div>
+</div>
