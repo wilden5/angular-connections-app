@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ISearchItem } from '../../../models/search-item.model';
-import { YoutubeItemService } from '../../../services/youtube-item.service';
-import { FiltersVisibilityService } from '../../../services/filters-visibility.service';
-import { SearchService } from '../../../services/search.service';
-import { projectConstants } from '../../../../utils/project-constants';
-import { SnackBarService } from '../../../../core/services/snack-bar.service';
+import { ISearchItem } from '../../models/search-item.model';
+import { YoutubeItemService } from '../../services/youtube-item.service';
+import { FiltersVisibilityService } from '../../services/filters-visibility.service';
+import { SearchService } from '../../services/search.service';
+import { projectConstants } from '../../../utils/project-constants';
+import { SnackBarService } from '../../../core/services/snack-bar.service';
 
 @Component({
   selector: 'app-search-results',
