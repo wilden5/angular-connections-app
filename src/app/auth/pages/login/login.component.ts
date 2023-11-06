@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { IUser } from '../../models/user.model';
 import { LoggerService } from '../../../core/services/logger/logger.service';
@@ -68,8 +68,7 @@ export class LoginComponent {
   }
 
   onLoginButtonClick(): void {
-    console.warn(this.loginForm.value);
-    /* this.loggerService.logMessage(projectConstants.CLICK_ON_LOGIN_BUTTON);
-    this.loginService.login(this.user); */
+    this.loggerService.logMessage(projectConstants.CLICK_ON_LOGIN_BUTTON);
+    this.loginService.login(this.loginForm.value as IUser);
   }
 }

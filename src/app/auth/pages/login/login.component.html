@@ -4,7 +4,7 @@
     <mat-form-field>
       <mat-label>Email</mat-label>
       <mat-error *ngIf="email?.invalid && email?.dirty || email?.touched"> {{getErrorMessageForEmail()}} </mat-error>
-      <input id="email" formControlName="email" matInput placeholder="pat@example.com" />
+      <input id="email" formControlName="email" matInput placeholder="pat@example.com" autocomplete="user-email" />
     </mat-form-field>
     <mat-form-field>
       <mat-label>Password</mat-label>
@@ -14,8 +14,14 @@
         <br />
         <span>{{getErrorMessageForPassword()}}</span>
       </mat-error>
-      <input id="password" formControlName="password" matInput [type]="hidePassword ? 'password' : 'text'" />
+      <input
+        id="password"
+        formControlName="password"
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        autocomplete="current-password" />
       <button
+        type="button"
         mat-icon-button
         matSuffix
         (click)="hidePassword = !hidePassword"
@@ -28,5 +34,4 @@
       >Login</app-custom-button
     >
   </form>
-  <p>Form Status: {{loginForm.status}}</p>
 </div>
