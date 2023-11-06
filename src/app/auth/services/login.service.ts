@@ -15,7 +15,6 @@ export class LoginService {
 
   login(credentials: IUser): void {
     if (credentials.email && credentials.password) {
-      localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('userCredentials', JSON.stringify(credentials));
       this.router.navigate(['/']);
       this.isLoggedInSubject.next(true);
@@ -23,9 +22,12 @@ export class LoginService {
   }
 
   logout(): void {
-    localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('userCredentials');
     this.router.navigate(['/login']);
     this.isLoggedInSubject.next(false);
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('userCredentials');
   }
 }
