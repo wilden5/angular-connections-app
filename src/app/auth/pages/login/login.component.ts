@@ -4,6 +4,7 @@ import { LoginService } from '../../services/login.service';
 import { IUser } from '../../models/user.model';
 import { LoggerService } from '../../../core/services/logger/logger.service';
 import { projectConstants } from '../../../utils/project-constants';
+import { customPasswordValidator } from '../../validators/login.validator';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent {
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]],
+    password: ['', [Validators.required, customPasswordValidator]],
   });
 
   constructor(
@@ -39,6 +40,30 @@ export class LoginComponent {
     if (this.email?.hasError('email')) {
       return projectConstants.INVALID_EMAIL_FIELD_MESSAGE;
     }
+    return '';
+  }
+
+  getErrorMessageForPassword(): string {
+    if (this.password?.hasError('required')) {
+      return projectConstants.EMPTY_PASSWORD_FIELD_MESSAGE;
+    }
+
+    if (this.password?.hasError('hasLength')) {
+      return projectConstants.PASSWORD_LENGTH_MESSAGE;
+    }
+
+    if (this.password?.hasError('hasLowerCaseLetter') || this.password?.hasError('hasUpperCaseLetter')) {
+      return projectConstants.PASSWORD_UPPER_LOWER_CASE_MESSAGE;
+    }
+
+    if (this.password?.hasError('hasDigit') || this.password?.hasError('hasAnyLetter')) {
+      return projectConstants.PASSWORD_DIGITS_LETTERS_MESSAGE;
+    }
+
+    if (this.password?.hasError('hasSpecialCharacter')) {
+      return projectConstants.PASSWORD_SPECIAL_SYMBOLS_MESSAGE;
+    }
+
     return '';
   }
 
