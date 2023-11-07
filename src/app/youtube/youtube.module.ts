@@ -7,9 +7,16 @@ import { SharedModule } from '../shared/shared.module';
 import { YoutubeRoutingModule } from './youtube-routing.module';
 import { CustomButtonComponent } from '../shared/components/custom-button.component';
 import { DetailedInformationComponent } from './pages/detailed-information/detailed-information.component';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 
 @NgModule({
-  declarations: [SearchResultsComponent, SearchItemComponent, FilterComponent, DetailedInformationComponent],
+  declarations: [
+    SearchResultsComponent,
+    SearchItemComponent,
+    FilterComponent,
+    DetailedInformationComponent,
+    AdminPageComponent,
+  ],
   imports: [CommonModule, CustomButtonComponent, YoutubeRoutingModule, SharedModule],
   exports: [SearchResultsComponent],
 })

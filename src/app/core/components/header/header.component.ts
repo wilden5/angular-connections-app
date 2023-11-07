@@ -52,4 +52,8 @@ export class HeaderComponent implements OnInit {
   onLoginButtonClick(): void {
     this.router.navigate(['/login']);
   }
+
+  onAddVideoButtonClick(): void {
+    this.router.navigate(['/search/admin']);
+  }
 }

@@ -15,6 +15,7 @@
 }
 
 .login-cb,
+.add-video-button,
 .filter-button {
   margin-bottom: 0.2rem;
   min-width: unset !important;
@@ -48,5 +49,9 @@
 }
 
 .filter-button {
+  margin-left: 1rem;
+}
+
+.add-video-button {
   margin-left: 1rem;
 }
