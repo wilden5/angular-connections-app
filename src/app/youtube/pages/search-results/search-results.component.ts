@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, DestroyRef, OnInit } from '@angular/core';
+import { switchMap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ISearchItem } from '../../models/search-item.model';
 import { YoutubeItemService } from '../../services/youtube-item.service';
 import { FiltersVisibilityService } from '../../services/filters-visibility.service';
@@ -12,7 +13,7 @@ import { SnackBarService } from '../../../core/services/snack-bar.service';
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss'],
 })
-export class SearchResultsComponent implements OnInit, OnDestroy {
+export class SearchResultsComponent implements OnInit {
   itemsArray: ISearchItem[] = [];
 
   filteredItemsArray: ISearchItem[] = [];
@@ -23,28 +24,25 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   searchTerm = '';
 
-  private searchQuerySubscription?: Subscription;
-
   constructor(
     private youtubeItemService: YoutubeItemService,
     private snackBarService: SnackBarService,
     protected filtersVisibilityService: FiltersVisibilityService,
-    protected searchService: SearchService
+    protected searchService: SearchService,
+    private destroyRef: DestroyRef
   ) {}
 
   ngOnInit(): void {
-    this.searchQuerySubscription = this.searchService.getSearchQueryObservable().subscribe((query) => {
-      this.youtubeItemService.getYoutubeItemsBySearchQuery(query).subscribe((data) => {
+    this.searchService
+      .getSearchQueryObservable()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        switchMap((query) => this.youtubeItemService.getYoutubeItemsBySearchQuery(query))
+      )
+      .subscribe((data) => {
         this.itemsArray = data;
         this.filteredItemsArray = data;
       });
-    });
-  }
-
-  ngOnDestroy(): void {
-    if (this.searchQuerySubscription) {
-      this.searchQuerySubscription.unsubscribe();
-    }
   }
 
   sortByViewsCount(): void {

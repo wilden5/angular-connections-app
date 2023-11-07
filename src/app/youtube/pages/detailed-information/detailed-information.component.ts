@@ -1,7 +1,7 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ISearchItem } from '../../models/search-item.model';
 import { YoutubeItemService } from '../../services/youtube-item.service';
 
@@ -10,28 +10,26 @@ import { YoutubeItemService } from '../../services/youtube-item.service';
   templateUrl: './detailed-information.component.html',
   styleUrls: ['./detailed-information.component.scss'],
 })
-export class DetailedInformationComponent implements OnInit, OnDestroy {
+export class DetailedInformationComponent implements OnInit {
   @Input() searchItem: ISearchItem | undefined;
-
-  private itemSubscription?: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private youtubeItemService: YoutubeItemService,
-    private location: Location
+    private location: Location,
+    private destroyRef: DestroyRef
   ) {}
 
   ngOnInit(): void {
     const itemId = this.route.snapshot.paramMap.get('id');
     if (itemId) {
-      this.itemSubscription = this.youtubeItemService.getSpecificItemById(itemId).subscribe((data) => {
-        this.searchItem = data;
-      });
+      this.youtubeItemService
+        .getSpecificItemById(itemId)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe((data) => {
+          this.searchItem = data;
+        });
     }
-  }
-
-  ngOnDestroy(): void {
-    this.itemSubscription?.unsubscribe();
   }
 
   onBackButtonClick(): void {
