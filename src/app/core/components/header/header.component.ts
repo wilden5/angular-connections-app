@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { debounceTime, Subject } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FiltersVisibilityService } from '../../../youtube/services/filters-visibility.service';
 import { SearchService } from '../../../youtube/services/search.service';
 import { LoginService } from '../../../auth/services/login.service';
@@ -19,16 +20,17 @@ export class HeaderComponent implements OnInit {
     protected filtersVisibilityService: FiltersVisibilityService,
     private searchService: SearchService,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private destroyRef: DestroyRef
   ) {}
 
   ngOnInit(): void {
-    this.searchQuerySubject.pipe(debounceTime(1000)).subscribe((searchQuery) => {
+    this.searchQuerySubject.pipe(takeUntilDestroyed(this.destroyRef), debounceTime(1000)).subscribe((searchQuery) => {
       this.router.navigate(['/search']);
       this.searchService.setSearchObservable(searchQuery);
     });
 
-    this.loginService.isLoggedIn$.subscribe((data: boolean) => {
+    this.loginService.isLoggedIn$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data: boolean) => {
       this.isLoggedIn = data;
     });
   }
