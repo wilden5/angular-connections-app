@@ -3,8 +3,30 @@
   <form class="admin-form" [formGroup]="adminForm" (ngSubmit)="onCreateCardButtonClick()">
     <mat-form-field>
       <mat-label>Title</mat-label>
-      <mat-error></mat-error>
+      <mat-error *ngIf="title?.invalid && title?.touched">{{getErrorMessageForTitle()}}</mat-error>
       <input type="text" formControlName="title" matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <mat-error *ngIf="description?.invalid && description?.touched">The description is too long</mat-error>
+      <textarea class="description" formControlName="description" matInput></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Image Link</mat-label>
+      <mat-error *ngIf="coverImageLink?.invalid && coverImageLink?.touched">Please enter a link to the image</mat-error>
+      <input type="text" formControlName="coverImageLink" matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Video Link</mat-label>
+      <mat-error *ngIf="videoLink?.invalid && videoLink?.touched">Please enter a link to the video</mat-error>
+      <input type="text" formControlName="videoLink" matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Creation Date</mat-label>
+      <mat-error *ngIf="creationDate?.invalid && creationDate?.touched">{{getErrorMessageForCreationDate()}}</mat-error>
+      <input formControlName="creationDate" matInput [matDatepicker]="picker" />
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </form>
 </div>

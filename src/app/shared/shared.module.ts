@@ -9,6 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { SortByKeywordPipe } from './pipes/sort-by-keyword.pipe';
 import { ColoredBorderDirective } from './directives/colored-border.directive';
 import { ColoredItemFilterDirective } from './directives/colored-item-filter.directive';
@@ -26,6 +28,8 @@ import { ColoredItemFilterDirective } from './directives/colored-item-filter.dir
     MatInputModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   exports: [
     MatSnackBarModule,
@@ -40,6 +44,8 @@ import { ColoredItemFilterDirective } from './directives/colored-item-filter.dir
     SortByKeywordPipe,
     HttpClientModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [SortByKeywordPipe],
 })
