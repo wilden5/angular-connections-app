@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { projectConstants } from '../../../utils/project-constants';
 import { customCardDateValidator } from '../../validators/card-date.validator';
 
@@ -15,6 +15,7 @@ export class AdminPageComponent {
     coverImageLink: ['', [Validators.required, Validators.pattern(/(http(s?):)([/.\w\s-])*\.(?:jpg|png)/g)]],
     videoLink: ['', [Validators.required, Validators.pattern(/^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/g)]],
     creationDate: ['', [Validators.required, customCardDateValidator]],
+    tags: this.fb.array([this.fb.control('', Validators.required)]),
   });
 
   constructor(private fb: FormBuilder) {}
@@ -62,5 +63,16 @@ export class AdminPageComponent {
       return 'The date is invalid';
     }
     return '';
+  }
+
+  get tags(): FormArray {
+    return this.adminForm.get('tags') as FormArray;
+  }
+
+  addTag(): void {
+    const tags = this.adminForm.get('tags') as FormArray;
+    if (tags.length < 5) {
+      tags.push(this.fb.control('', Validators.required));
+    }
   }
 }
