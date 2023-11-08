@@ -14,6 +14,8 @@ import { LoginService } from '../../../auth/services/login.service';
 export class HeaderComponent implements OnInit {
   isLoggedIn = false;
 
+  isAddButtonClicked = false;
+
   searchQuerySubject = new Subject<string>();
 
   constructor(
@@ -55,5 +57,6 @@ export class HeaderComponent implements OnInit {
 
   onAddVideoButtonClick(): void {
     this.router.navigate(['/search/admin']);
+    this.isAddButtonClicked = true;
   }
 }

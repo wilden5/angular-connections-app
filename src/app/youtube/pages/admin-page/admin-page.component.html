@@ -1,6 +1,6 @@
-<div class="admin-container">
-  <h2>Create new card</h2>
+<div class="admin-container" *ngIf="!isCardCreated; else cardCreated">
   <form class="admin-form" [formGroup]="adminForm" (ngSubmit)="onCreateCardButtonClick()">
+    <h2>Create new card</h2>
     <mat-form-field>
       <mat-label>Title</mat-label>
       <mat-error *ngIf="title?.invalid && title?.touched">{{getErrorMessageForTitle()}}</mat-error>
@@ -54,3 +54,16 @@
     </div>
   </form>
 </div>
+<ng-template #cardCreated>
+  <div class="newly-created-card">
+    <h2>New card was created successfully!</h2>
+    <div>Title: {{ title?.value }}</div>
+    <div class="nc-description">Description: {{ description?.value }}</div>
+    <div>Image Link: {{ coverImageLink?.value }}</div>
+    <div>Video Link: {{ videoLink?.value }}</div>
+    <div>Creation Date: {{ creationDate?.value | date}}</div>
+    <div *ngFor="let tag of tags.controls; let i = index">
+      <div>Tag{{i + 1}}: {{tag.value}}</div>
+    </div>
+  </div>
+</ng-template>

@@ -1,22 +1,24 @@
 <div class="header-container">
   <mat-toolbar>
     <mat-toolbar-row>
-      <img
-        class="app-logo"
-        [ngSrc]="'./assets/youtube-logo.png'"
-        alt="app-logo"
-        height="50"
-        width="50"
-        priority="true" />
+      <a class="home-link" href="/">
+        <img
+          class="app-logo"
+          [ngSrc]="'./assets/youtube-logo.png'"
+          alt="app-logo"
+          height="50"
+          width="50"
+          priority="true" />
+      </a>
       <input class="header-input" type="text" #searchInput (input)="onSearchInputChange(searchInput.value)" />
       <app-custom-button
-        *ngIf="!filtersVisibilityService.isItemOrMainRoute()"
+        *ngIf="!filtersVisibilityService.isItemOrMainRoute() && !isAddButtonClicked"
         (buttonClickRequested)="onToggleFiltersButtonClick()"
         customClass="filter-button button">
         <mat-icon class="gear-icon icon">settings</mat-icon>
       </app-custom-button>
       <app-custom-button
-        *ngIf="isLoggedIn"
+        *ngIf="isLoggedIn && !isAddButtonClicked"
         (buttonClickRequested)="onAddVideoButtonClick()"
         customClass="add-video-button button">
         <mat-icon class="icon">add_to_queue</mat-icon>

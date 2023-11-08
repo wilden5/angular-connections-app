@@ -39,3 +39,14 @@
   display: flex;
   justify-content: space-between;
 }
+
+.newly-created-card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 3rem;
+}
+
+.nc-description {
+  max-width: 60rem;
+}

@@ -18,6 +18,8 @@ export class AdminPageComponent {
     tags: this.fb.array([this.fb.control('', Validators.required)]),
   });
 
+  public isCardCreated = false;
+
   constructor(private fb: FormBuilder) {}
 
   get title(): AbstractControl | null {
@@ -40,7 +42,26 @@ export class AdminPageComponent {
     return this.adminForm.get('creationDate');
   }
 
-  onCreateCardButtonClick(): void {}
+  get tags(): FormArray {
+    return this.adminForm.get('tags') as FormArray;
+  }
+
+  addTag(): void {
+    const tags = this.adminForm.get('tags') as FormArray;
+    if (tags.length < 5) {
+      tags.push(this.fb.control('', Validators.required));
+    }
+  }
+
+  onCreateCardButtonClick(): void {
+    this.isCardCreated = true;
+  }
+
+  onResetFormButtonClick(): void {
+    this.adminForm.reset();
+    this.tags.clear();
+    this.tags.push(this.fb.control('', Validators.required));
+  }
 
   getErrorMessageForTitle(): string {
     if (this.title?.hasError('required')) {
@@ -63,22 +84,5 @@ export class AdminPageComponent {
       return projectConstants.ADMIN_FORM_CREATION_DATE_MESSAGE_FUTURE_DATE;
     }
     return '';
-  }
-
-  get tags(): FormArray {
-    return this.adminForm.get('tags') as FormArray;
-  }
-
-  addTag(): void {
-    const tags = this.adminForm.get('tags') as FormArray;
-    if (tags.length < 5) {
-      tags.push(this.fb.control('', Validators.required));
-    }
-  }
-
-  onResetFormButtonClick(): void {
-    this.adminForm.reset();
-    this.tags.clear();
-    this.tags.push(this.fb.control('', Validators.required));
   }
 }
