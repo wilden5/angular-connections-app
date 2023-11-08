@@ -56,3 +56,16 @@
 .add-video-button {
   margin-left: 1rem;
 }
+
+.create-button {
+  margin-top: 2rem;
+}
+
+.reset-button {
+  background-color: #800a0a;
+  box-shadow: 0.2rem 0 0.4rem 0 #800a0a;
+
+  &:hover {
+    box-shadow: 0 0.2rem 0.4rem 0 #800a0a;
+  }
+}

@@ -44,23 +44,23 @@ export class AdminPageComponent {
 
   getErrorMessageForTitle(): string {
     if (this.title?.hasError('required')) {
-      return 'Please enter a title';
+      return projectConstants.ADMIN_FORM_TITLE_MESSAGE_REQUIRED;
     }
     if (this.title?.hasError('minlength')) {
-      return 'The title is too short';
+      return projectConstants.ADMIN_FORM_TITLE_MESSAGE_MIN_LENGTH;
     }
     if (this.title?.hasError('maxlength')) {
-      return 'The title is too long';
+      return projectConstants.ADMIN_FORM_TITLE_MESSAGE_MAX_LENGTH;
     }
     return '';
   }
 
   getErrorMessageForCreationDate(): string {
     if (this.creationDate?.hasError('required')) {
-      return 'Please enter a creation date';
+      return projectConstants.ADMIN_FORM_CREATION_DATE_MESSAGE_REQUIRED;
     }
     if (this.creationDate?.hasError('futureDate')) {
-      return 'The date is invalid';
+      return projectConstants.ADMIN_FORM_CREATION_DATE_MESSAGE_FUTURE_DATE;
     }
     return '';
   }
@@ -74,5 +74,11 @@ export class AdminPageComponent {
     if (tags.length < 5) {
       tags.push(this.fb.control('', Validators.required));
     }
+  }
+
+  onResetFormButtonClick(): void {
+    this.adminForm.reset();
+    this.tags.clear();
+    this.tags.push(this.fb.control('', Validators.required));
   }
 }

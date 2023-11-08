@@ -2,11 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 3rem;
+  min-width: 120rem;
 }
 
 .admin-form {
   display: flex;
   flex-direction: column;
+  background-color: #E0E0E0;
+  padding: 5rem;
 }
 
 .description {
@@ -15,4 +19,23 @@
 
 .admin-form {
   display: flex;
+}
+
+.tag-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tag {
+  width: 100%;
+}
+
+.add-tag-button {
+  margin-bottom: 1rem;
+}
+
+.form-sb {
+  display: flex;
+  justify-content: space-between;
 }

@@ -15,6 +15,8 @@ export class CustomButtonComponent {
 
   @Input() disabled = false;
 
+  @Input() buttonType: string | undefined;
+
   onButtonClick(): void {
     this.buttonClickRequested.emit();
   }

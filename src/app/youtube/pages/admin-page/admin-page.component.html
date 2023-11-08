@@ -29,16 +29,28 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <div formArrayName="tags">
-      <div *ngFor="let control of tags.controls; let i = index">
-        <mat-form-field>
+      <div class="tag-list" *ngFor="let control of tags.controls; let i = index">
+        <mat-form-field class="tag">
           <mat-label>Tag {{i + 1}}</mat-label>
+          <mat-error *ngIf="control?.invalid && control?.touched">Please enter a tag</mat-error>
           <input type="text" [formControlName]="i" matInput />
         </mat-form-field>
       </div>
-      <button mat-button type="button" (click)="addTag()">Add Tag</button>
+      <app-custom-button [buttonType]="'button'" (buttonClickRequested)="addTag()" customClass="create-button button"
+        >Add Tag</app-custom-button
+      >
     </div>
-    <app-custom-button class="create-card-button" [disabled]="adminForm.invalid" customClass="create-button button">
-      Create Card
-    </app-custom-button>
+    <div class="form-sb">
+      <app-custom-button
+        (buttonClickRequested)="onResetFormButtonClick()"
+        [buttonType]="'button'"
+        class="create-card-button"
+        customClass="create-button reset-button button">
+        Reset Form
+      </app-custom-button>
+      <app-custom-button class="create-card-button" [disabled]="adminForm.invalid" customClass="create-button button">
+        Create Card
+      </app-custom-button>
+    </div>
   </form>
 </div>

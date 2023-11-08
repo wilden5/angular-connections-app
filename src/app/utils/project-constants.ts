@@ -16,6 +16,12 @@ export const projectConstants = {
   PASSWORD_UPPER_LOWER_CASE_MESSAGE: 'a mixture of both uppercase and lowercase letters',
   PASSWORD_DIGITS_LETTERS_MESSAGE: 'a mixture of letters and numbers',
   PASSWORD_SPECIAL_SYMBOLS_MESSAGE: 'at least one special character, e.g., ! @ # ?',
+
+  ADMIN_FORM_TITLE_MESSAGE_REQUIRED: 'Please enter a title',
+  ADMIN_FORM_TITLE_MESSAGE_MIN_LENGTH: 'The title is too short',
+  ADMIN_FORM_TITLE_MESSAGE_MAX_LENGTH: 'The title is too long',
+  ADMIN_FORM_CREATION_DATE_MESSAGE_REQUIRED: 'Please enter a creation date',
+  ADMIN_FORM_CREATION_DATE_MESSAGE_FUTURE_DATE: 'The date is invalid',
 };
 
 export const httpConstants = {

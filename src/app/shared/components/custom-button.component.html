@@ -1,3 +1,9 @@
-<button mat-button color="primary" (click)="onButtonClick()" [class]="customClass" [disabled]="disabled">
+<button
+  mat-button
+  color="primary"
+  (click)="onButtonClick()"
+  [class]="customClass"
+  [disabled]="disabled"
+  [type]="buttonType">
   <ng-content></ng-content>
 </button>
