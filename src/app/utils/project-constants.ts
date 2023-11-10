@@ -23,8 +23,3 @@ export const projectConstants = {
   ADMIN_FORM_CREATION_DATE_MESSAGE_REQUIRED: 'Please enter a creation date',
   ADMIN_FORM_CREATION_DATE_MESSAGE_FUTURE_DATE: 'The date is invalid',
 };
-
-export const httpConstants = {
-  YOUTUBE_API_KEY: 'AIzaSyDHIENt4zqMyRvGz1ZI9ULzZGJNU0iw_iE',
-  YOUTUBE_BASE_URL: 'https://www.googleapis.com/youtube/v3',
-};

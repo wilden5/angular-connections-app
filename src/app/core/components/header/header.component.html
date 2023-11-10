@@ -18,24 +18,26 @@
         <mat-icon class="gear-icon icon">settings</mat-icon>
       </app-custom-button>
       <app-custom-button
-        *ngIf="isLoggedIn && !isAddButtonClicked"
+        *ngIf="(this.loginService.isLoggedIn$ | async) && !isAddButtonClicked"
         (buttonClickRequested)="onAddVideoButtonClick()"
         customClass="add-video-button button">
         <mat-icon class="icon">add_to_queue</mat-icon>
       </app-custom-button>
       <div class="login-information">
-        <span class="user-name">Login Status: <span class="login-status">{{isLoggedIn}}</span></span>
+        <span class="user-name"
+          >Login Status: <span class="login-status">{{this.loginService.isLoggedIn$ | async}}</span></span
+        >
         <div class="login-button-container">
           <app-custom-button
             (buttonClickRequested)="onLoginButtonClick()"
             customClass="login-cb button"
-            *ngIf="!isLoggedIn">
+            *ngIf="(this.loginService.isLoggedIn$ | async) === false">
             <mat-icon class="login-icon icon">supervised_user_circle</mat-icon>
           </app-custom-button>
           <app-custom-button
             (buttonClickRequested)="onLogoutButtonClick()"
             customClass="login-cb button"
-            *ngIf="isLoggedIn">
+            *ngIf="this.loginService.isLoggedIn$ | async">
             <mat-icon class="login-icon icon">logout</mat-icon>
           </app-custom-button>
         </div>

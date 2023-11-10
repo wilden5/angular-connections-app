@@ -1,6 +1,6 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { debounceTime, Subject } from 'rxjs';
+import { debounceTime, filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FiltersVisibilityService } from '../../../youtube/services/filters-visibility.service';
 import { SearchService } from '../../../youtube/services/search.service';
@@ -12,29 +12,27 @@ import { LoginService } from '../../../auth/services/login.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  isLoggedIn = false;
-
   isAddButtonClicked = false;
-
-  searchQuerySubject = new Subject<string>();
 
   constructor(
     protected filtersVisibilityService: FiltersVisibilityService,
     private searchService: SearchService,
     private router: Router,
-    private loginService: LoginService,
+    protected loginService: LoginService,
     private destroyRef: DestroyRef
   ) {}
 
   ngOnInit(): void {
-    this.searchQuerySubject.pipe(takeUntilDestroyed(this.destroyRef), debounceTime(1000)).subscribe((searchQuery) => {
-      this.router.navigate(['/search']);
-      this.searchService.setSearchObservable(searchQuery);
-    });
-
-    this.loginService.isLoggedIn$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data: boolean) => {
-      this.isLoggedIn = data;
-    });
+    this.searchService
+      .getSearchQueryObservable()
+      .pipe(
+        filter((searchQuery) => searchQuery.length > 2),
+        debounceTime(1000),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(() => {
+        this.router.navigate(['/search']);
+      });
   }
 
   onToggleFiltersButtonClick(): void {
@@ -42,9 +40,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onSearchInputChange(searchQuery: string): void {
-    if (searchQuery && searchQuery.length > 2) {
-      this.searchQuerySubject.next(searchQuery);
-    }
+    this.searchService.setSearchObservable(searchQuery);
   }
 
   onLogoutButtonClick(): void {
