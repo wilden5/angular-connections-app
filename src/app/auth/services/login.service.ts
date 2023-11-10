@@ -7,7 +7,7 @@ import { IUser } from '../models/user.model';
   providedIn: 'root',
 })
 export class LoginService {
-  private isLoggedInSubject = new BehaviorSubject<boolean>(localStorage.getItem('isLoggedIn') === 'true');
+  private isLoggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('userCredentials'));
 
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
