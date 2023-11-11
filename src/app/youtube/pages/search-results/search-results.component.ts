@@ -1,5 +1,5 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
-import { switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ISearchItem } from '../../models/search-item.model';
 import { YoutubeItemService } from '../../services/youtube-item.service';
@@ -37,6 +37,9 @@ export class SearchResultsComponent implements OnInit {
       .getSearchQueryObservable()
       .pipe(
         takeUntilDestroyed(this.destroyRef),
+        filter((searchQuery) => searchQuery.length > 2),
+        debounceTime(1000),
+        distinctUntilChanged(),
         switchMap((query) => this.youtubeItemService.getYoutubeItemsBySearchQuery(query))
       )
       .subscribe((data) => {
