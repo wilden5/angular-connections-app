@@ -48,7 +48,7 @@ interface IStatistics {
   commentCount: string;
 }
 
-interface IVideoId {
+export interface IVideoId {
   kind: string;
   videoId: string;
 }
