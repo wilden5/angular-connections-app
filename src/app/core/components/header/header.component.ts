@@ -25,9 +25,7 @@ export class HeaderComponent implements OnInit {
     this.searchService
       .getSearchQueryObservable()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        this.router.navigate(['/search']);
-      });
+      .subscribe(() => {});
   }
 
   onToggleFiltersButtonClick(): void {
@@ -36,6 +34,9 @@ export class HeaderComponent implements OnInit {
 
   onSearchInputChange(searchQuery: string): void {
     this.searchService.setSearchObservable(searchQuery);
+    if (searchQuery.length > 2) {
+      this.router.navigate(['/search']);
+    }
   }
 
   onLogoutButtonClick(): void {
