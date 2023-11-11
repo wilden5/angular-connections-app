@@ -22,7 +22,7 @@ export class DetailedInformationComponent implements OnInit {
   ngOnInit(): void {
     const itemId = this.route.snapshot.paramMap.get('id');
     if (itemId) {
-      this.searchItem$ = this.youtubeItemService.getSpecificItemById(itemId);
+      this.searchItem$ = this.youtubeItemService.getYoutubeSpecificItemById(itemId);
     }
   }
 
