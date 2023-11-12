@@ -1,12 +1,14 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
-import { debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Store } from '@ngrx/store';
 import { ISearchItem } from '../../models/search-item.model';
 import { YoutubeItemService } from '../../services/youtube-item.service';
 import { FiltersVisibilityService } from '../../services/filters-visibility.service';
 import { SearchService } from '../../services/search.service';
 import { projectConstants } from '../../../utils/project-constants';
 import { SnackBarService } from '../../../core/services/snack-bar.service';
+import { searchYoutubeItems } from '../../../redux/actions/youtube-item.actions';
 
 @Component({
   selector: 'app-search-results',
@@ -29,7 +31,8 @@ export class SearchResultsComponent implements OnInit {
     private snackBarService: SnackBarService,
     protected filtersVisibilityService: FiltersVisibilityService,
     protected searchService: SearchService,
-    private destroyRef: DestroyRef
+    private destroyRef: DestroyRef,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -39,12 +42,10 @@ export class SearchResultsComponent implements OnInit {
         takeUntilDestroyed(this.destroyRef),
         filter((searchQuery) => searchQuery.length > 2),
         debounceTime(1000),
-        distinctUntilChanged(),
-        switchMap((query) => this.youtubeItemService.getYoutubeItemsBySearchQuery(query))
+        distinctUntilChanged()
       )
-      .subscribe((data) => {
-        this.itemsArray = data;
-        this.filteredItemsArray = data;
+      .subscribe((query) => {
+        this.store.dispatch(searchYoutubeItems({ query }));
       });
   }
 
