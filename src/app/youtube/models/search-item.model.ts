@@ -6,6 +6,14 @@ export interface ISearchItem {
   statistics: IStatistics;
 }
 
+export interface ICustomSearchItem {
+  kind: string;
+  etag: string;
+  id: string;
+  snippet: ISnippet;
+  statistics: IStatistics;
+}
+
 interface ISnippet {
   publishedAt: string;
   channelId: string;
