@@ -3,12 +3,13 @@ import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { ISearchItem } from '../../models/search-item.model';
-import { YoutubeItemService } from '../../services/youtube-item.service';
 import { FiltersVisibilityService } from '../../services/filters-visibility.service';
 import { SearchService } from '../../services/search.service';
 import { projectConstants } from '../../../utils/project-constants';
 import { SnackBarService } from '../../../core/services/snack-bar.service';
 import { searchYoutubeItems } from '../../../redux/actions/youtube-item.actions';
+import { selectYoutubeItem } from '../../../redux/selectors/youtube-item.selectors';
+import { AppState } from '../../../redux/app.state';
 
 @Component({
   selector: 'app-search-results',
@@ -26,13 +27,14 @@ export class SearchResultsComponent implements OnInit {
 
   searchTerm = '';
 
+  protected readonly selectYoutubeItem = selectYoutubeItem;
+
   constructor(
-    private youtubeItemService: YoutubeItemService,
     private snackBarService: SnackBarService,
     protected filtersVisibilityService: FiltersVisibilityService,
     protected searchService: SearchService,
     private destroyRef: DestroyRef,
-    private store: Store
+    protected store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
