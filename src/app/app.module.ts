@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { ApiInterceptor } from './core/interceptors/api.interceptor';
 import { AppState } from './redux/app.state';
-import { youtubeItemReducer } from './redux/reducers/youtube-item.reducer';
+import { youtubeItemsReducer } from './redux/reducers/youtube-items.reducer';
 import { customItemReducer } from './redux/reducers/custom-item.reducer';
 import { AppEffects } from './redux/effects/app.effects';
 
@@ -22,7 +22,7 @@ import { AppEffects } from './redux/effects/app.effects';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot<AppState>({ youtubeItem: youtubeItemReducer, customItem: customItemReducer }),
+    StoreModule.forRoot<AppState>({ youtubeItems: youtubeItemsReducer, customItems: customItemReducer }),
     EffectsModule.forRoot([AppEffects]),
     StoreDevtoolsModule.instrument(),
   ],

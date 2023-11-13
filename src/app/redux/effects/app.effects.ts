@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, EMPTY, map, mergeMap } from 'rxjs';
 import { YoutubeItemService } from '../../youtube/services/youtube-item.service';
-import { loadYoutubeItems, searchYoutubeItems } from '../actions/youtube-item.actions';
+import { loadYoutubeItems, searchYoutubeItems } from '../actions/youtube-items.actions';
 
 @Injectable()
 export class AppEffects {
@@ -11,7 +11,7 @@ export class AppEffects {
       ofType(searchYoutubeItems),
       mergeMap((action) =>
         this.youtubeItemService.getYoutubeItemsBySearchQuery(action.query).pipe(
-          map((youtubeItem) => loadYoutubeItems({ youtubeItem })),
+          map((youtubeItems) => loadYoutubeItems({ youtubeItems })),
           catchError(() => EMPTY)
         )
       )

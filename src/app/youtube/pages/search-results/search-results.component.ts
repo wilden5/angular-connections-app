@@ -7,7 +7,7 @@ import { FiltersVisibilityService } from '../../services/filters-visibility.serv
 import { SearchService } from '../../services/search.service';
 import { projectConstants } from '../../../utils/project-constants';
 import { SnackBarService } from '../../../core/services/snack-bar.service';
-import { searchYoutubeItems, updateYoutubeItems } from '../../../redux/actions/youtube-item.actions';
+import { searchYoutubeItems, sortYoutubeItems } from '../../../redux/actions/youtube-items.actions';
 import {
   selectYoutubeItems,
   selectYoutubeItemsSortedByDateAsc,
@@ -23,6 +23,8 @@ import { AppState } from '../../../redux/app.state';
   styleUrls: ['./search-results.component.scss'],
 })
 export class SearchResultsComponent implements OnInit {
+  protected readonly selectYoutubeItems = selectYoutubeItems;
+
   isSortAscViews = true;
 
   isSortAscDate = true;
@@ -30,8 +32,6 @@ export class SearchResultsComponent implements OnInit {
   searchTerm = '';
 
   sortedStore$: Observable<ISearchItem[]> | undefined;
-
-  protected readonly selectYoutubeItem = selectYoutubeItems;
 
   constructor(
     private snackBarService: SnackBarService,
@@ -66,7 +66,7 @@ export class SearchResultsComponent implements OnInit {
     this.isSortAscViews = !this.isSortAscViews;
 
     this.sortedStore$.pipe(take(1)).subscribe((sortedStore) => {
-      this.store.dispatch(updateYoutubeItems({ items: sortedStore }));
+      this.store.dispatch(sortYoutubeItems({ youtubeItems: sortedStore }));
     });
   }
 
@@ -81,7 +81,7 @@ export class SearchResultsComponent implements OnInit {
     this.isSortAscDate = !this.isSortAscDate;
 
     this.sortedStore$.pipe(take(1)).subscribe((sortedStore) => {
-      this.store.dispatch(updateYoutubeItems({ items: sortedStore }));
+      this.store.dispatch(sortYoutubeItems({ youtubeItems: sortedStore }));
     });
   }
 }

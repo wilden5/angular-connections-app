@@ -2,7 +2,7 @@ import { createSelector } from '@ngrx/store';
 import { AppState } from '../app.state';
 import { ISearchItem } from '../../youtube/models/search-item.model';
 
-export const selectYoutubeItems = (state: AppState): ISearchItem[] => state.youtubeItem;
+export const selectYoutubeItems = (state: AppState): ISearchItem[] => state.youtubeItems;
 
 export const selectYoutubeItemsSortedByViewsASC = createSelector(selectYoutubeItems, (youtubeItems: ISearchItem[]) => {
   return [...youtubeItems].sort((a, b) => Number(a.statistics.viewCount) - Number(b.statistics.viewCount));
