@@ -12,13 +12,13 @@
       </a>
       <input class="header-input" type="text" #searchInput (input)="onSearchInputChange(searchInput.value)" />
       <app-custom-button
-        *ngIf="!filtersVisibilityService.isItemOrMainRoute() && !isAddButtonClicked"
+        *ngIf="!filtersVisibilityService.isItemOrMainRoute()"
         (buttonClickRequested)="onToggleFiltersButtonClick()"
         customClass="filter-button button">
         <mat-icon class="gear-icon icon">settings</mat-icon>
       </app-custom-button>
       <app-custom-button
-        *ngIf="(this.loginService.isLoggedIn$ | async) && !isAddButtonClicked"
+        *ngIf="(this.loginService.isLoggedIn$ | async)"
         (buttonClickRequested)="onAddVideoButtonClick()"
         customClass="add-video-button button">
         <mat-icon class="icon">add_to_queue</mat-icon>

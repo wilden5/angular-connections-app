@@ -116,7 +116,7 @@ export class AdminPageComponent {
         },
       },
       statistics: {
-        viewCount: String(Math.floor(Math.random() * 10000)),
+        viewCount: String(Math.floor(Math.random() * 100000)),
         commentCount: String(Math.floor(Math.random() * 100)),
         dislikeCount: '',
         favoriteCount: String(Math.floor(Math.random() * 50)),

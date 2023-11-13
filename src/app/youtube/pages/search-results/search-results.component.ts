@@ -9,7 +9,6 @@ import { projectConstants } from '../../../utils/project-constants';
 import { SnackBarService } from '../../../core/services/snack-bar.service';
 import { searchYoutubeItems, sortYoutubeItems } from '../../../redux/actions/youtube-items.actions';
 import {
-  selectYoutubeItems,
   selectYoutubeItemsSortedByDateAsc,
   selectYoutubeItemsSortedByDateDesc,
   selectYoutubeItemsSortedByViewsASC,
@@ -24,8 +23,6 @@ import { selectAllItems } from '../../../redux/selectors/items.selectors';
   styleUrls: ['./search-results.component.scss'],
 })
 export class SearchResultsComponent implements OnInit {
-  protected readonly selectYoutubeItems = selectYoutubeItems;
-
   protected readonly selectAllItems = selectAllItems;
 
   isSortAscViews = true;

@@ -11,8 +11,6 @@ import { LoginService } from '../../../auth/services/login.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  isAddButtonClicked = false;
-
   constructor(
     protected filtersVisibilityService: FiltersVisibilityService,
     private searchService: SearchService,
@@ -49,6 +47,5 @@ export class HeaderComponent implements OnInit {
 
   onAddVideoButtonClick(): void {
     this.router.navigate(['/search/admin']);
-    this.isAddButtonClicked = true;
   }
 }
