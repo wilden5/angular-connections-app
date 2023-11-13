@@ -12,7 +12,11 @@ export class SearchItemComponent {
 
   constructor(private router: Router) {}
 
-  onMoreButtonClick(itemId: IVideoId): void {
-    this.router.navigate(['/search/item', itemId]);
+  onMoreButtonClick(itemId: string | IVideoId): void {
+    if (typeof itemId === 'string') {
+      this.router.navigate(['/search/item', itemId]);
+    } else if (typeof itemId === 'object') {
+      this.router.navigate(['/search/item', itemId.videoId]);
+    }
   }
 }
