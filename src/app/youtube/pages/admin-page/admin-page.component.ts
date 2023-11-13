@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 import { projectConstants } from '../../../utils/project-constants';
 import { customCardDateValidator } from '../../validators/card-date.validator';
+import { AppState } from '../../../redux/app.state';
+import { addCustomItem } from '../../../redux/actions/custom-item.actions';
+import { ISearchItem } from '../../models/search-item.model';
 
 @Component({
   selector: 'app-admin-page',
@@ -18,9 +23,11 @@ export class AdminPageComponent {
     tags: this.fb.array([this.fb.control('', Validators.required)]),
   });
 
-  public isCardCreated = false;
-
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<AppState>,
+    private router: Router
+  ) {}
 
   get title(): AbstractControl | null {
     return this.adminForm.get('title');
@@ -54,7 +61,9 @@ export class AdminPageComponent {
   }
 
   onCreateCardButtonClick(): void {
-    this.isCardCreated = true;
+    const customItem: ISearchItem = this.createCustomItem();
+    this.store.dispatch(addCustomItem({ customItem }));
+    this.router.navigate(['/search']);
   }
 
   onResetFormButtonClick(): void {
@@ -84,5 +93,35 @@ export class AdminPageComponent {
       return projectConstants.ADMIN_FORM_CREATION_DATE_MESSAGE_FUTURE_DATE;
     }
     return '';
+  }
+
+  createCustomItem(): ISearchItem {
+    return {
+      etag: 'custom-item-etag',
+      id: {
+        kind: 'custom-kind',
+        videoId: `cv${String(Math.floor(Math.random() * 9000))}`,
+      },
+      kind: 'youtube#video',
+      snippet: {
+        title: this.adminForm.value.title as string,
+        publishedAt: this.adminForm.value.creationDate as string,
+        description: this.adminForm.value.description as string,
+        thumbnails: {
+          medium: {
+            url: this.adminForm.value.coverImageLink as string,
+            height: 123,
+            width: 223,
+          },
+        },
+      },
+      statistics: {
+        viewCount: String(Math.floor(Math.random() * 10000)),
+        commentCount: String(Math.floor(Math.random() * 100)),
+        dislikeCount: '',
+        favoriteCount: String(Math.floor(Math.random() * 50)),
+        likeCount: String(Math.floor(Math.random() * 1000)),
+      },
+    };
   }
 }

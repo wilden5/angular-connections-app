@@ -14,8 +14,9 @@ import {
   selectYoutubeItemsSortedByDateDesc,
   selectYoutubeItemsSortedByViewsASC,
   selectYoutubeItemsSortedByViewsDESC,
-} from '../../../redux/selectors/youtube-item.selectors';
+} from '../../../redux/selectors/youtube-items.selectors';
 import { AppState } from '../../../redux/app.state';
+import { selectAllItems } from '../../../redux/selectors/items.selectors';
 
 @Component({
   selector: 'app-search-results',
@@ -24,6 +25,8 @@ import { AppState } from '../../../redux/app.state';
 })
 export class SearchResultsComponent implements OnInit {
   protected readonly selectYoutubeItems = selectYoutubeItems;
+
+  protected readonly selectAllItems = selectAllItems;
 
   isSortAscViews = true;
 

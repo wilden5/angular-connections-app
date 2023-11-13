@@ -1,8 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 import { addCustomItem } from '../actions/custom-item.actions';
-import { ICustomSearchItem } from '../../youtube/models/search-item.model';
+import { ISearchItem } from '../../youtube/models/search-item.model';
 
-export const initialCustomItemState: ICustomSearchItem[] = [];
+export const initialCustomItemState: ISearchItem[] = [];
 
 export const customItemReducer = createReducer(
   initialCustomItemState,
