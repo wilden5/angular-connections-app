@@ -1,5 +1,5 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
-import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, Observable, take } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { ISearchItem } from '../../models/search-item.model';
@@ -7,8 +7,14 @@ import { FiltersVisibilityService } from '../../services/filters-visibility.serv
 import { SearchService } from '../../services/search.service';
 import { projectConstants } from '../../../utils/project-constants';
 import { SnackBarService } from '../../../core/services/snack-bar.service';
-import { searchYoutubeItems } from '../../../redux/actions/youtube-item.actions';
-import { selectYoutubeItem } from '../../../redux/selectors/youtube-item.selectors';
+import { searchYoutubeItems, updateYoutubeItems } from '../../../redux/actions/youtube-item.actions';
+import {
+  selectYoutubeItems,
+  selectYoutubeItemsSortedByDateAsc,
+  selectYoutubeItemsSortedByDateDesc,
+  selectYoutubeItemsSortedByViewsASC,
+  selectYoutubeItemsSortedByViewsDESC,
+} from '../../../redux/selectors/youtube-item.selectors';
 import { AppState } from '../../../redux/app.state';
 
 @Component({
@@ -17,17 +23,15 @@ import { AppState } from '../../../redux/app.state';
   styleUrls: ['./search-results.component.scss'],
 })
 export class SearchResultsComponent implements OnInit {
-  itemsArray: ISearchItem[] = [];
-
-  filteredItemsArray: ISearchItem[] = [];
-
   isSortAscViews = true;
 
   isSortAscDate = true;
 
   searchTerm = '';
 
-  protected readonly selectYoutubeItem = selectYoutubeItem;
+  sortedStore$: Observable<ISearchItem[]> | undefined;
+
+  protected readonly selectYoutubeItem = selectYoutubeItems;
 
   constructor(
     private snackBarService: SnackBarService,
@@ -52,28 +56,32 @@ export class SearchResultsComponent implements OnInit {
   }
 
   sortByViewsCount(): void {
-    const sortedArray = this.filteredItemsArray.slice();
     if (this.isSortAscViews) {
-      sortedArray.sort((a, b) => Number(a.statistics.viewCount) - Number(b.statistics.viewCount));
+      this.sortedStore$ = this.store.select(selectYoutubeItemsSortedByViewsASC);
       this.snackBarService.setSnackBar(projectConstants.SORT_BY_VIEWS_ASC);
     } else {
-      sortedArray.sort((a, b) => Number(b.statistics.viewCount) - Number(a.statistics.viewCount));
+      this.sortedStore$ = this.store.select(selectYoutubeItemsSortedByViewsDESC);
       this.snackBarService.setSnackBar(projectConstants.SORT_BY_VIEWS_DESC);
     }
     this.isSortAscViews = !this.isSortAscViews;
-    this.filteredItemsArray = sortedArray;
+
+    this.sortedStore$.pipe(take(1)).subscribe((sortedStore) => {
+      this.store.dispatch(updateYoutubeItems({ items: sortedStore }));
+    });
   }
 
   sortByDate(): void {
-    const sortedArray = this.filteredItemsArray.slice();
     if (this.isSortAscDate) {
-      sortedArray.sort((a, b) => new Date(a.snippet.publishedAt).getTime() - new Date(b.snippet.publishedAt).getTime());
+      this.sortedStore$ = this.store.select(selectYoutubeItemsSortedByDateAsc);
       this.snackBarService.setSnackBar(projectConstants.SORT_BY_DATE_ASC);
     } else {
-      sortedArray.sort((a, b) => new Date(b.snippet.publishedAt).getTime() - new Date(a.snippet.publishedAt).getTime());
+      this.sortedStore$ = this.store.select(selectYoutubeItemsSortedByDateDesc);
       this.snackBarService.setSnackBar(projectConstants.SORT_BY_DATE_DESC);
     }
     this.isSortAscDate = !this.isSortAscDate;
-    this.filteredItemsArray = sortedArray;
+
+    this.sortedStore$.pipe(take(1)).subscribe((sortedStore) => {
+      this.store.dispatch(updateYoutubeItems({ items: sortedStore }));
+    });
   }
 }

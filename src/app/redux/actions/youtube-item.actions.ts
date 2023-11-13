@@ -7,3 +7,8 @@ export const loadYoutubeItems = createAction(
 );
 
 export const searchYoutubeItems = createAction('[YOUTUBE ITEM] Search Youtube Items', props<{ query: string }>());
+
+export const updateYoutubeItems = createAction(
+  '[YOUTUBE ITEM] Update Youtube Items',
+  props<{ items: ISearchItem[] }>()
+);
