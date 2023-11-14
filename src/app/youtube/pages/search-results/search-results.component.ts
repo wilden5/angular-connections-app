@@ -53,8 +53,8 @@ export class SearchResultsComponent implements OnInit {
       .getSearchQueryObservable()
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        filter((searchQuery) => searchQuery.length > 2),
         debounceTime(1000),
+        filter((searchQuery) => searchQuery.length > 2),
         distinctUntilChanged()
       )
       .subscribe((query) => {

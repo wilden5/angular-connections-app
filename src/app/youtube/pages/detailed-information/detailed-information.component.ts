@@ -7,6 +7,7 @@ import { ISearchItem } from '../../models/search-item.model';
 import { AppState } from '../../../redux/app.state';
 import { selectSpecificCustomItem } from '../../../redux/selectors/custom-items.selectors';
 import { selectSpecificYoutubeItem } from '../../../redux/selectors/youtube-items.selectors';
+import { deleteCustomItem } from '../../../redux/actions/custom-item.actions';
 
 @Component({
   selector: 'app-detailed-information',
@@ -32,6 +33,11 @@ export class DetailedInformationComponent implements OnInit {
   }
 
   onBackButtonClick(): void {
+    this.location.back();
+  }
+
+  onDeleteButtonClick(customItemId: string): void {
+    this.store.dispatch(deleteCustomItem({ id: customItemId }));
     this.location.back();
   }
 }

@@ -16,7 +16,7 @@ export class YoutubeItemService {
 
   getYoutubeItemsBySearchQuery(query: string, isNextPage = true): Observable<ISearchItem[]> {
     const pageToken = isNextPage ? this.nextPageToken : this.prevPageToken;
-    return this.http.get<ISearchResponse>(`search?part=snippet&q=${query}&maxResults=12&pageToken=${pageToken}`).pipe(
+    return this.http.get<ISearchResponse>(`search?part=snippet&q=${query}&maxResults=20&pageToken=${pageToken}`).pipe(
       tap((response) => {
         this.nextPageToken = response.nextPageToken;
         this.prevPageToken = response.prevPageToken ? response.prevPageToken : '';
