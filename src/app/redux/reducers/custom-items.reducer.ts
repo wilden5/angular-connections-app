@@ -4,7 +4,7 @@ import { ISearchItem } from '../../youtube/models/search-item.model';
 
 export const initialCustomItemState: ISearchItem[] = [];
 
-export const customItemReducer = createReducer(
+export const customItemsReducer = createReducer(
   initialCustomItemState,
   on(addCustomItem, (state, { customItem }) => [...state, customItem])
 );

@@ -113,6 +113,11 @@ export class AdminPageComponent {
             height: 123,
             width: 223,
           },
+          maxres: {
+            url: this.adminForm.value.coverImageLink as string,
+            height: 720,
+            width: 1280,
+          },
         },
       },
       statistics: {

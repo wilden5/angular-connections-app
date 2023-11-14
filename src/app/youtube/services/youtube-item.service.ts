@@ -31,14 +31,4 @@ export class YoutubeItemService {
       })
     );
   }
-
-  getYoutubeSpecificItemById(id: string): Observable<ISearchItem> {
-    // temporary before NgRx implementation, since currently we are storing items inside the search-results component
-    return this.http.get<ISearchResponse>(`videos?part=snippet,statistics&id=${id}`).pipe(
-      map((itemResponse) => ({ ...itemResponse.items[0] })),
-      catchError((error) => {
-        return throwError(() => error);
-      })
-    );
-  }
 }

@@ -12,7 +12,7 @@ import { CoreModule } from './core/core.module';
 import { ApiInterceptor } from './core/interceptors/api.interceptor';
 import { AppState } from './redux/app.state';
 import { youtubeItemsReducer } from './redux/reducers/youtube-items.reducer';
-import { customItemReducer } from './redux/reducers/custom-item.reducer';
+import { customItemsReducer } from './redux/reducers/custom-items.reducer';
 import { AppEffects } from './redux/effects/app.effects';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { AppEffects } from './redux/effects/app.effects';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot<AppState>({ youtubeItems: youtubeItemsReducer, customItems: customItemReducer }),
+    StoreModule.forRoot<AppState>({ youtubeItems: youtubeItemsReducer, customItems: customItemsReducer }),
     EffectsModule.forRoot([AppEffects]),
     StoreDevtoolsModule.instrument(),
   ],

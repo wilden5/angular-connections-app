@@ -4,9 +4,9 @@ import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ISearchItem } from '../../models/search-item.model';
-import { YoutubeItemService } from '../../services/youtube-item.service';
 import { AppState } from '../../../redux/app.state';
-import { selectSpecificCustomItem } from '../../../redux/selectors/items.selectors';
+import { selectSpecificCustomItem } from '../../../redux/selectors/custom-items.selectors';
+import { selectSpecificYoutubeItem } from '../../../redux/selectors/youtube-items.selectors';
 
 @Component({
   selector: 'app-detailed-information',
@@ -18,19 +18,16 @@ export class DetailedInformationComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private youtubeItemService: YoutubeItemService,
     private location: Location,
     private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
     const itemId = this.route.snapshot.paramMap.get('id');
-    /* if (itemId) {
-      this.searchItem$ = this.youtubeItemService.getYoutubeSpecificItemById(itemId);
-    } */
-    if (itemId) {
-      console.log(itemId);
+    if (itemId && itemId.startsWith('cv')) {
       this.searchItem$ = this.store.select(selectSpecificCustomItem(itemId));
+    } else if (itemId) {
+      this.searchItem$ = this.store.select(selectSpecificYoutubeItem(itemId));
     }
   }
 

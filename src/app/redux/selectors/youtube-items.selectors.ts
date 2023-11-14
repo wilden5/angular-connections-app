@@ -1,4 +1,4 @@
-import { createSelector } from '@ngrx/store';
+import { createSelector, MemoizedSelector } from '@ngrx/store';
 import { AppState } from '../app.state';
 import { ISearchItem } from '../../youtube/models/search-item.model';
 
@@ -23,3 +23,8 @@ export const selectYoutubeItemsSortedByDateDesc = createSelector(selectYoutubeIt
     (a, b) => new Date(b.snippet.publishedAt).getTime() - new Date(a.snippet.publishedAt).getTime()
   );
 });
+
+export const selectSpecificYoutubeItem = (id: string): MemoizedSelector<AppState, ISearchItem | undefined> =>
+  createSelector(selectYoutubeItems, (youtubeItem: ISearchItem[]) =>
+    youtubeItem.find((item) => String(item.id) === id)
+  );
