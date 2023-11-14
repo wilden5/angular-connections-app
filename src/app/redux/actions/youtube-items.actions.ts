@@ -12,3 +12,7 @@ export const sortYoutubeItems = createAction(
   '[YOUTUBE ITEM] Sort Youtube Items',
   props<{ youtubeItems: ISearchItem[] }>()
 );
+
+export const loadNextYoutubeItemsPage = createAction('[YOUTUBE ITEM] Load Next Youtube Items Page');
+
+export const loadPrevYoutubeItemsPage = createAction('[YOUTUBE ITEM] Load Prev Youtube Items Page');

@@ -7,7 +7,12 @@ import { FiltersVisibilityService } from '../../services/filters-visibility.serv
 import { SearchService } from '../../services/search.service';
 import { projectConstants } from '../../../utils/project-constants';
 import { SnackBarService } from '../../../core/services/snack-bar.service';
-import { searchYoutubeItems, sortYoutubeItems } from '../../../redux/actions/youtube-items.actions';
+import {
+  loadNextYoutubeItemsPage,
+  loadPrevYoutubeItemsPage,
+  searchYoutubeItems,
+  sortYoutubeItems,
+} from '../../../redux/actions/youtube-items.actions';
 import {
   selectYoutubeItemsSortedByDateAsc,
   selectYoutubeItemsSortedByDateDesc,
@@ -16,6 +21,7 @@ import {
 } from '../../../redux/selectors/youtube-items.selectors';
 import { AppState } from '../../../redux/app.state';
 import { selectAllItems } from '../../../redux/selectors/items.selectors';
+import { YoutubeItemService } from '../../services/youtube-item.service';
 
 @Component({
   selector: 'app-search-results',
@@ -38,7 +44,8 @@ export class SearchResultsComponent implements OnInit {
     protected filtersVisibilityService: FiltersVisibilityService,
     protected searchService: SearchService,
     private destroyRef: DestroyRef,
-    protected store: Store<AppState>
+    protected store: Store<AppState>,
+    protected youtubeItemService: YoutubeItemService
   ) {}
 
   ngOnInit(): void {
@@ -83,5 +90,13 @@ export class SearchResultsComponent implements OnInit {
     this.sortedStore$.pipe(take(1)).subscribe((sortedStore) => {
       this.store.dispatch(sortYoutubeItems({ youtubeItems: sortedStore }));
     });
+  }
+
+  onNextPageButtonClick(): void {
+    this.store.dispatch(loadNextYoutubeItemsPage());
+  }
+
+  onPrevButtonClick(): void {
+    this.store.dispatch(loadPrevYoutubeItemsPage());
   }
 }
