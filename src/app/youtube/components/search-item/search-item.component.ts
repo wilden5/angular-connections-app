@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ISearchItem } from '../../../models/search-item.model';
+import { ISearchItem, IVideoId } from '../../models/search-item.model';
 
 @Component({
   selector: 'app-search-item',
@@ -12,7 +12,7 @@ export class SearchItemComponent {
 
   constructor(private router: Router) {}
 
-  onMoreButtonClick(itemId: string): void {
-    this.router.navigate(['/item', itemId]);
+  onMoreButtonClick(itemId: IVideoId): void {
+    this.router.navigate(['/search/item', itemId]);
   }
 }

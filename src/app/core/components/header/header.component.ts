@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FiltersVisibilityService } from '../../../youtube/services/filters-visibility.service';
 import { SearchService } from '../../../youtube/services/search.service';
 import { LoginService } from '../../../auth/services/login.service';
@@ -9,24 +10,40 @@ import { LoginService } from '../../../auth/services/login.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  isAddButtonClicked = false;
+
   constructor(
     protected filtersVisibilityService: FiltersVisibilityService,
     private searchService: SearchService,
     private router: Router,
-    private loginService: LoginService
+    protected loginService: LoginService,
+    private destroyRef: DestroyRef
   ) {}
+
+  ngOnInit(): void {
+    this.searchService
+      .getSearchQueryObservable()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {});
+  }
 
   onToggleFiltersButtonClick(): void {
     this.filtersVisibilityService.toggleFiltersVisibility();
   }
 
-  onSearchButtonClick(searchQuery: string): void {
-    this.router.navigate(['/search']);
+  onSearchInputChange(searchQuery: string): void {
     this.searchService.setSearchObservable(searchQuery);
+    if (searchQuery.length > 2) {
+      this.router.navigate(['/search']);
+    }
   }
 
   onLogoutButtonClick(): void {
     this.loginService.logout();
+  }
+
+  onLoginButtonClick(): void {
+    this.router.navigate(['/login']);
   }
 }

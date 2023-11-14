@@ -1,7 +1,7 @@
 export interface ISearchItem {
   kind: string;
   etag: string;
-  id: string;
+  id: IVideoId;
   snippet: ISnippet;
   statistics: IStatistics;
 }
@@ -46,4 +46,9 @@ interface IStatistics {
   dislikeCount: string;
   favoriteCount: string;
   commentCount: string;
+}
+
+export interface IVideoId {
+  kind: string;
+  videoId: string;
 }

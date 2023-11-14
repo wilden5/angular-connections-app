@@ -1,4 +1,7 @@
-<div [appColoredItemFilter]="searchItem?.snippet?.publishedAt" class="item-wrapper">
+<div
+  *ngIf="searchItem$ | async as searchItem"
+  [appColoredItemFilter]="searchItem.snippet.publishedAt"
+  class="item-wrapper">
   <app-custom-button
     (buttonClickRequested)="onBackButtonClick()"
     class="back-button"

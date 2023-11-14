@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Observable } from 'rxjs';
 import { ISearchItem } from '../../models/search-item.model';
 import { YoutubeItemService } from '../../services/youtube-item.service';
 
@@ -10,7 +11,7 @@ import { YoutubeItemService } from '../../services/youtube-item.service';
   styleUrls: ['./detailed-information.component.scss'],
 })
 export class DetailedInformationComponent implements OnInit {
-  @Input() searchItem: ISearchItem | undefined;
+  @Input() searchItem$: Observable<ISearchItem | undefined> | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,9 +22,7 @@ export class DetailedInformationComponent implements OnInit {
   ngOnInit(): void {
     const itemId = this.route.snapshot.paramMap.get('id');
     if (itemId) {
-      this.youtubeItemService.getSpecificItemById(itemId).subscribe((data) => {
-        this.searchItem = data;
-      });
+      this.searchItem$ = this.youtubeItemService.getYoutubeSpecificItemById(itemId);
     }
   }
 

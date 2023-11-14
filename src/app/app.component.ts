@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SearchService } from './youtube/services/search.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +7,4 @@ import { SearchService } from './youtube/services/search.service';
 })
 export class AppComponent {
   title = 'youtube-client-app';
-
-  constructor(protected searchService: SearchService) {}
 }
