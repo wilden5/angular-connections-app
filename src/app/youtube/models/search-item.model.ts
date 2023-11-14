@@ -4,6 +4,7 @@ export interface ISearchItem {
   id: IVideoId;
   snippet: ISnippet;
   statistics: IStatistics;
+  custom?: boolean;
 }
 
 interface ISnippet {

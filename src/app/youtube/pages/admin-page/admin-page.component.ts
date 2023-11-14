@@ -127,6 +127,7 @@ export class AdminPageComponent {
         favoriteCount: String(Math.floor(Math.random() * 50)),
         likeCount: String(Math.floor(Math.random() * 1000)),
       },
+      custom: true,
     };
   }
 }
