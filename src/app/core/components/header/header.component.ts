@@ -48,4 +48,8 @@ export class HeaderComponent implements OnInit {
   onAddVideoButtonClick(): void {
     this.router.navigate(['/search/admin']);
   }
+
+  onFavoriteButtonClick(): void {
+    this.router.navigate(['/favorite']);
+  }
 }

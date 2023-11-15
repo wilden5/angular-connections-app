@@ -23,6 +23,9 @@
         customClass="add-video-button button">
         <mat-icon class="icon">add_to_queue</mat-icon>
       </app-custom-button>
+      <app-custom-button (buttonClickRequested)="onFavoriteButtonClick()" customClass="add-video-button button">
+        <mat-icon class="icon">favorite</mat-icon>
+      </app-custom-button>
       <div class="login-information">
         <span class="user-name"
           >Login Status: <span class="login-status">{{this.loginService.isLoggedIn$ | async}}</span></span
