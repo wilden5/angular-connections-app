@@ -38,6 +38,12 @@
         customClass="filter-button button">
         <mat-icon class="delete-icon">delete_forever</mat-icon>
       </app-custom-button>
+      <app-custom-button
+        *ngIf="!searchItem.custom"
+        (buttonClickRequested)="onAddToFavoriteButtonClick(searchItem.id)"
+        customClass="filter-button button">
+        <mat-icon class="delete-icon">favorite</mat-icon>
+      </app-custom-button>
     </div>
     <div [appColoredBorder]="searchItem.snippet.publishedAt" class="item-border"></div>
   </mat-card>

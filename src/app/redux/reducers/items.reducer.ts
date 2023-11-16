@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadYoutubeItems, sortYoutubeItems } from '../actions/youtube-items.actions';
+import { addYoutubeItemToFavoriteList, loadYoutubeItems, sortYoutubeItems } from '../actions/youtube-items.actions';
 import { AppState } from '../app.state';
 import { addCustomItem, deleteCustomItem } from '../actions/custom-item.actions';
 
@@ -38,6 +38,12 @@ export const itemsReducer = createReducer(
     return {
       ...state,
       customItems: remainingItems,
+    };
+  }),
+  on(addYoutubeItemToFavoriteList, (state, { id }) => {
+    return {
+      ...state,
+      favoriteListIds: [...state.favoriteListIds, id],
     };
   })
 );

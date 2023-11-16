@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { ISearchItem, IVideoId } from '../../models/search-item.model';
 import { AppState } from '../../../redux/app.state';
 import { deleteCustomItem } from '../../../redux/actions/custom-item.actions';
+import { addYoutubeItemToFavoriteList } from '../../../redux/actions/youtube-items.actions';
 
 @Component({
   selector: 'app-search-item',
@@ -28,5 +29,9 @@ export class SearchItemComponent {
 
   onDeleteButtonClick(customItemId: string): void {
     this.store.dispatch(deleteCustomItem({ id: customItemId }));
+  }
+
+  onAddToFavoriteButtonClick(customItemId: IVideoId): void {
+    this.store.dispatch(addYoutubeItemToFavoriteList({ id: String(customItemId) }));
   }
 }

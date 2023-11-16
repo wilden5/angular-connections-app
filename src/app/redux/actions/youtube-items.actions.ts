@@ -16,3 +16,8 @@ export const sortYoutubeItems = createAction(
 export const loadNextYoutubeItemsPage = createAction('[YOUTUBE ITEM] Load Next Youtube Items Page');
 
 export const loadPrevYoutubeItemsPage = createAction('[YOUTUBE ITEM] Load Prev Youtube Items Page');
+
+export const addYoutubeItemToFavoriteList = createAction(
+  '[YOUTUBE ITEM] Add Youtube Item To Favorite List',
+  props<{ id: string }>()
+);

@@ -5,6 +5,7 @@ export interface ISearchItem {
   snippet: ISnippet;
   statistics: IStatistics;
   custom?: boolean;
+  favorite?: boolean;
 }
 
 interface ISnippet {
