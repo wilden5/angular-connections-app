@@ -5,6 +5,7 @@ import { addCustomItem, deleteCustomItem } from '../actions/custom-item.actions'
 
 export const initialAppState: AppState = {
   videoItems: {},
+  customItems: {},
   videoListIds: [],
   favoriteListIds: [],
 };
@@ -15,11 +16,11 @@ export const itemsReducer = createReducer(
     const videoItems = youtubeItems.reduce(
       (acc, item) => ({
         ...acc,
-        [item.id.videoId ? item.id.videoId : String(item.id)]: item,
+        [String(item.id)]: item,
       }),
       {}
     );
-    const videoListIds = youtubeItems.map((item) => (item.id.videoId ? item.id.videoId : String(item.id)));
+    const videoListIds = youtubeItems.map((item) => String(item.id));
     return { ...state, videoItems, videoListIds };
   }),
   on(sortYoutubeItems, (state, { youtubeItems }) => {
@@ -29,16 +30,14 @@ export const itemsReducer = createReducer(
   on(addCustomItem, (state, { customItem }) => {
     return {
       ...state,
-      videoItems: { [customItem.id.videoId]: customItem, ...state.videoItems },
-      videoListIds: [customItem.id.videoId, ...state.videoListIds],
+      customItems: { ...state.customItems, [customItem.id.videoId]: customItem },
     };
   }),
   on(deleteCustomItem, (state, { id }) => {
-    const { [id]: removeItem, ...remainingItems } = state.videoItems;
+    const { [id]: removeItem, ...remainingItems } = state.customItems;
     return {
       ...state,
-      videoItems: remainingItems,
-      videoListIds: state.videoListIds.filter((videoId) => videoId !== id),
+      customItems: remainingItems,
     };
   })
 );

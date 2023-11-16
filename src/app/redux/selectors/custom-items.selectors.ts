@@ -4,7 +4,7 @@ import { ISearchItem } from '../../youtube/models/search-item.model';
 
 export const selectAppState = createFeatureSelector<AppState>('appState');
 
-export const selectVideoItems = createSelector(selectAppState, (state) => state.videoItems);
+export const selectCustomItems = createSelector(selectAppState, (state) => state.customItems);
 
 export const selectSpecificCustomItem = (id: string): MemoizedSelector<AppState, ISearchItem | undefined> =>
-  createSelector(selectVideoItems, (state): ISearchItem | undefined => state[id]);
+  createSelector(selectCustomItems, (state): ISearchItem | undefined => state[id]);

@@ -7,6 +7,20 @@ export const selectVideoItems = createSelector(selectAppState, (state) => state.
 
 const selectVideoListIds = createSelector(selectAppState, (state) => state.videoListIds);
 
-export const selectAllItems = createSelector(selectVideoItems, selectVideoListIds, (videoItems, videoListIds) =>
-  videoListIds.map((id) => videoItems[id])
+const selectCustomItems = createSelector(selectAppState, (state) => state.customItems);
+
+export const selectAllItems = createSelector(
+  selectVideoItems,
+  selectVideoListIds,
+  selectCustomItems,
+  (videoItems, videoListIds, customItems) => {
+    const allItems = Object.values(customItems);
+
+    videoListIds.forEach((id) => {
+      if (videoItems[id]) {
+        allItems.push(videoItems[id]);
+      }
+    });
+    return allItems;
+  }
 );
