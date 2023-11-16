@@ -1,12 +1,10 @@
-import { createSelector, MemoizedSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
 import { AppState } from '../app.state';
 import { ISearchItem } from '../../youtube/models/search-item.model';
 
-export const selectCustomItems = createSelector(
-  (state: AppState) => state.videoItems,
-  (state: AppState) => state.videoListIds,
-  (videoItems, videoListIds) => videoListIds.map((id) => videoItems[id]).filter((item) => item.custom)
-);
+export const selectAppState = createFeatureSelector<AppState>('appState');
+
+export const selectVideoItems = createSelector(selectAppState, (state) => state.videoItems);
 
 export const selectSpecificCustomItem = (id: string): MemoizedSelector<AppState, ISearchItem | undefined> =>
-  createSelector(selectCustomItems, (customItems: ISearchItem[]) => customItems.find((item) => item.id.videoId === id));
+  createSelector(selectVideoItems, (state): ISearchItem | undefined => state[id]);

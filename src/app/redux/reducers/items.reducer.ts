@@ -15,11 +15,11 @@ export const itemsReducer = createReducer(
     const videoItems = youtubeItems.reduce(
       (acc, item) => ({
         ...acc,
-        [String(item.id)]: item,
+        [item.id.videoId ? item.id.videoId : String(item.id)]: item,
       }),
       {}
     );
-    const videoListIds = youtubeItems.map((item) => String(item.id));
+    const videoListIds = youtubeItems.map((item) => (item.id.videoId ? item.id.videoId : String(item.id)));
     return { ...state, videoItems, videoListIds };
   }),
   on(sortYoutubeItems, (state, { youtubeItems }) => {
@@ -29,8 +29,8 @@ export const itemsReducer = createReducer(
   on(addCustomItem, (state, { customItem }) => {
     return {
       ...state,
-      videoItems: { ...state.videoItems, [customItem.id.videoId]: customItem },
-      videoListIds: [...state.videoListIds, customItem.id.videoId],
+      videoItems: { [customItem.id.videoId]: customItem, ...state.videoItems },
+      videoListIds: [customItem.id.videoId, ...state.videoListIds],
     };
   }),
   on(deleteCustomItem, (state, { id }) => {

@@ -1,11 +1,12 @@
-import { createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AppState } from '../app.state';
-import { ISearchItem } from '../../youtube/models/search-item.model';
 
-export const selectVideoItems = (state: AppState): { [id: string]: ISearchItem } => state.videoItems;
+export const selectAppState = createFeatureSelector<AppState>('appState');
 
-export const selectVideoListIds = (state: AppState): string[] => state.videoListIds;
+export const selectVideoItems = createSelector(selectAppState, (state) => state.videoItems);
+
+const selectVideoListIds = createSelector(selectAppState, (state) => state.videoListIds);
 
 export const selectAllItems = createSelector(selectVideoItems, selectVideoListIds, (videoItems, videoListIds) =>
-  videoListIds ? videoListIds.map((id) => videoItems[id]) : []
+  videoListIds.map((id) => videoItems[id])
 );

@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { ApiInterceptor } from './core/interceptors/api.interceptor';
 import { AppEffects } from './redux/effects/app.effects';
-import { itemsReducer } from './redux/reducers/youtube-items.reducer';
+import { itemsReducer } from './redux/reducers/items.reducer';
 
 @NgModule({
   declarations: [AppComponent],
