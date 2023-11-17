@@ -42,7 +42,7 @@
         *ngIf="!searchItem.custom"
         (buttonClickRequested)="onAddToFavoriteButtonClick(searchItem.id)"
         customClass="filter-button button">
-        <mat-icon class="delete-icon">favorite</mat-icon>
+        <mat-icon [ngClass]="{'favorite': searchItem.favorite}" class="delete-icon">favorite</mat-icon>
       </app-custom-button>
     </div>
     <div [appColoredBorder]="searchItem.snippet.publishedAt" class="item-border"></div>
