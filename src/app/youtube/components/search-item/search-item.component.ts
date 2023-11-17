@@ -37,8 +37,8 @@ export class SearchItemComponent {
     this.store.dispatch(deleteCustomItem({ id: customItemId }));
   }
 
-  onAddToFavoriteButtonClick(customItemId: IVideoId): void {
-    this.store.dispatch(addYoutubeItemToFavoriteList({ id: String(customItemId) }));
+  onToggleFavoriteStatusButtonClick(itemId: IVideoId): void {
+    this.store.dispatch(addYoutubeItemToFavoriteList({ id: String(itemId) }));
   }
 
   isFavoriteItem(id: IVideoId): Observable<boolean> {

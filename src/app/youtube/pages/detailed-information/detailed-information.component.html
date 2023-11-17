@@ -16,6 +16,14 @@
       [appColoredBorder]="searchItem?.snippet?.publishedAt">
       <mat-icon class="back-button-icon">delete_forever</mat-icon>
     </app-custom-button>
+    <app-custom-button
+      class="back-button fav-button"
+      *ngIf="!searchItem.custom"
+      (buttonClickRequested)="onToggleFavoriteStatusButtonClick(searchItem.id)">
+      <mat-icon [ngClass]="(isFavoriteItem(searchItem.id) | async) ? 'favorite': ''" class="back-button-icon"
+        >favorite</mat-icon
+      >
+    </app-custom-button>
   </div>
   <div class="image-container">
     <img

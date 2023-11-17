@@ -40,7 +40,7 @@
       </app-custom-button>
       <app-custom-button
         *ngIf="!searchItem.custom"
-        (buttonClickRequested)="onAddToFavoriteButtonClick(searchItem.id)"
+        (buttonClickRequested)="onToggleFavoriteStatusButtonClick(searchItem.id)"
         customClass="filter-button button">
         <mat-icon [ngClass]="(isFavoriteItem(searchItem.id) | async) ? 'favorite': ''" class="delete-icon"
           >favorite</mat-icon
