@@ -18,6 +18,6 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
     AdminPageComponent,
   ],
   imports: [CommonModule, CustomButtonComponent, YoutubeRoutingModule, SharedModule],
-  exports: [SearchResultsComponent],
+  exports: [SearchResultsComponent, SearchItemComponent],
 })
 export class YoutubeModule {}

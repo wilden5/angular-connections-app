@@ -34,3 +34,8 @@ export const selectYoutubeItemsSortedByDateDesc = createSelector(selectVideoItem
 
 export const selectSpecificYoutubeItem = (id: string): MemoizedSelector<AppState, ISearchItem | undefined> =>
   createSelector(selectVideoItems, (state): ISearchItem | undefined => state[id]);
+
+export const selectFavoriteItems = createSelector(selectVideoItems, selectFavoriteListIds, (state, ids) => {
+  const values = Object.values(state);
+  return [...values].filter((item) => ids.includes(String(item.id)));
+});

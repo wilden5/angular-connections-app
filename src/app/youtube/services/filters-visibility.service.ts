@@ -14,6 +14,11 @@ export class FiltersVisibilityService {
   }
 
   isItemOrMainRoute(): boolean {
-    return this.router.url.includes('/item/') || this.router.url === '/' || this.router.url.includes('/login');
+    return (
+      this.router.url.includes('/item/') ||
+      this.router.url === '/' ||
+      this.router.url.includes('/login') ||
+      this.router.url.includes('/favorite')
+    );
   }
 }
