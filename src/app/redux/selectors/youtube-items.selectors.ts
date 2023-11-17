@@ -6,6 +6,8 @@ export const selectAppState = createFeatureSelector<AppState>('appState');
 
 export const selectVideoItems = createSelector(selectAppState, (state) => state.videoItems);
 
+export const selectFavoriteListIds = createSelector(selectAppState, (state) => state.favoriteListIds);
+
 export const selectYoutubeItemsSortedByViewsASC = createSelector(selectVideoItems, (state) => {
   const values = Object.values(state);
   return [...values].sort((a, b) => Number(a.statistics.viewCount) - Number(b.statistics.viewCount));

@@ -41,7 +41,7 @@ export const itemsReducer = createReducer(
     };
   }),
   on(addYoutubeItemToFavoriteList, (state, { id }) => {
-    const isFavorite = !state.videoItems[id].favorite;
+    const isFavorite = !state.favoriteListIds.includes(id);
     const favoriteListIds = isFavorite
       ? [...state.favoriteListIds, id]
       : state.favoriteListIds.filter((itemId) => itemId !== id);
