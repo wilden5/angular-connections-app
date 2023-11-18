@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProjectPath } from '../../utils/project-constants';
 
 @Injectable({
   providedIn: 'root',
@@ -15,10 +16,10 @@ export class FiltersVisibilityService {
 
   isItemOrMainRoute(): boolean {
     return (
-      this.router.url.includes('/item/') ||
+      this.router.url.includes(`${ProjectPath.Item}/`) ||
       this.router.url === '/' ||
-      this.router.url.includes('/login') ||
-      this.router.url.includes('/favorite')
+      this.router.url.includes(ProjectPath.Login) ||
+      this.router.url.includes(ProjectPath.Favorite)
     );
   }
 }
