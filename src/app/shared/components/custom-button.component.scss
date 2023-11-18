@@ -3,6 +3,11 @@
   box-shadow: 0.2rem 0 0.4rem 0 #3f51b5;
   transition: box-shadow 0.3s;
   color: #ffffff !important;
+
+  &:disabled {
+    background-color: #828282 !important;
+    box-shadow: 0.2rem 0 0.4rem 0 #828282;
+  }
 }
 
 .button:hover {
@@ -10,6 +15,7 @@
 }
 
 .login-cb,
+.add-video-button,
 .filter-button {
   margin-bottom: 0.2rem;
   min-width: unset !important;
@@ -26,6 +32,7 @@
   margin-bottom: 0.25rem;
 }
 
+.create-button,
 .login-button {
   width: 100%;
   margin: 0;
@@ -44,4 +51,21 @@
 
 .filter-button {
   margin-left: 1rem;
+}
+
+.add-video-button {
+  margin-left: 1rem;
+}
+
+.create-button {
+  margin-top: 2rem;
+}
+
+.reset-button {
+  background-color: #800a0a;
+  box-shadow: 0.2rem 0 0.4rem 0 #800a0a;
+
+  &:hover {
+    box-shadow: 0 0.2rem 0.4rem 0 #800a0a;
+  }
 }

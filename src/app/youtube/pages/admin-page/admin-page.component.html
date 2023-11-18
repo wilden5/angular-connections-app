@@ -1,0 +1,69 @@
+<div class="admin-container" *ngIf="!isCardCreated; else cardCreated">
+  <form class="admin-form" [formGroup]="adminForm" (ngSubmit)="onCreateCardButtonClick()">
+    <h2>Create new card</h2>
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <mat-error *ngIf="title?.invalid && title?.touched">{{getErrorMessageForTitle()}}</mat-error>
+      <input type="text" formControlName="title" matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <mat-error *ngIf="description?.invalid && description?.touched">The description is too long</mat-error>
+      <textarea class="description" formControlName="description" matInput></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Image Link</mat-label>
+      <mat-error *ngIf="coverImageLink?.invalid && coverImageLink?.touched">Please enter a link to the image</mat-error>
+      <input type="text" formControlName="coverImageLink" matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Video Link</mat-label>
+      <mat-error *ngIf="videoLink?.invalid && videoLink?.touched">Please enter a link to the video</mat-error>
+      <input type="text" formControlName="videoLink" matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Creation Date</mat-label>
+      <mat-error *ngIf="creationDate?.invalid && creationDate?.touched">{{getErrorMessageForCreationDate()}}</mat-error>
+      <input formControlName="creationDate" matInput [matDatepicker]="picker" />
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div formArrayName="tags">
+      <div class="tag-list" *ngFor="let control of tags.controls; let i = index">
+        <mat-form-field class="tag">
+          <mat-label>Tag {{i + 1}}</mat-label>
+          <mat-error *ngIf="control?.invalid && control?.touched">Please enter a tag</mat-error>
+          <input type="text" [formControlName]="i" matInput />
+        </mat-form-field>
+      </div>
+      <app-custom-button [buttonType]="'button'" (buttonClickRequested)="addTag()" customClass="create-button button"
+        >Add Tag</app-custom-button
+      >
+    </div>
+    <div class="form-sb">
+      <app-custom-button
+        (buttonClickRequested)="onResetFormButtonClick()"
+        [buttonType]="'button'"
+        class="create-card-button"
+        customClass="create-button reset-button button">
+        Reset Form
+      </app-custom-button>
+      <app-custom-button class="create-card-button" [disabled]="adminForm.invalid" customClass="create-button button">
+        Create Card
+      </app-custom-button>
+    </div>
+  </form>
+</div>
+<ng-template #cardCreated>
+  <div class="newly-created-card">
+    <h2>New card was created successfully!</h2>
+    <div>Title: {{ title?.value }}</div>
+    <div class="nc-description">Description: {{ description?.value }}</div>
+    <div>Image Link: {{ coverImageLink?.value }}</div>
+    <div>Video Link: {{ videoLink?.value }}</div>
+    <div>Creation Date: {{ creationDate?.value | date}}</div>
+    <div *ngFor="let tag of tags.controls; let i = index">
+      <div>Tag{{i + 1}}: {{tag.value}}</div>
+    </div>
+  </div>
+</ng-template>

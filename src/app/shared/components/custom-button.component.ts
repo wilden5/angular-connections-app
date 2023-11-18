@@ -13,6 +13,10 @@ export class CustomButtonComponent {
 
   @Input() customClass: string | undefined;
 
+  @Input() disabled = false;
+
+  @Input() buttonType: string | undefined;
+
   onButtonClick(): void {
     this.buttonClickRequested.emit();
   }

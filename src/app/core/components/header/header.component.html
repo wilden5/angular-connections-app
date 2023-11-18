@@ -17,6 +17,12 @@
         customClass="filter-button button">
         <mat-icon class="gear-icon icon">settings</mat-icon>
       </app-custom-button>
+      <app-custom-button
+        *ngIf="(this.loginService.isLoggedIn$ | async) && !isAddButtonClicked"
+        (buttonClickRequested)="onAddVideoButtonClick()"
+        customClass="add-video-button button">
+        <mat-icon class="icon">add_to_queue</mat-icon>
+      </app-custom-button>
       <div class="login-information">
         <span class="user-name"
           >Login Status: <span class="login-status">{{this.loginService.isLoggedIn$ | async}}</span></span

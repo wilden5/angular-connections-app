@@ -3,10 +3,17 @@ import { NgModule } from '@angular/core';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { DetailedInformationComponent } from './pages/detailed-information/detailed-information.component';
 import { authGuard } from '../core/guards/auth.guard';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { ProjectPath } from '../utils/project-constants';
 
 const routes: Routes = [
-  { path: '', component: SearchResultsComponent },
-  { path: 'item/:id', component: DetailedInformationComponent, canActivate: [authGuard] },
+  { path: ProjectPath.Empty, component: SearchResultsComponent },
+  {
+    path: `${ProjectPath.Item}/${ProjectPath.ItemId}`,
+    component: DetailedInformationComponent,
+    canActivate: [authGuard],
+  },
+  { path: ProjectPath.Admin, component: AdminPageComponent, canActivate: [authGuard] },
 ];
 
 @NgModule({

@@ -1,14 +1,27 @@
 <div class="login-container">
   <h2 class="login-header">Login</h2>
-  <div class="login-form">
+  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onLoginButtonClick()">
     <mat-form-field>
-      <mat-label>Enter your email</mat-label>
-      <input [(ngModel)]="user.email" matInput placeholder="pat@example.com" required />
+      <mat-label>Email</mat-label>
+      <mat-error *ngIf="email?.invalid && email?.dirty || email?.touched"> {{getErrorMessageForEmail()}} </mat-error>
+      <input id="email" formControlName="email" matInput placeholder="pat@example.com" autocomplete="user-email" />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Enter your password</mat-label>
-      <input [(ngModel)]="user.password" matInput [type]="hidePassword ? 'password' : 'text'" required />
+      <mat-label>Password</mat-label>
+      <mat-error *ngIf="password?.invalid && !password?.dirty">{{getErrorMessageForPassword()}}</mat-error>
+      <mat-error class="specific-error-message" *ngIf="password?.invalid && password?.dirty">
+        <span>Your password isn't strong enough:</span>
+        <br />
+        <span>{{getErrorMessageForPassword()}}</span>
+      </mat-error>
+      <input
+        id="password"
+        formControlName="password"
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        autocomplete="current-password" />
       <button
+        type="button"
         mat-icon-button
         matSuffix
         (click)="hidePassword = !hidePassword"
@@ -17,11 +30,8 @@
         <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
-    <app-custom-button
-      (buttonClickRequested)="onLoginButtonClick()"
-      class="login-button"
-      customClass="login-button button"
+    <app-custom-button [disabled]="loginForm.invalid" class="login-button" customClass="login-button button"
       >Login</app-custom-button
     >
-  </div>
+  </form>
 </div>
