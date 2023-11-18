@@ -51,6 +51,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onFavoriteButtonClick(): void {
-    this.router.navigate(['/favorite']);
+    this.router.navigate([ProjectPath.Favorite]);
   }
 }

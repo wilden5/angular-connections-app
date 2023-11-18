@@ -28,9 +28,9 @@ export class SearchItemComponent {
 
   onMoreButtonClick(itemId: string | IVideoId): void {
     if (typeof itemId === 'string') {
-      this.router.navigate(['/search/item', itemId]);
+      this.router.navigate([`${ProjectPath.Search}/${ProjectPath.Item}`, itemId]);
     } else if (typeof itemId === 'object') {
-      this.router.navigate(['/search/item', itemId.videoId]);
+      this.router.navigate([`${ProjectPath.Search}/${ProjectPath.Item}`, itemId.videoId]);
     }
   }
 

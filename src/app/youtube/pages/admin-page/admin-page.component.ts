@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { projectConstants } from '../../../utils/project-constants';
+import { projectConstants, ProjectPath } from '../../../utils/project-constants';
 import { customCardDateValidator } from '../../validators/card-date.validator';
 import { AppState } from '../../../redux/app.state';
 import { addCustomItem } from '../../../redux/actions/custom-item.actions';
@@ -64,7 +64,7 @@ export class AdminPageComponent {
   onCreateCardButtonClick(): void {
     const customItem: ISearchItem = this.createCustomItem();
     this.store.dispatch(addCustomItem({ customItem }));
-    this.router.navigate(['/search']);
+    this.router.navigate([ProjectPath.Search]);
   }
 
   onResetFormButtonClick(): void {
