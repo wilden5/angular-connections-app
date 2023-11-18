@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { projectConstants } from '../../../utils/project-constants';
 import { customCardDateValidator } from '../../validators/card-date.validator';
+import { customURLValidator } from '../../validators/url.validator';
 
 @Component({
   selector: 'app-admin-page',
@@ -12,8 +13,8 @@ export class AdminPageComponent {
   adminForm = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     description: ['', Validators.maxLength(255)],
-    coverImageLink: ['', [Validators.required, Validators.pattern(/(http(s?):)([/.\w\s-])*\.(?:jpg|png)/g)]],
-    videoLink: ['', [Validators.required, Validators.pattern(/^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/g)]],
+    coverImageLink: ['', [Validators.required, customURLValidator]],
+    videoLink: ['', [Validators.required, customURLValidator]],
     creationDate: ['', [Validators.required, customCardDateValidator]],
     tags: this.fb.array([this.fb.control('', Validators.required)]),
   });
