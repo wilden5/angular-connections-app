@@ -7,6 +7,7 @@ import { AppState } from '../../../redux/app.state';
 import { deleteCustomItem } from '../../../redux/actions/custom-item.actions';
 import { addYoutubeItemToFavoriteList } from '../../../redux/actions/youtube-items.actions';
 import { selectFavoriteListIds } from '../../../redux/selectors/youtube-items.selectors';
+import { ProjectPath } from '../../../utils/project-constants';
 
 @Component({
   selector: 'app-search-item',

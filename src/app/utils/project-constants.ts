@@ -23,3 +23,12 @@ export const projectConstants = {
   ADMIN_FORM_CREATION_DATE_MESSAGE_REQUIRED: 'Please enter a creation date',
   ADMIN_FORM_CREATION_DATE_MESSAGE_FUTURE_DATE: 'The date is invalid',
 };
+
+export enum ProjectPath {
+  Empty = '',
+  Login = 'login',
+  Search = 'search',
+  Admin = 'admin',
+  Item = 'item',
+  ItemId = ':id',
+}

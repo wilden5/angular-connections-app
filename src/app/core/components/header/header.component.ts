@@ -4,6 +4,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FiltersVisibilityService } from '../../../youtube/services/filters-visibility.service';
 import { SearchService } from '../../../youtube/services/search.service';
 import { LoginService } from '../../../auth/services/login.service';
+import { ProjectPath } from '../../../utils/project-constants';
 
 @Component({
   selector: 'app-header',
@@ -33,7 +34,7 @@ export class HeaderComponent implements OnInit {
   onSearchInputChange(searchQuery: string): void {
     this.searchService.setSearchObservable(searchQuery);
     if (searchQuery.length > 2) {
-      this.router.navigate(['/search']);
+      this.router.navigate([ProjectPath.Search]);
     }
   }
 
@@ -42,11 +43,11 @@ export class HeaderComponent implements OnInit {
   }
 
   onLoginButtonClick(): void {
-    this.router.navigate(['/login']);
+    this.router.navigate([ProjectPath.Login]);
   }
 
   onAddVideoButtonClick(): void {
-    this.router.navigate(['/search/admin']);
+    this.router.navigate([`${ProjectPath.Search}/${ProjectPath.Admin}`]);
   }
 
   onFavoriteButtonClick(): void {
