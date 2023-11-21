@@ -1,5 +1,5 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
-import { debounceTime, delay, distinctUntilChanged, filter, Observable, take } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, Observable, take } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { ISearchItem } from '../../models/search-item.model';
