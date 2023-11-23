@@ -58,4 +58,14 @@ describe('LoginService', () => {
     expect(navigateSpy).not.toHaveBeenCalled();
     expect(service.isLoggedIn$).toBeTruthy();
   });
+
+  it('should return true if userCredentials record is created in LocalStorage', () => {
+    const userCredentials: IUser = {
+      email: 'test@test.com',
+      password: '12345testA!',
+    };
+    service.login(userCredentials);
+
+    expect(service.isLoggedIn()).toBe(true);
+  });
 });
