@@ -12,9 +12,10 @@
       <mat-error class="specific-error-message" *ngIf="password?.invalid && password?.dirty">
         <span>Your password isn't strong enough:</span>
         <br />
-        <span>{{getErrorMessageForPassword()}}</span>
+        <span class="error-message-password">{{getErrorMessageForPassword()}}</span>
       </mat-error>
       <input
+        class="password-field"
         id="password"
         formControlName="password"
         matInput
