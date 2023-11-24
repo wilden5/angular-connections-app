@@ -1,7 +1,9 @@
 <div class="sort-container">
   <span class="sort-label">Sorting by:</span>
   <app-custom-button (buttonClickRequested)="onSortByDateButtonClick()">date</app-custom-button>
-  <app-custom-button (buttonClickRequested)="onSortByViewsButtonClick()">count of views</app-custom-button>
+  <app-custom-button class="sort-by-views-button" (buttonClickRequested)="onSortByViewsButtonClick()"
+    >count of views</app-custom-button
+  >
   <span class="by-word-or-sentence">by word or sentence</span>
   <input class="filter-input" type="text" (keyup)="onSortByKeywordInputChange($event)" />
 </div>
