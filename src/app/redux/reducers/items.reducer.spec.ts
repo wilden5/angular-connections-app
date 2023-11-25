@@ -1,3 +1,4 @@
+import { Action } from '@ngrx/store';
 import { initialAppState, itemsReducer } from './items.reducer';
 import { ISearchItem } from '../../youtube/models/search-item.model';
 import { addYoutubeItemToFavoriteList, loadYoutubeItems, sortYoutubeItems } from '../actions/youtube-items.actions';
@@ -5,9 +6,7 @@ import { addCustomItem, deleteCustomItem } from '../actions/custom-item.actions'
 
 describe('ItemsReducer', () => {
   it('should return the default state', () => {
-    const action = {
-      type: 'unknown',
-    };
+    const action: Action = { type: 'unknown' };
     const state = itemsReducer(initialAppState, action);
 
     expect(state).toBe(initialAppState);
