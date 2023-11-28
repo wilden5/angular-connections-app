@@ -29,7 +29,7 @@
         "import/no-duplicates": "error",
         "max-len": [
           "error",
-          120
+          100
         ],
         "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
         // TypeScript Eslint rules
