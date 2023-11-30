@@ -18,6 +18,7 @@
       'email'}}</mat-error
     >
     <input
+      #userEmail
       matInput
       type="text"
       formControlName="email"
@@ -40,7 +41,7 @@
     class="registration-button"
     mat-raised-button
     color="primary"
-    [disabled]="registrationForm.invalid">
+    [disabled]="registrationForm.invalid || previousEnteredEmail === userEmail.value || (userService.isExceptionSubject | async) === true">
     Submit Form
   </button>
 </form>

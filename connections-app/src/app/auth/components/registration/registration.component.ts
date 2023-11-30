@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   customPasswordValidationMessages,
   customPasswordValidator,
@@ -8,6 +9,7 @@ import {
 import { ProjectPages } from '../../../../environment/environment';
 import { registerNewUser } from '../../../redux/actions/user.actions';
 import { IUser } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -19,6 +21,8 @@ export class RegistrationComponent {
 
   protected readonly ProjectPages = ProjectPages;
 
+  protected previousEnteredEmail = '';
+
   registrationForm = this.fb.group({
     name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
     email: ['', [Validators.required, Validators.email]],
@@ -27,8 +31,14 @@ export class RegistrationComponent {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store
-  ) {}
+    private store: Store,
+    protected userService: UserService,
+    private destroyRef: DestroyRef
+  ) {
+    this.email.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.userService.isExceptionSubject.next(false));
+  }
 
   get name(): AbstractControl {
     return this.registrationForm.get('name')!;
@@ -43,6 +53,8 @@ export class RegistrationComponent {
   }
 
   onSubmitRegistrationForm(): void {
+    this.previousEnteredEmail = this.registrationForm.get('email')?.value as string;
+    this.userService.isExceptionSubject.next(true);
     this.store.dispatch(registerNewUser({ user: this.registrationForm.value as IUser }));
   }
 }

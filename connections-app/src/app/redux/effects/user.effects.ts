@@ -32,7 +32,10 @@ export class UserEffects {
     () => {
       return this.actions$.pipe(
         ofType(registerSuccess),
-        tap(() => this.router.navigate([`/${ProjectPages.Auth}/${ProjectPages.Login}`]))
+        tap(() => {
+          this.router.navigate([`/${ProjectPages.Auth}/${ProjectPages.Login}`]);
+          this.userService.isExceptionSubject.next(false);
+        })
       );
     },
     { dispatch: false }
@@ -42,7 +45,9 @@ export class UserEffects {
     () => {
       return this.actions$.pipe(
         ofType(registerFailure),
-        tap((action) => this.snackBarService.setSnackBar(action.error.error.message))
+        tap((action) => {
+          this.snackBarService.setSnackBar(action.error.error.message);
+        })
       );
     },
     { dispatch: false }
