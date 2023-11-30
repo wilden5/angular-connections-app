@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import {
   customPasswordValidationMessages,
   customPasswordValidator,
 } from '../../validators/password.validator';
 import { ProjectPages } from '../../../../environment/environment';
+import { registerNewUser } from '../../../redux/actions/user.actions';
+import { IUser } from '../../models/user.model';
 
 @Component({
   selector: 'app-registration',
@@ -25,7 +27,7 @@ export class RegistrationComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private store: Store
   ) {}
 
   get name(): AbstractControl {
@@ -41,6 +43,6 @@ export class RegistrationComponent {
   }
 
   onSubmitRegistrationForm(): void {
-    console.log(this.registrationForm.value);
+    this.store.dispatch(registerNewUser({ user: this.registrationForm.value as IUser }));
   }
 }
