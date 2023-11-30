@@ -21,7 +21,7 @@ export class RegistrationComponent {
 
   protected readonly ProjectPages = ProjectPages;
 
-  protected previousEnteredEmail = '';
+  protected previousEnteredEmail: string | undefined;
 
   registrationForm = this.fb.group({
     name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],

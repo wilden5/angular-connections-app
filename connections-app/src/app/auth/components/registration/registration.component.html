@@ -14,8 +14,10 @@
   <mat-form-field class="registration-field">
     <mat-label>Email</mat-label>
     <mat-error
-      >{{email.invalid && !email.dirty ? 'Field is required' : 'Should be a valid ' +
-      'email'}}</mat-error
+      >{{email.invalid && !email.dirty ? 'Field is required' : 'Should be a valid ' + 'email'}}
+    </mat-error>
+    <span class="duplicate-error" [hidden]="previousEnteredEmail !== userEmail.value"
+      >User with such email already exists</span
     >
     <input
       #userEmail
