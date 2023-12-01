@@ -16,7 +16,9 @@
     <mat-error
       >{{email.invalid && !email.dirty ? 'Field is required' : 'Should be a valid ' + 'email'}}
     </mat-error>
-    <span class="duplicate-error" [hidden]="previousEnteredEmail !== userEmail.value"
+    <span
+      class="duplicate-error"
+      [hidden]="(userService.previousEnteredEmail | async) !== userEmail.value"
       >User with such email already exists</span
     >
     <input
@@ -43,7 +45,7 @@
     class="registration-button"
     mat-raised-button
     color="primary"
-    [disabled]="registrationForm.invalid || previousEnteredEmail === userEmail.value || (userService.isExceptionSubject | async) === true">
+    [disabled]="registrationForm.invalid || (userService.previousEnteredEmail | async) === userEmail.value || (userService.isExceptionSubject | async) === true">
     Submit Form
   </button>
 </form>

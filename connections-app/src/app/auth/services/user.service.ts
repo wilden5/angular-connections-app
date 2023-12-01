@@ -9,6 +9,8 @@ import { IUser } from '../models/user.model';
 export class UserService {
   public isExceptionSubject = new BehaviorSubject<boolean>(false);
 
+  previousEnteredEmail = new BehaviorSubject<string>('initialValue');
+
   constructor(private http: HttpClient) {}
 
   register(user: IUser): Observable<IUser> {

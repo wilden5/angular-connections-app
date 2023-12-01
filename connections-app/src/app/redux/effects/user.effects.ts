@@ -22,7 +22,10 @@ export class UserEffects {
       concatMap((action) =>
         this.userService.register(action.user).pipe(
           map((user) => registerSuccess({ user })),
-          catchError((error) => of(registerFailure({ error })))
+          catchError((error) => {
+            this.userService.previousEnteredEmail.next(action.user.email);
+            return of(registerFailure({ error }));
+          })
         )
       )
     );

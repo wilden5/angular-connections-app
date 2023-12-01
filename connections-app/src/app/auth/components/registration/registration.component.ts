@@ -21,8 +21,6 @@ export class RegistrationComponent {
 
   protected readonly ProjectPages = ProjectPages;
 
-  protected previousEnteredEmail: string | undefined;
-
   registrationForm = this.fb.group({
     name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
     email: ['', [Validators.required, Validators.email]],
@@ -53,7 +51,6 @@ export class RegistrationComponent {
   }
 
   onSubmitRegistrationForm(): void {
-    this.previousEnteredEmail = this.registrationForm.get('email')?.value as string;
     this.userService.isExceptionSubject.next(true);
     this.store.dispatch(registerNewUser({ user: this.registrationForm.value as IUser }));
   }
