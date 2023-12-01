@@ -3,4 +3,4 @@ import { RootState } from '../root.state';
 
 export const selectRootState = createFeatureSelector<RootState>('user');
 
-export const selectCurrentUser = createSelector(selectRootState, (state) => state.currentUser);
+export const selectUserAuthToken = createSelector(selectRootState, (state) => state.userAuthToken);

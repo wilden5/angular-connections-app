@@ -8,3 +8,8 @@ export enum ProjectPages {
   Login = 'signin',
   Registration = 'signup',
 }
+
+export const projectConstants = {
+  userRegisterSuccess: 'You have been registered!',
+  userLoginSuccess: 'You have been logged in!',
+};
