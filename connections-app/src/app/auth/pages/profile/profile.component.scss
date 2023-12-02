@@ -14,3 +14,20 @@
 .profile-field {
   min-width: 35rem;
 }
+
+.profile-error-container {
+  display: flex;
+  max-width: 90rem;
+  flex-direction: column;
+}
+
+.profile-error-text {
+  text-align: center;
+  font-size: 4rem;
+  line-height: 1.5;
+}
+
+.logout-button {
+  width: 15rem !important;
+  align-self: center;
+}

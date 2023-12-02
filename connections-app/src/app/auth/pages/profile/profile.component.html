@@ -1,19 +1,37 @@
 <h2 class="profile-header">Profile Information</h2>
-<form class="profile-form">
-  <mat-form-field class="profile-field">
-    <mat-label>Creation Date</mat-label>
-    <input matInput type="text" disabled />
-  </mat-form-field>
-  <mat-form-field class="profile-field">
-    <mat-label>ID</mat-label>
-    <input matInput type="text" disabled />
-  </mat-form-field>
-  <mat-form-field class="profile-field">
-    <mat-label>Email</mat-label>
-    <input matInput type="text" disabled />
-  </mat-form-field>
-  <mat-form-field class="profile-field">
-    <mat-label>Name</mat-label>
-    <input matInput type="text" disabled />
-  </mat-form-field>
-</form>
+<ng-container *ngIf="store.select(selectUser) | async as user; else emptyForm">
+  <form class="profile-form">
+    <mat-form-field class="profile-field">
+      <mat-label>Creation Date</mat-label>
+      <input matInput type="text" [value]="(user.createdAt | date: 'medium') ?? ''" disabled />
+    </mat-form-field>
+    <mat-form-field class="profile-field">
+      <mat-label>ID</mat-label>
+      <input matInput type="text" [value]="user.uid" disabled />
+    </mat-form-field>
+    <mat-form-field class="profile-field">
+      <mat-label>Email</mat-label>
+      <input matInput type="text" [value]="user.email" disabled />
+    </mat-form-field>
+    <mat-form-field class="profile-field">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" [value]="user.name" disabled />
+    </mat-form-field>
+  </form>
+</ng-container>
+
+<ng-template #emptyForm>
+  <img
+    class="app-logo"
+    [ngSrc]="'./assets/user-profile-error.jpg'"
+    alt="app-logo"
+    height="350"
+    width="350"
+    priority="true" />
+  <div class="profile-error-container">
+    <p class="profile-error-text">
+      Cannot get user profile information, please logout, and try to login one more time!
+    </p>
+    <button class="logout-button" mat-raised-button color="primary">Logout</button>
+  </div>
+</ng-template>

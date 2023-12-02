@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { IUser, IUserAuthenticated, IUserProfileInformation } from '../models/user.model';
+import {
+  IServerProfileInformation,
+  IUser,
+  IUserAuthenticated,
+  IUserProfileInformation,
+} from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +17,15 @@ export class UserService {
   public previousEnteredEmail = new BehaviorSubject<string>('initialValue');
 
   constructor(private http: HttpClient) {}
+
+  transformProfileInformation(data: IServerProfileInformation): IUserProfileInformation {
+    return {
+      createdAt: data.createdAt.S,
+      uid: data.uid.S,
+      email: data.email.S,
+      name: data.name.S,
+    };
+  }
 
   getAuthHeaders(): HttpHeaders {
     const userHeaders = JSON.parse(localStorage.getItem('userObject')!);
@@ -30,9 +44,9 @@ export class UserService {
     return this.http.post<IUserAuthenticated>('https://tasks.app.rs.school/angular/login', user);
   }
 
-  getProfileInformation(): Observable<IUserProfileInformation> {
+  getProfileInformation(): Observable<IServerProfileInformation> {
     const headers = this.getAuthHeaders();
-    return this.http.get<IUserProfileInformation>('https://tasks.app.rs.school/angular/profile', {
+    return this.http.get<IServerProfileInformation>('https://tasks.app.rs.school/angular/profile', {
       headers,
     });
   }

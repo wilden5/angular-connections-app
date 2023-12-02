@@ -15,6 +15,13 @@ export interface IUserProfileHeaders {
   token: string;
 }
 
+export interface IServerProfileInformation {
+  createdAt: { S: string };
+  uid: { S: string };
+  email: { S: string };
+  name: { S: string };
+}
+
 export interface IUserProfileInformation {
   createdAt: string;
   uid: string;

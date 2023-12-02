@@ -130,7 +130,10 @@ export class UserEffects {
         }
         return this.userService.getProfileInformation().pipe(
           map((profileInformationHttp) =>
-            loadProfileHttpSuccess({ profileInformation: profileInformationHttp })
+            loadProfileHttpSuccess({
+              profileInformation:
+                this.userService.transformProfileInformation(profileInformationHttp),
+            })
           ),
           catchError((error) => {
             return of(loadProfileHttpFailure({ error }));
