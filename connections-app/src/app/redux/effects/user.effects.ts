@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, concatMap, map, of, tap } from 'rxjs';
+import { Actions, createEffect, ofType, concatLatestFrom } from '@ngrx/effects';
+import { catchError, concatMap, map, of, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import {
-  loadProfileHttp,
+  loadProfile,
   loadProfileHttpFailure,
   loadProfileHttpSuccess,
+  loadProfileStore,
   loginFailure,
   loginSuccess,
   loginUser,
@@ -17,6 +19,7 @@ import { UserService } from '../../auth/services/user.service';
 import { projectConstants, ProjectPages } from '../../../environment/environment';
 import { SnackBarService } from '../../core/services/snackbar.service';
 import { IUserProfileHeaders } from '../../auth/models/user.model';
+import { selectUser } from '../selectors/user.selectors';
 
 @Injectable()
 export class UserEffects {
@@ -24,7 +27,8 @@ export class UserEffects {
     private actions$: Actions,
     private userService: UserService,
     private router: Router,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private store: Store
   ) {}
 
   register$ = createEffect(() => {
@@ -118,15 +122,21 @@ export class UserEffects {
 
   profile$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(loadProfileHttp),
-      concatMap(() =>
-        this.userService.getProfileInformation().pipe(
-          map((profileInformation) => loadProfileHttpSuccess({ profileInformation })),
+      ofType(loadProfile),
+      concatLatestFrom(() => this.store.select(selectUser)),
+      switchMap(([action, profileInformation]) => {
+        if (profileInformation) {
+          return of(loadProfileStore());
+        }
+        return this.userService.getProfileInformation().pipe(
+          map((profileInformationHttp) =>
+            loadProfileHttpSuccess({ profileInformation: profileInformationHttp })
+          ),
           catchError((error) => {
             return of(loadProfileHttpFailure({ error }));
           })
-        )
-      )
+        );
+      })
     );
   });
 

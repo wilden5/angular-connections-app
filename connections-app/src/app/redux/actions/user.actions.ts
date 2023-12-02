@@ -20,7 +20,7 @@ export const loginSuccess = createAction(
 
 export const loginFailure = createAction('[USER] Login Failure', props<{ error: IServerError }>());
 
-export const loadProfileHttp = createAction('[USER] Load Profile HTTP Request');
+export const loadProfile = createAction('[USER] Load Profile Request');
 
 export const loadProfileHttpSuccess = createAction(
   '[USER] Load Profile HTTP Request Success',

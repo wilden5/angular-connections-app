@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loadProfileHttp } from '../../../redux/actions/user.actions';
+import { loadProfile } from '../../../redux/actions/user.actions';
 
 @Component({
   selector: 'app-profile',
@@ -12,6 +12,6 @@ export class ProfileComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(loadProfileHttp());
+    this.store.dispatch(loadProfile());
   }
 }
