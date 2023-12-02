@@ -69,7 +69,11 @@ export class UserEffects {
       ofType(loginUser),
       concatMap((action) =>
         this.userService.login(action.user).pipe(
-          map((userAuth) => loginSuccess({ userAuth })),
+          map((userAuth) => {
+            localStorage.setItem('userEmail', action.user.email);
+            localStorage.setItem('userAuthToken', JSON.stringify(userAuth));
+            return loginSuccess({ userAuth });
+          }),
           catchError((error) => {
             return of(loginFailure({ error }));
           })
