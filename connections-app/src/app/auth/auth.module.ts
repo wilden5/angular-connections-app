@@ -7,9 +7,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthRoutingModule } from './auth-routing.module';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
-  declarations: [RegistrationComponent, LoginComponent],
+  declarations: [RegistrationComponent, LoginComponent, ProfileComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

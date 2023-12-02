@@ -1,5 +1,5 @@
-import { IUserAuthenticated } from '../auth/models/user.model';
+import { IUserProfileInformation } from '../auth/models/user.model';
 
 export interface RootState {
-  readonly userAuthToken?: IUserAuthenticated;
+  readonly user?: IUserProfileInformation;
 }

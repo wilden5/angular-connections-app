@@ -3,6 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, map, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import {
+  loadProfileHttp,
+  loadProfileHttpFailure,
+  loadProfileHttpSuccess,
   loginFailure,
   loginSuccess,
   loginUser,
@@ -13,6 +16,7 @@ import {
 import { UserService } from '../../auth/services/user.service';
 import { projectConstants, ProjectPages } from '../../../environment/environment';
 import { SnackBarService } from '../../core/services/snackbar.service';
+import { IUserProfileHeaders } from '../../auth/models/user.model';
 
 @Injectable()
 export class UserEffects {
@@ -70,8 +74,12 @@ export class UserEffects {
       concatMap((action) =>
         this.userService.login(action.user).pipe(
           map((userAuth) => {
-            localStorage.setItem('userEmail', action.user.email);
-            localStorage.setItem('userAuthToken', JSON.stringify(userAuth));
+            const userObject: IUserProfileHeaders = {
+              uid: userAuth.uid,
+              email: action.user.email,
+              token: userAuth.token,
+            };
+            localStorage.setItem('userObject', JSON.stringify(userObject));
             return loginSuccess({ userAuth });
           }),
           catchError((error) => {
@@ -100,6 +108,44 @@ export class UserEffects {
     () => {
       return this.actions$.pipe(
         ofType(loginFailure),
+        tap((action) => {
+          this.snackBarService.setSnackBar(action.error.error.message);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  profile$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(loadProfileHttp),
+      concatMap(() =>
+        this.userService.getProfileInformation().pipe(
+          map((profileInformation) => loadProfileHttpSuccess({ profileInformation })),
+          catchError((error) => {
+            return of(loadProfileHttpFailure({ error }));
+          })
+        )
+      )
+    );
+  });
+
+  profileSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(loadProfileHttpSuccess),
+        tap(() => {
+          this.snackBarService.setSnackBar('Profile information was received!');
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  profileFailure$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(loadProfileHttpFailure),
         tap((action) => {
           this.snackBarService.setSnackBar(action.error.error.message);
         })

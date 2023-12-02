@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IUser, IUserAuthenticated } from '../../auth/models/user.model';
+import { IUser, IUserAuthenticated, IUserProfileInformation } from '../../auth/models/user.model';
 import { IServerError } from '../../core/models/server-error.model';
 
 export const registerNewUser = createAction('[USER] Register New User', props<{ user: IUser }>());
@@ -19,3 +19,17 @@ export const loginSuccess = createAction(
 );
 
 export const loginFailure = createAction('[USER] Login Failure', props<{ error: IServerError }>());
+
+export const loadProfileHttp = createAction('[USER] Load Profile HTTP Request');
+
+export const loadProfileHttpSuccess = createAction(
+  '[USER] Load Profile HTTP Request Success',
+  props<{ profileInformation: IUserProfileInformation }>()
+);
+
+export const loadProfileHttpFailure = createAction(
+  '[USER] Load Profile HTTP Request Failure',
+  props<{ error: IServerError }>()
+);
+
+export const loadProfileStore = createAction('[User] Load Profile Store Request');

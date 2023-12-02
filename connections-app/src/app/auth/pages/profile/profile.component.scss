@@ -1,0 +1,16 @@
+:host,
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.profile-header {
+  margin-top: 3rem;
+  font-size: 4rem;
+}
+
+.profile-field {
+  min-width: 35rem;
+}
