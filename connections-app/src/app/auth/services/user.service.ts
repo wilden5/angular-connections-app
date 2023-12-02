@@ -20,4 +20,8 @@ export class UserService {
   login(user: IUser): Observable<IUserAuthenticated> {
     return this.http.post<IUserAuthenticated>('https://tasks.app.rs.school/angular/login', user);
   }
+
+  isUserLoggedIn(): boolean {
+    return !!localStorage.getItem('userAuthToken');
+  }
 }
