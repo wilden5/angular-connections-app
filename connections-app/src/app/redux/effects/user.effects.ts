@@ -17,6 +17,9 @@ import {
   updateUserNameFailure,
   updateUserName,
   updateUserNameSuccess,
+  logoutUser,
+  logoutFailure,
+  logoutSuccess,
 } from '../actions/user.actions';
 import { UserService } from '../../auth/services/user.service';
 import { projectConstants, ProjectPages } from '../../../environment/environment';
@@ -201,6 +204,48 @@ export class UserEffects {
     () => {
       return this.actions$.pipe(
         ofType(updateUserNameFailure),
+        tap((action) => {
+          this.userService.isExceptionSubject.next(false);
+          this.snackBarService.setSnackBar(action.error.error.message);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  logout$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(logoutUser),
+      concatMap(() =>
+        this.userService.logout().pipe(
+          map(() => logoutSuccess()),
+          catchError((error) => {
+            return of(logoutFailure({ error }));
+          })
+        )
+      )
+    );
+  });
+
+  logoutSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(logoutSuccess),
+        tap(() => {
+          this.userService.isExceptionSubject.next(false);
+          this.snackBarService.setSnackBar('User has been logout successfully!');
+          localStorage.removeItem('userObject');
+          this.router.navigate([`/${ProjectPages.Auth}/${ProjectPages.Login}`]);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  logoutFailure$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(logoutFailure),
         tap((action) => {
           this.userService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar(action.error.error.message);

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } fro
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { loadProfile, updateUserName } from '../../../redux/actions/user.actions';
+import { loadProfile, logoutUser, updateUserName } from '../../../redux/actions/user.actions';
 import { selectUser, selectUserName } from '../../../redux/selectors/user.selectors';
 import { UserService } from '../../services/user.service';
 
@@ -59,6 +59,11 @@ export class ProfileComponent implements OnInit {
     const name = this.inputName.nativeElement.value;
     this.store.dispatch(updateUserName({ name }));
     this.profileForm.get('name')?.disable();
+    this.userService.isExceptionSubject.next(true);
+  }
+
+  onLogoutButtonClick(): void {
+    this.store.dispatch(logoutUser());
     this.userService.isExceptionSubject.next(true);
   }
 }

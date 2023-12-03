@@ -60,6 +60,11 @@ export class UserService {
     );
   }
 
+  logout(): Observable<void> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete<void>('https://tasks.app.rs.school/angular/logout', { headers });
+  }
+
   isUserLoggedIn(): boolean {
     return !!localStorage.getItem('userObject');
   }

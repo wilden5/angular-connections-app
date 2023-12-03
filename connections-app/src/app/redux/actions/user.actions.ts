@@ -45,3 +45,12 @@ export const updateUserNameFailure = createAction(
   '[USER] Update Name Failure',
   props<{ error: IServerError }>()
 );
+
+export const logoutUser = createAction('[USER] Logout User');
+
+export const logoutSuccess = createAction('[USER] Logout Success');
+
+export const logoutFailure = createAction(
+  '[USER] Logout Failure',
+  props<{ error: IServerError }>()
+);

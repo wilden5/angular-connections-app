@@ -3,6 +3,7 @@ import { RootState } from '../root.state';
 import {
   loadProfileHttpSuccess,
   loadProfileStore,
+  logoutSuccess,
   updateUserNameSuccess,
 } from '../actions/user.actions';
 
@@ -25,5 +26,14 @@ export const userReducer = createReducer(
   on(
     updateUserNameSuccess,
     (state, { name }): RootState => ({ ...state, user: { ...state.user, name } })
+  ),
+  on(
+    logoutSuccess,
+    (state): RootState => ({
+      ...state,
+      user: {
+        ...initialRootState.user,
+      },
+    })
   )
 );
