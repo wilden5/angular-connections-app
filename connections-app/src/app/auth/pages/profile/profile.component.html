@@ -1,6 +1,6 @@
 <h2 class="profile-header">Profile Information</h2>
 <ng-container *ngIf="store.select(selectUser) | async as user; else emptyForm">
-  <form class="profile-form">
+  <form class="profile-form" [formGroup]="profileForm">
     <mat-form-field class="profile-field">
       <mat-label>Creation Date</mat-label>
       <input matInput type="text" [value]="(user.createdAt | date: 'medium') ?? ''" disabled />
@@ -16,11 +16,16 @@
     <div class="name-container">
       <mat-form-field class="profile-field">
         <mat-label>Name</mat-label>
-        <input matInput type="text" [value]="user.name" [disabled]="isDisabled" #inputName />
+        <mat-error
+          >{{name.invalid && !name.dirty ? 'Field is required' : 'Should consist of ' +
+          'letters'}}</mat-error
+        >
+        <input matInput type="text" formControlName="name" [value]="user.name" #inputName />
       </mat-form-field>
       <button
-        *ngIf="isDisabled"
+        *ngIf="name.disabled"
         (click)="onEditButtonClick()"
+        [disabled]="(userService.isExceptionSubject | async) === true"
         class="edit-button"
         type="button"
         mat-raised-button
@@ -28,7 +33,7 @@
         Edit
       </button>
       <button
-        *ngIf="!isDisabled"
+        *ngIf="!name.disabled"
         (click)="onCancelButtonClick()"
         class="cancel-button"
         mat-raised-button
@@ -37,7 +42,8 @@
         Cancel
       </button>
       <button
-        *ngIf="!isDisabled"
+        [disabled]="profileForm.invalid"
+        *ngIf="!name.disabled"
         (click)="onSaveButtonClick()"
         class="save-button"
         mat-raised-button

@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { loadProfile, updateUserName } from '../../../redux/actions/user.actions';
 import { selectUser, selectUserName } from '../../../redux/selectors/user.selectors';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,16 +17,32 @@ export class ProfileComponent implements OnInit {
 
   protected readonly selectUser = selectUser;
 
-  protected isDisabled = true;
+  profileForm = this.fb.group({
+    name: [
+      { value: '', disabled: true },
+      [Validators.required, Validators.pattern('^[a-zA-Z ]+$')],
+    ],
+  });
 
-  constructor(protected store: Store) {}
+  constructor(
+    protected store: Store,
+    private fb: FormBuilder,
+    protected userService: UserService
+  ) {}
+
+  get name(): AbstractControl {
+    return this.profileForm.get('name')!;
+  }
 
   ngOnInit(): void {
     this.store.dispatch(loadProfile());
   }
 
   onEditButtonClick(): void {
-    this.isDisabled = !this.isDisabled;
+    this.profileForm.patchValue({
+      name: this.inputName.nativeElement.value,
+    });
+    this.profileForm.get('name')?.enable();
   }
 
   onCancelButtonClick(): void {
@@ -34,12 +52,13 @@ export class ProfileComponent implements OnInit {
       .subscribe((value) => {
         this.inputName.nativeElement.value = value;
       });
-    this.isDisabled = !this.isDisabled;
+    this.profileForm.get('name')?.disable();
   }
 
   onSaveButtonClick(): void {
     const name = this.inputName.nativeElement.value;
     this.store.dispatch(updateUserName({ name }));
-    this.isDisabled = !this.isDisabled;
+    this.profileForm.get('name')?.disable();
+    this.userService.isExceptionSubject.next(true);
   }
 }

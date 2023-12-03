@@ -189,6 +189,7 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(updateUserNameSuccess),
         tap(() => {
+          this.userService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar('User name was updated!');
         })
       );
@@ -201,6 +202,7 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(updateUserNameFailure),
         tap((action) => {
+          this.userService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar(action.error.error.message);
         })
       );
