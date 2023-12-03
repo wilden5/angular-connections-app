@@ -13,10 +13,39 @@
       <mat-label>Email</mat-label>
       <input matInput type="text" [value]="user.email" disabled />
     </mat-form-field>
-    <mat-form-field class="profile-field">
-      <mat-label>Name</mat-label>
-      <input matInput type="text" [value]="user.name" disabled />
-    </mat-form-field>
+    <div class="name-container">
+      <mat-form-field class="profile-field">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" [value]="user.name" [disabled]="isDisabled" #inputName />
+      </mat-form-field>
+      <button
+        *ngIf="isDisabled"
+        (click)="onEditButtonClick()"
+        class="edit-button"
+        type="button"
+        mat-raised-button
+        color="primary">
+        Edit
+      </button>
+      <button
+        *ngIf="!isDisabled"
+        (click)="onCancelButtonClick()"
+        class="cancel-button"
+        mat-raised-button
+        color="warn"
+        type="button">
+        Cancel
+      </button>
+      <button
+        *ngIf="!isDisabled"
+        (click)="onSaveButtonClick()"
+        class="save-button"
+        mat-raised-button
+        color="primary"
+        type="button">
+        Save
+      </button>
+    </div>
   </form>
 </ng-container>
 

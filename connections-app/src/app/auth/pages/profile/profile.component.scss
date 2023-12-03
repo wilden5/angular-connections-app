@@ -31,3 +31,12 @@
   width: 15rem !important;
   align-self: center;
 }
+
+.name-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.cancel-button {
+  margin-bottom: 2rem;
+}
