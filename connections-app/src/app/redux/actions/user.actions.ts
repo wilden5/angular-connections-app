@@ -32,4 +32,16 @@ export const loadProfileHttpFailure = createAction(
   props<{ error: IServerError }>()
 );
 
-export const loadProfileStore = createAction('[User] Load Profile Store Request');
+export const loadProfileStore = createAction('[USER] Load Profile Store Request');
+
+export const updateUserName = createAction('[USER] Update User Name', props<{ name: string }>());
+
+export const updateUserNameSuccess = createAction(
+  '[USER] Update Name Success',
+  props<{ name: string }>()
+);
+
+export const updateUserNameFailure = createAction(
+  '[USER] Update Name Failure',
+  props<{ error: IServerError }>()
+);

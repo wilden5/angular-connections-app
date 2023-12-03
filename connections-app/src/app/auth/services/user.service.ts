@@ -51,6 +51,15 @@ export class UserService {
     });
   }
 
+  updateProfileName(name: string): Observable<void> {
+    const headers = this.getAuthHeaders();
+    return this.http.put<void>(
+      'https://tasks.app.rs.school/angular/profile',
+      { name },
+      { headers }
+    );
+  }
+
   isUserLoggedIn(): boolean {
     return !!localStorage.getItem('userObject');
   }

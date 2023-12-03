@@ -1,9 +1,18 @@
 import { createReducer, on } from '@ngrx/store';
 import { RootState } from '../root.state';
-import { loadProfileHttpSuccess, loadProfileStore } from '../actions/user.actions';
+import {
+  loadProfileHttpSuccess,
+  loadProfileStore,
+  updateUserNameSuccess,
+} from '../actions/user.actions';
 
 export const initialRootState: RootState = {
-  user: undefined,
+  user: {
+    name: '',
+    email: '',
+    uid: '',
+    createdAt: '',
+  },
 };
 
 export const userReducer = createReducer(
@@ -12,5 +21,9 @@ export const userReducer = createReducer(
     loadProfileHttpSuccess,
     (state, { profileInformation }): RootState => ({ ...state, user: profileInformation })
   ),
-  on(loadProfileStore, (state): RootState => ({ ...state }))
+  on(loadProfileStore, (state): RootState => ({ ...state })),
+  on(
+    updateUserNameSuccess,
+    (state, { name }): RootState => ({ ...state, user: { ...state.user, name } })
+  )
 );

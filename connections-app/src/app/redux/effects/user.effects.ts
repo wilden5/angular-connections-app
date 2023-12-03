@@ -14,6 +14,9 @@ import {
   registerFailure,
   registerNewUser,
   registerSuccess,
+  updateUserNameFailure,
+  updateUserName,
+  updateUserNameSuccess,
 } from '../actions/user.actions';
 import { UserService } from '../../auth/services/user.service';
 import { projectConstants, ProjectPages } from '../../../environment/environment';
@@ -125,7 +128,7 @@ export class UserEffects {
       ofType(loadProfile),
       concatLatestFrom(() => this.store.select(selectUser)),
       switchMap(([action, profileInformation]) => {
-        if (profileInformation) {
+        if (profileInformation.uid.length > 0) {
           return of(loadProfileStore());
         }
         return this.userService.getProfileInformation().pipe(
@@ -159,6 +162,44 @@ export class UserEffects {
     () => {
       return this.actions$.pipe(
         ofType(loadProfileHttpFailure),
+        tap((action) => {
+          this.snackBarService.setSnackBar(action.error.error.message);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  updateUserName$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(updateUserName),
+      concatMap((action) =>
+        this.userService.updateProfileName(action.name).pipe(
+          map(() => updateUserNameSuccess({ name: action.name })),
+          catchError((error) => {
+            return of(updateUserNameFailure({ error }));
+          })
+        )
+      )
+    );
+  });
+
+  updateUserNameSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(updateUserNameSuccess),
+        tap(() => {
+          this.snackBarService.setSnackBar('User name was updated!');
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  updateUserNameFailure$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(updateUserNameFailure),
         tap((action) => {
           this.snackBarService.setSnackBar(action.error.error.message);
         })

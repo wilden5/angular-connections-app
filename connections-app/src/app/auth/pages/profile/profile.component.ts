@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
-import { loadProfile } from '../../../redux/actions/user.actions';
+import { loadProfile, updateUserName } from '../../../redux/actions/user.actions';
 import { selectUser, selectUserName } from '../../../redux/selectors/user.selectors';
 
 @Component({
@@ -37,5 +37,9 @@ export class ProfileComponent implements OnInit {
     this.isDisabled = !this.isDisabled;
   }
 
-  onSaveButtonClick(): void {}
+  onSaveButtonClick(): void {
+    const name = this.inputName.nativeElement.value;
+    this.store.dispatch(updateUserName({ name }));
+    this.isDisabled = !this.isDisabled;
+  }
 }
