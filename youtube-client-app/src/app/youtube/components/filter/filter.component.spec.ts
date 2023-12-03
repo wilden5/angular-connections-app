@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { By } from '@angular/platform-browser';
 import { FilterComponent } from './filter.component';
-import { CustomButtonComponent } from '../../../shared/components/custom-button.component';
+import { CustomButtonComponent } from '../../../shared/components/custom-button/custom-button.component';
 
 describe('FilterComponent', () => {
   let component: FilterComponent;

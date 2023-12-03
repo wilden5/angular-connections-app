@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { SearchItemComponent } from './search-item.component';
 import { ProjectPath } from '../../../utils/project-constants';
-import { IVideoId } from '../../models/search-item.model';
+import { IVideoId } from '../../../youtube/models/search-item.model';
 
 describe('SearchItemComponent', () => {
   let component: SearchItemComponent;

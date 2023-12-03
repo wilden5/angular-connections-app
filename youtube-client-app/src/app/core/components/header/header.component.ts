@@ -5,6 +5,9 @@ import { FiltersVisibilityService } from '../../../youtube/services/filters-visi
 import { SearchService } from '../../../youtube/services/search.service';
 import { LoginService } from '../../../auth/services/login.service';
 import { ProjectPath } from '../../../utils/project-constants';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
+import { searchYoutubeItems } from '../../../redux/actions/youtube-items.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-header',
@@ -17,14 +20,22 @@ export class HeaderComponent implements OnInit {
     private searchService: SearchService,
     private router: Router,
     protected loginService: LoginService,
-    private destroyRef: DestroyRef
+    private destroyRef: DestroyRef,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
     this.searchService
       .getSearchQueryObservable()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {});
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        debounceTime(1000),
+        filter((searchQuery) => searchQuery.length > 2),
+        distinctUntilChanged()
+      )
+      .subscribe((query) => {
+        this.store.dispatch(searchYoutubeItems({ query }));
+      });
   }
 
   onToggleFiltersButtonClick(): void {

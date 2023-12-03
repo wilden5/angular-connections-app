@@ -50,3 +50,15 @@
 .nc-description {
   max-width: 60rem;
 }
+
+.search-link {
+  margin-top: 1rem;
+  font-size: 2rem;
+  text-decoration: none;
+  color: #3f51b5;
+  transition: 0.7s;
+
+  &:hover {
+    color: #800a0a;
+  }
+}
