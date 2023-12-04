@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {
   IServerProfileInformation,
@@ -27,15 +27,6 @@ export class UserService {
     };
   }
 
-  getAuthHeaders(): HttpHeaders {
-    const userHeaders = JSON.parse(localStorage.getItem('userObject')!);
-    return new HttpHeaders({
-      'rs-uid': userHeaders.uid,
-      'rs-email': userHeaders.email,
-      authorization: `Bearer ${userHeaders.token}`,
-    });
-  }
-
   register(user: IUser): Observable<IUser> {
     return this.http.post<IUser>('https://tasks.app.rs.school/angular/registration', user);
   }
@@ -45,24 +36,15 @@ export class UserService {
   }
 
   getProfileInformation(): Observable<IServerProfileInformation> {
-    const headers = this.getAuthHeaders();
-    return this.http.get<IServerProfileInformation>('https://tasks.app.rs.school/angular/profile', {
-      headers,
-    });
+    return this.http.get<IServerProfileInformation>('https://tasks.app.rs.school/angular/profile');
   }
 
   updateProfileName(name: string): Observable<void> {
-    const headers = this.getAuthHeaders();
-    return this.http.put<void>(
-      'https://tasks.app.rs.school/angular/profile',
-      { name },
-      { headers }
-    );
+    return this.http.put<void>('https://tasks.app.rs.school/angular/profile', { name });
   }
 
   logout(): Observable<void> {
-    const headers = this.getAuthHeaders();
-    return this.http.delete<void>('https://tasks.app.rs.school/angular/logout', { headers });
+    return this.http.delete<void>('https://tasks.app.rs.school/angular/logout');
   }
 
   isUserLoggedIn(): boolean {

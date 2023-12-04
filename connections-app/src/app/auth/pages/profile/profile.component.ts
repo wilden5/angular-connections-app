@@ -36,6 +36,16 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(loadProfile());
+    this.store
+      .select(selectUserName)
+      .pipe(take(1))
+      .subscribe((name) => {
+        if (name) {
+          this.profileForm.patchValue({
+            name,
+          });
+        }
+      });
   }
 
   onEditButtonClick(): void {

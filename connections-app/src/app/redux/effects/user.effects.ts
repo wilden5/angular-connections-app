@@ -234,7 +234,8 @@ export class UserEffects {
         tap(() => {
           this.userService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar('User has been logout successfully!');
-          localStorage.removeItem('userObject');
+          localStorage.clear();
+          // todo: try to delete cookies here
           this.router.navigate([`/${ProjectPages.Auth}/${ProjectPages.Login}`]);
         })
       );
