@@ -31,4 +31,5 @@ export enum ProjectPath {
   Admin = 'admin',
   Item = 'item',
   ItemId = ':id',
+  Favorite = 'favorite',
 }

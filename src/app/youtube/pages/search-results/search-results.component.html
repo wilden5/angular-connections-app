@@ -7,9 +7,20 @@
     </app-filter>
   </mat-toolbar-row>
 </mat-toolbar>
-<div *ngIf="searchService.getSearchQueryObservable() | async">
+<div class="pagination-buttons">
+  <app-custom-button
+    (buttonClickRequested)="onPrevButtonClick()"
+    [disabled]="youtubeItemService.prevPageToken === ''"
+    customClass="pag-button button"
+    >Prev Page</app-custom-button
+  >
+  <app-custom-button (buttonClickRequested)="onNextPageButtonClick()" customClass="pag-button button"
+    >Next Page</app-custom-button
+  >
+</div>
+<div *ngIf="store.select(selectAllItems) | async as youtubeItems">
   <div class="search-results-container">
-    <div *ngFor="let item of filteredItemsArray | sortByKeyword:searchTerm">
+    <div *ngFor="let item of youtubeItems | sortByKeyword:searchTerm">
       <app-search-item [searchItem]="item"></app-search-item>
     </div>
   </div>

@@ -12,8 +12,6 @@ import { ProjectPath } from '../../../utils/project-constants';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  isAddButtonClicked = false;
-
   constructor(
     protected filtersVisibilityService: FiltersVisibilityService,
     private searchService: SearchService,
@@ -50,6 +48,9 @@ export class HeaderComponent implements OnInit {
 
   onAddVideoButtonClick(): void {
     this.router.navigate([`${ProjectPath.Search}/${ProjectPath.Admin}`]);
-    this.isAddButtonClicked = true;
+  }
+
+  onFavoriteButtonClick(): void {
+    this.router.navigate([ProjectPath.Favorite]);
   }
 }

@@ -4,29 +4,31 @@ export interface ISearchItem {
   id: IVideoId;
   snippet: ISnippet;
   statistics: IStatistics;
+  custom?: boolean;
+  favorite?: boolean;
 }
 
 interface ISnippet {
   publishedAt: string;
-  channelId: string;
+  channelId?: string;
   title: string;
   description: string;
   thumbnails: IThumbnails;
-  channelTitle: string;
-  tags: string[];
-  categoryId: string;
-  liveBroadcastContent: string;
+  channelTitle?: string;
+  tags?: string[];
+  categoryId?: string;
+  liveBroadcastContent?: string;
   defaultLanguage?: string;
-  localized: ILocalized;
-  defaultAudioLanguage: string;
+  localized?: ILocalized;
+  defaultAudioLanguage?: string;
 }
 
 interface IThumbnails {
-  default: IThumbnail;
+  default?: IThumbnail;
   medium: IThumbnail;
-  high: IThumbnail;
-  standard: IThumbnail;
-  maxres: IThumbnail;
+  high?: IThumbnail;
+  standard?: IThumbnail;
+  maxres?: IThumbnail;
 }
 
 interface IThumbnail {

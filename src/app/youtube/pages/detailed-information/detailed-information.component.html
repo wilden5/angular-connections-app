@@ -2,12 +2,29 @@
   *ngIf="searchItem$ | async as searchItem"
   [appColoredItemFilter]="searchItem.snippet.publishedAt"
   class="item-wrapper">
-  <app-custom-button
-    (buttonClickRequested)="onBackButtonClick()"
-    class="back-button"
-    [appColoredBorder]="searchItem?.snippet?.publishedAt">
-    <mat-icon class="back-button-icon">arrow_back_ios</mat-icon>
-  </app-custom-button>
+  <div class="item-buttons">
+    <app-custom-button
+      (buttonClickRequested)="onBackButtonClick()"
+      class="back-button"
+      [appColoredBorder]="searchItem?.snippet?.publishedAt">
+      <mat-icon class="back-button-icon">arrow_back_ios</mat-icon>
+    </app-custom-button>
+    <app-custom-button
+      (buttonClickRequested)="onDeleteButtonClick(searchItem.id.videoId)"
+      *ngIf="searchItem.custom"
+      class="back-button"
+      [appColoredBorder]="searchItem?.snippet?.publishedAt">
+      <mat-icon class="back-button-icon">delete_forever</mat-icon>
+    </app-custom-button>
+    <app-custom-button
+      class="back-button fav-button"
+      *ngIf="!searchItem.custom"
+      (buttonClickRequested)="onToggleFavoriteStatusButtonClick(searchItem.id)">
+      <mat-icon [ngClass]="(isFavoriteItem(searchItem.id) | async) ? 'favorite': ''" class="back-button-icon"
+        >favorite</mat-icon
+      >
+    </app-custom-button>
+  </div>
   <div class="image-container">
     <img
       class="item-image"

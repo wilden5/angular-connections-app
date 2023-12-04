@@ -13,6 +13,11 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   { path: ProjectPath.Login, loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule) },
+  {
+    path: ProjectPath.Favorite,
+    loadChildren: () => import('./favorite/favorite.module').then((m) => m.FavoriteModule),
+    canActivate: [authGuard],
+  },
   { path: '**', component: NotFoundComponent },
 ];
 

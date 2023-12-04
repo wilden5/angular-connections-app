@@ -89,8 +89,26 @@
   }
 }
 
+.fav-button {
+  background-color: #929292;
+}
+
 .back-button-icon {
   margin-top: 0.3rem;
   margin-left: 1rem;
   color: #ffffff;
+}
+
+.item-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.delete-icon {
+  margin-top: 0.5rem;
+}
+
+.favorite {
+  color: red;
 }

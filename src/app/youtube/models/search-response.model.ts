@@ -5,6 +5,8 @@ export interface ISearchResponse {
   etag: string;
   pageInfo: IPageInfo;
   items: ISearchItem[];
+  nextPageToken: string;
+  prevPageToken?: string;
 }
 
 interface IPageInfo {
