@@ -16,3 +16,14 @@
     color: red;
   }
 }
+
+.main {
+  display: flex;
+  margin-top: 5rem;
+}
+
+.group-list-container,
+.people-list-container {
+  width: 50%;
+  padding: 1rem;
+}

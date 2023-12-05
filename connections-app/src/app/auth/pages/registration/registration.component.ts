@@ -24,6 +24,7 @@ export class RegistrationComponent {
 
   registrationForm = this.fb.group({
     name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
+    // todo: implement maxLength 40 (as for profile page)
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, customPasswordValidator]],
   });

@@ -1,13 +1,17 @@
 import { createReducer, on } from '@ngrx/store';
-import { RootState } from '../root.state';
 import {
   loadProfileHttpSuccess,
   loadProfileStore,
   logoutSuccess,
   updateUserNameSuccess,
 } from '../actions/user.actions';
+import { IUserProfileInformation } from '../../auth/models/user.model';
 
-export const initialRootState: RootState = {
+export interface UserState {
+  user: IUserProfileInformation;
+}
+
+export const initialUserState: UserState = {
   user: {
     name: '',
     email: '',
@@ -17,22 +21,22 @@ export const initialRootState: RootState = {
 };
 
 export const userReducer = createReducer(
-  initialRootState,
+  initialUserState,
   on(
     loadProfileHttpSuccess,
-    (state, { profileInformation }): RootState => ({ ...state, user: profileInformation })
+    (state, { profileInformation }): UserState => ({ ...state, user: profileInformation })
   ),
-  on(loadProfileStore, (state): RootState => ({ ...state })),
+  on(loadProfileStore, (state): UserState => ({ ...state })),
   on(
     updateUserNameSuccess,
-    (state, { name }): RootState => ({ ...state, user: { ...state.user, name } })
+    (state, { name }): UserState => ({ ...state, user: { ...state.user, name } })
   ),
   on(
     logoutSuccess,
-    (state): RootState => ({
+    (state): UserState => ({
       ...state,
       user: {
-        ...initialRootState.user,
+        ...initialUserState.user,
       },
     })
   )
