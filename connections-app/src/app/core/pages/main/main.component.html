@@ -6,9 +6,25 @@
 </div>
 <div class="main">
   <div class="group-list-container">
-    <button mat-raised-button color="primary" class="update-button">Update</button>
-    <button mat-raised-button color="primary" class="update-button">Create</button>
-    <div class="group-list"></div>
+    <div class="buttons-container">
+      <button mat-raised-button color="primary" class="update-button">UPDATE GROUP LIST</button>
+      <button mat-raised-button color="primary" class="update-button">CREATE A NEW GROUP</button>
+    </div>
+    <ng-container *ngIf="store.select(selectGroupList) | async as groupList">
+      <div class="group-list">
+        <h2 class="group-header">Available groups:</h2>
+        <div class="group-wrapper">
+          <div class="specific-group" *ngFor="let item of groupList; let i = index">
+            <a class="specific-link" [routerLink]="[ProjectPages.Group, item.id]"
+              >{{i + 1}}: {{item.name}}</a
+            >
+            <button *ngIf="userUid === item.createdBy" mat-raised-button color="accent">
+              DELETE
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
   </div>
   <div class="people-list-container"></div>
 </div>
