@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IGroupItemTransformed } from '../../core/models/group.model';
+import { GroupResponse, IGroupItemTransformed } from '../../core/models/group.model';
 import { IServerError } from '../../core/models/server-error.model';
 
 export const loadGroupList = createAction('[GROUP] Load Group List Request');
@@ -34,7 +34,7 @@ export const createGroup = createAction('[GROUP] Create Group Request', props<{ 
 
 export const createGroupSuccess = createAction(
   '[GROUP] Create Group Success',
-  props<{ id: string; name: string }>()
+  props<{ response: GroupResponse; name: string }>()
 );
 
 export const createGroupFailure = createAction(

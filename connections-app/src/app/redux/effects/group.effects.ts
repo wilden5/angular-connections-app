@@ -142,7 +142,7 @@ export class GroupEffects {
       ofType(createGroup),
       concatMap((action) =>
         this.groupService.createNewGroup(action.name).pipe(
-          map((id) => createGroupSuccess({ name: action.name, id })),
+          map((response) => createGroupSuccess({ name: action.name, response })),
           catchError((error) => {
             return of(createGroupFailure({ error }));
           })

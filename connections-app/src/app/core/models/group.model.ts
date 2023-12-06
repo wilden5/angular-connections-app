@@ -22,3 +22,7 @@ export interface IGroupItemTransformed {
   createdAt: string;
   createdBy: string;
 }
+
+export interface GroupResponse {
+  groupID: string;
+}

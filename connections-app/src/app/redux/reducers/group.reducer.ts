@@ -22,9 +22,9 @@ export const groupReducer = createReducer(
   on(deleteGroupSuccess, (state, { id }): GroupState => {
     return { ...state, groupList: state.groupList.filter((item) => item.id !== id) };
   }),
-  on(createGroupSuccess, (state, { id, name }): GroupState => {
+  on(createGroupSuccess, (state, { response, name }): GroupState => {
     const newGroup: IGroupItemTransformed = {
-      id,
+      id: response.groupID,
       name,
       createdAt: '',
       createdBy: JSON.parse(localStorage.getItem('userObject') as string).uid,

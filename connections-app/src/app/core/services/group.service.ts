@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { IGroup, IGroupItem, IGroupItemTransformed } from '../models/group.model';
+import { GroupResponse, IGroup, IGroupItem, IGroupItemTransformed } from '../models/group.model';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,9 @@ export class GroupService {
     );
   }
 
-  createNewGroup(name: string): Observable<string> {
-    return this.http.post<string>('https://tasks.app.rs.school/angular/groups/create', { name });
+  createNewGroup(name: string): Observable<GroupResponse> {
+    return this.http.post<GroupResponse>('https://tasks.app.rs.school/angular/groups/create', {
+      name,
+    });
   }
 }
