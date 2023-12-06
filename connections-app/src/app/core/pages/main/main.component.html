@@ -12,11 +12,20 @@
         mat-raised-button
         color="primary"
         class="update-button"
-        [disabled]="(groupService.isExceptionSubject | async) === true">
+        [disabled]="(groupService.isExceptionSubject | async) === true
+          || (modalService.isExceptionSubject | async) === true">
         UPDATE GROUP LIST
       </button>
       <!--todo: try to implement fucking timer-->
-      <button mat-raised-button color="primary" class="update-button">CREATE A NEW GROUP</button>
+      <button
+        (click)="onCreateGroupButtonClick()"
+        [disabled]="(groupService.isExceptionSubject | async) === true
+          || (modalService.isExceptionSubject | async) === true"
+        mat-raised-button
+        color="primary"
+        class="update-button">
+        CREATE A NEW GROUP
+      </button>
     </div>
     <ng-container *ngIf="store.select(selectGroupList) | async as groupList">
       <div class="group-list">

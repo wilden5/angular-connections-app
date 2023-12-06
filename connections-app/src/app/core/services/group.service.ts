@@ -29,4 +29,8 @@ export class GroupService {
       `https://tasks.app.rs.school/angular/groups/delete?groupID=${id}`
     );
   }
+
+  createNewGroup(name: string): Observable<string> {
+    return this.http.post<string>('https://tasks.app.rs.school/angular/groups/create', { name });
+  }
 }

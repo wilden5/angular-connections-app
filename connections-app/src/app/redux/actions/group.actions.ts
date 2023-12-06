@@ -29,3 +29,15 @@ export const deleteGroupFailure = createAction(
   '[GROUP] Delete Group Request Failure',
   props<{ error: IServerError }>()
 );
+
+export const createGroup = createAction('[GROUP] Create Group Request', props<{ name: string }>());
+
+export const createGroupSuccess = createAction(
+  '[GROUP] Create Group Success',
+  props<{ id: string; name: string }>()
+);
+
+export const createGroupFailure = createAction(
+  '[GROUP] Create Group Failure',
+  props<{ error: IServerError }>()
+);

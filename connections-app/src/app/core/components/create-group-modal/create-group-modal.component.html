@@ -1,0 +1,30 @@
+<mat-dialog-actions class="wrapper">
+  <h2 mat-dialog-title>Create a new Group</h2>
+  <form [formGroup]="createGroupForm">
+    <mat-form-field>
+      <mat-label>Group name</mat-label>
+      <mat-error *ngIf="createGroupForm.get('name')?.errors?.['required']">
+        Name is required.
+      </mat-error>
+      <mat-error *ngIf="createGroupForm.get('name')?.errors?.['maxlength']">
+        Name is not more than 30 symbols.
+      </mat-error>
+      <mat-error *ngIf="createGroupForm.get('name')?.errors?.['pattern']">
+        Name contains only letters, digits or spaces.
+      </mat-error>
+      <input formControlName="name" matInput type="text" />
+    </mat-form-field>
+  </form>
+  <div class="buttons-container">
+    <button
+      (click)="onCreateButtonClick()"
+      [disabled]="createGroupForm.invalid"
+      class="cm-button"
+      mat-button
+      color="primary"
+      [mat-dialog-close]="true">
+      Create
+    </button>
+    <button class="cm-button" mat-button color="warn" [mat-dialog-close]="false">Cancel</button>
+  </div>
+</mat-dialog-actions>

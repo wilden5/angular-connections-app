@@ -38,4 +38,8 @@ export class MainComponent implements OnInit {
   onDeleteGroupButtonClick(id: string): void {
     this.modalService.openConfirmationDialog(id);
   }
+
+  onCreateGroupButtonClick(): void {
+    this.modalService.openCreateGroupDialog();
+  }
 }

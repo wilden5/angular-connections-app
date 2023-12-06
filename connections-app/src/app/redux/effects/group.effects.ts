@@ -4,6 +4,9 @@ import { Store } from '@ngrx/store';
 import { catchError, concatMap, map, of, switchMap, tap } from 'rxjs';
 import { SnackBarService } from '../../core/services/snackbar.service';
 import {
+  createGroup,
+  createGroupFailure,
+  createGroupSuccess,
   deleteGroup,
   deleteGroupFailure,
   deleteGroupSuccess,
@@ -125,6 +128,46 @@ export class GroupEffects {
     () => {
       return this.actions$.pipe(
         ofType(deleteGroupFailure),
+        tap((action) => {
+          this.modalService.isExceptionSubject.next(false);
+          this.snackBarService.setSnackBar(action.error.error.message);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  createGroup$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(createGroup),
+      concatMap((action) =>
+        this.groupService.createNewGroup(action.name).pipe(
+          map((id) => createGroupSuccess({ name: action.name, id })),
+          catchError((error) => {
+            return of(createGroupFailure({ error }));
+          })
+        )
+      )
+    );
+  });
+
+  createGroupSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(createGroupSuccess),
+        tap(() => {
+          this.modalService.isExceptionSubject.next(false);
+          this.snackBarService.setSnackBar('Group was Created successfully!');
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  createGroupFailure$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(createGroupFailure),
         tap((action) => {
           this.modalService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar(action.error.error.message);
