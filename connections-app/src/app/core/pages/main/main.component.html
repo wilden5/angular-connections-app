@@ -7,7 +7,15 @@
 <div class="main">
   <div class="group-list-container">
     <div class="buttons-container">
-      <button mat-raised-button color="primary" class="update-button">UPDATE GROUP LIST</button>
+      <button
+        (click)="onUpdateButtonClick()"
+        mat-raised-button
+        color="primary"
+        class="update-button"
+        [disabled]="(groupService.isExceptionSubject | async) === true">
+        UPDATE GROUP LIST
+      </button>
+      <!--todo: try to implement fucking timer-->
       <button mat-raised-button color="primary" class="update-button">CREATE A NEW GROUP</button>
     </div>
     <ng-container *ngIf="store.select(selectGroupList) | async as groupList">
@@ -18,7 +26,12 @@
             <a class="specific-link" [routerLink]="[ProjectPages.Group, item.id]"
               >{{i + 1}}: {{item.name}}</a
             >
-            <button *ngIf="userUid === item.createdBy" mat-raised-button color="accent">
+            <button
+              *ngIf="userUid === item.createdBy"
+              mat-raised-button
+              color="accent"
+              [disabled]="(modalService.isExceptionSubject | async)===true"
+              (click)="onDeleteGroupButtonClick(item.id)">
               DELETE
             </button>
           </div>

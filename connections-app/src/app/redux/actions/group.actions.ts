@@ -15,3 +15,17 @@ export const loadGroupListHttpFailure = createAction(
 );
 
 export const loadGroupListStore = createAction('[GROUP] Load Group List Store Request');
+
+export const loadGroupListDirectHttp = createAction('[GROUP] Load Group List Direct Http Request');
+
+export const deleteGroup = createAction('[GROUP] Delete Group Request', props<{ id: string }>());
+
+export const deleteGroupSuccess = createAction(
+  '[GROUP] Delete Group Request Success',
+  props<{ id: string }>()
+);
+
+export const deleteGroupFailure = createAction(
+  '[GROUP] Delete Group Request Failure',
+  props<{ error: IServerError }>()
+);

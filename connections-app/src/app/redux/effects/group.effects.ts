@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { catchError, concatMap, map, of, switchMap, tap } from 'rxjs';
 import { SnackBarService } from '../../core/services/snackbar.service';
 import {
+  deleteGroup,
+  deleteGroupFailure,
+  deleteGroupSuccess,
   loadGroupList,
+  loadGroupListDirectHttp,
+  loadGroupListHttpFailure,
   loadGroupListHttpSuccess,
   loadGroupListStore,
 } from '../actions/group.actions';
 import { GroupService } from '../../core/services/group.service';
-import { loadProfileHttpFailure, loadProfileHttpSuccess } from '../actions/user.actions';
+import { loadProfileHttpFailure } from '../actions/user.actions';
 import { selectGroupList } from '../selectors/group.selectors';
+import { ModalService } from '../../core/services/modal.service';
 
 @Injectable()
 export class GroupEffects {
@@ -18,7 +24,8 @@ export class GroupEffects {
     private actions$: Actions,
     private store: Store,
     private groupService: GroupService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private modalService: ModalService
   ) {}
 
   loadGroupList$ = createEffect(() => {
@@ -46,8 +53,9 @@ export class GroupEffects {
   loadGroupListSuccess$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(loadProfileHttpSuccess),
+        ofType(loadGroupListHttpSuccess),
         tap(() => {
+          this.groupService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar('Group list was received!');
         })
       );
@@ -58,8 +66,69 @@ export class GroupEffects {
   loadGroupListFailure$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(loadProfileHttpFailure),
-        tap((action) => this.snackBarService.setSnackBar(action.error.error.message))
+        ofType(loadGroupListHttpFailure),
+        tap((action) => {
+          this.groupService.isExceptionSubject.next(false);
+          this.snackBarService.setSnackBar(action.error.error.message);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  loadGroupListDirectHttp$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(loadGroupListDirectHttp),
+      switchMap(() =>
+        this.groupService.getGroupList().pipe(
+          map((groupListHttp) =>
+            loadGroupListHttpSuccess({
+              groupList: this.groupService.transformProfileInformation(groupListHttp.Items),
+            })
+          ),
+          catchError((error) => {
+            return of(loadProfileHttpFailure({ error }));
+          })
+        )
+      )
+    );
+  });
+
+  deleteGroup$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(deleteGroup),
+      concatMap((action) =>
+        this.groupService.deleteGroup(action.id).pipe(
+          map(() => deleteGroupSuccess({ id: action.id })),
+          catchError((error) => {
+            return of(deleteGroupFailure({ error }));
+          })
+        )
+      )
+    );
+  });
+
+  deleteGroupSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(deleteGroupSuccess),
+        tap(() => {
+          this.modalService.isExceptionSubject.next(false);
+          this.snackBarService.setSnackBar('Group was Deleted successfully!');
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  deleteGroupFailure$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(deleteGroupFailure),
+        tap((action) => {
+          this.modalService.isExceptionSubject.next(false);
+          this.snackBarService.setSnackBar(action.error.error.message);
+        })
       );
     },
     { dispatch: false }

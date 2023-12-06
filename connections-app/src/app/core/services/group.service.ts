@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { IGroup, IGroupItem, IGroupItemTransformed } from '../models/group.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GroupService {
+  public isExceptionSubject = new BehaviorSubject<boolean>(false);
+
   constructor(private http: HttpClient) {}
 
   transformProfileInformation(groupItem: IGroupItem[]): IGroupItemTransformed[] {
@@ -20,5 +22,11 @@ export class GroupService {
 
   getGroupList(): Observable<IGroup> {
     return this.http.get<IGroup>('https://tasks.app.rs.school/angular/groups/list');
+  }
+
+  deleteGroup(id: string): Observable<void> {
+    return this.http.delete<void>(
+      `https://tasks.app.rs.school/angular/groups/delete?groupID=${id}`
+    );
   }
 }
