@@ -24,12 +24,9 @@
 
 .group-list-container,
 .people-list-container {
-  width: 50%;
+  width: 75rem;
   padding: 1rem;
-  margin: 1rem
-}
-
-.group-list-container {
+  margin: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,11 +35,13 @@
   border-radius: 1rem;
 }
 
-.group-list {
+.group-list,
+.people-list {
   width: 75%;
 }
 
-.group-header {
+.group-header,
+.people-header {
   font-size: 5rem;
   padding: 1rem;
   font-weight: 800;
@@ -50,9 +49,14 @@
   font-family: "Agency FB", serif;
 }
 
-.group-wrapper {
+.people-header {
+  margin-top: 6rem;
+}
+
+.group-wrapper,
+.people-wrapper {
   max-height: 50rem;
-  max-width: 60rem;
+  width: 60rem;
   overflow: auto;
 }
 
@@ -100,4 +104,12 @@
   &:hover {
     color: red;
   }
+}
+
+.update-people-button {
+  margin: 0.5rem 0.5rem 2rem;
+  font-family: "Rockwell", serif;
+  letter-spacing: 0.1rem;
+  font-weight: 800;
+  width: 75%;
 }

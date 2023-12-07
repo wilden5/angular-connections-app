@@ -158,6 +158,7 @@ export class GroupEffects {
         tap(() => {
           this.modalService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar('Group was Created successfully!');
+          // todo: move plain text to constants object
         })
       );
     },

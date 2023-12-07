@@ -9,6 +9,7 @@ export enum ProjectPages {
   Registration = 'signup',
   Profile = 'profile',
   Group = 'group',
+  Conversation = 'conversation',
 }
 
 export const projectConstants = {

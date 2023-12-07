@@ -25,6 +25,8 @@ import { GroupEffects } from './redux/effects/group.effects';
 import { ConfirmationModalComponent } from './core/components/confirmation-modal/confirmation-modal.component';
 // eslint-disable-next-line max-len
 import { CreateGroupModalComponent } from './core/components/create-group-modal/create-group-modal.component';
+import { peopleReducer } from './redux/reducers/people.reducer';
+import { PeopleEffects } from './redux/effects/people.effects';
 
 @NgModule({
   declarations: [
@@ -39,8 +41,8 @@ import { CreateGroupModalComponent } from './core/components/create-group-modal/
     BrowserAnimationsModule,
     HttpClientModule,
     MatSnackBarModule,
-    StoreModule.forRoot({ user: userReducer, groupList: groupReducer }),
-    EffectsModule.forRoot([UserEffects, GroupEffects]),
+    StoreModule.forRoot({ user: userReducer, groupList: groupReducer, peopleList: peopleReducer }),
+    EffectsModule.forRoot([UserEffects, GroupEffects, PeopleEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     MatButtonModule,
     MatIconModule,
