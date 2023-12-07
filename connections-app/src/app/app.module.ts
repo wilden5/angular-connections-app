@@ -27,6 +27,8 @@ import { ConfirmationModalComponent } from './core/components/confirmation-modal
 import { CreateGroupModalComponent } from './core/components/create-group-modal/create-group-modal.component';
 import { peopleReducer } from './redux/reducers/people.reducer';
 import { PeopleEffects } from './redux/effects/people.effects';
+import { ConversationEffects } from './redux/effects/conversation.effects';
+import { conversationReducer } from './redux/reducers/conversation.reducer';
 
 @NgModule({
   declarations: [
@@ -41,8 +43,13 @@ import { PeopleEffects } from './redux/effects/people.effects';
     BrowserAnimationsModule,
     HttpClientModule,
     MatSnackBarModule,
-    StoreModule.forRoot({ user: userReducer, groupList: groupReducer, peopleList: peopleReducer }),
-    EffectsModule.forRoot([UserEffects, GroupEffects, PeopleEffects]),
+    StoreModule.forRoot({
+      user: userReducer,
+      groupList: groupReducer,
+      peopleList: peopleReducer,
+      conversationIds: conversationReducer,
+    }),
+    EffectsModule.forRoot([UserEffects, GroupEffects, PeopleEffects, ConversationEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     MatButtonModule,
     MatIconModule,

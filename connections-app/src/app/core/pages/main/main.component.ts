@@ -8,6 +8,7 @@ import { ModalService } from '../../services/modal.service';
 import { selectPeopleList } from '../../../redux/selectors/people.selectors';
 import { loadPeopleList, loadPeopleListDirectHttp } from '../../../redux/actions/people.actions';
 import { PeopleService } from '../../services/people.service';
+import { createNewConversation } from '../../../redux/actions/conversation.actions';
 
 @Component({
   selector: 'app-main',
@@ -52,5 +53,10 @@ export class MainComponent implements OnInit {
   onUpdatePeopleListButtonClick(): void {
     this.store.dispatch(loadPeopleListDirectHttp());
     this.peopleService.isExceptionSubject.next(true);
+  }
+
+  onUserNameClick(companionId: string): void {
+    this.store.dispatch(createNewConversation({ companionId }));
+    console.log(companionId);
   }
 }
