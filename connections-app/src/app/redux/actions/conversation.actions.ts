@@ -1,10 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { IServerError } from '../../core/models/server-error.model';
-import {
-  IConversationId,
-  IConversationItemTransformed,
-  IConversationList,
-} from '../../core/models/conversation.model';
+import { IConversationItemTransformed } from '../../core/models/conversation.model';
 
 export const createNewConversation = createAction(
   '[CON] Create New Conversation Request',
@@ -13,7 +9,7 @@ export const createNewConversation = createAction(
 
 export const createNewConversationSuccess = createAction(
   '[CON] Create New Conversation Success',
-  props<{ conversationId: IConversationId }>()
+  props<{ conversation: IConversationItemTransformed }>()
 );
 
 export const createNewConversationFailure = createAction(
@@ -32,3 +28,5 @@ export const loadConversationListFailure = createAction(
   '[CON] Load Conversation List Failure',
   props<{ error: IServerError }>()
 );
+
+export const loadConversationListStore = createAction('[CON] Load Conversation List Store');

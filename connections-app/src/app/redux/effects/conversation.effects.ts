@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, concatMap, map, of, tap } from 'rxjs';
+import { catchError, concatMap, map, of, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { ConversationService } from '../../core/services/conversation.service';
 import { SnackBarService } from '../../core/services/snackbar.service';
@@ -11,9 +11,12 @@ import {
   createNewConversationSuccess,
   loadConversationList,
   loadConversationListFailure,
+  loadConversationListStore,
   loadConversationListSuccess,
 } from '../actions/conversation.actions';
 import { ProjectPages } from '../../../environment/environment';
+import { selectConversationList } from '../selectors/conversation.selectors';
+import { IConversationItemTransformed } from '../../core/models/conversation.model';
 
 @Injectable()
 export class ConversationEffects {
@@ -28,20 +31,24 @@ export class ConversationEffects {
   loadConversationList$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loadConversationList),
-      concatMap(() =>
-        this.conversationService.getConversationList().pipe(
-          map((conversationList) =>
+      concatLatestFrom(() => this.store.select(selectConversationList)),
+      switchMap(([actions, conversationList]) => {
+        if (conversationList.length > 0) {
+          return of(loadConversationListStore());
+        }
+        return this.conversationService.getConversationList().pipe(
+          map((conversationListHttp) =>
             loadConversationListSuccess({
               conversationList: this.conversationService.transformConversationInformation(
-                conversationList.Items
+                conversationListHttp.Items
               ),
             })
           ),
           catchError((error) => {
             return of(loadConversationListFailure({ error }));
           })
-        )
-      )
+        );
+      })
     );
   });
 
@@ -74,7 +81,13 @@ export class ConversationEffects {
       ofType(createNewConversation),
       concatMap((action) =>
         this.conversationService.createConversation(action.companionId).pipe(
-          map((conversationId) => createNewConversationSuccess({ conversationId })),
+          map((conversationId) => {
+            const newConversation: IConversationItemTransformed = {
+              id: conversationId.conversationID,
+              companionID: action.companionId,
+            };
+            return createNewConversationSuccess({ conversation: newConversation });
+          }),
           catchError((error) => {
             return of(createNewConversationFailure({ error }));
           })
@@ -88,7 +101,7 @@ export class ConversationEffects {
       return this.actions$.pipe(
         ofType(createNewConversationSuccess),
         tap((action) => {
-          this.router.navigate([ProjectPages.Conversation, action.conversationId.conversationID]);
+          this.router.navigate([ProjectPages.Conversation, action.conversation.id]);
           this.snackBarService.setSnackBar('New Conversation was created!');
         })
       );

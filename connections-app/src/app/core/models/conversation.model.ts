@@ -21,4 +21,5 @@ export interface IConversationItemTransformed {
 
 export interface IConversationId {
   conversationID: string;
+  companionID: string;
 }
