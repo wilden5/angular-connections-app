@@ -3,7 +3,11 @@ import { RootState } from '../root.state';
 
 export const selectRootState = createFeatureSelector<RootState>('conversationIds');
 
-export const selectConversationIds = createSelector(
+export const selectConversationList = createSelector(
   selectRootState,
-  (state) => state.conversationIds
+  (state) => state.conversationList
 );
+
+export const selectCompanionIDs = createSelector(selectConversationList, (conversationList) => {
+  return conversationList.map((item) => item.companionID);
+});

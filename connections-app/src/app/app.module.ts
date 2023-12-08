@@ -47,7 +47,7 @@ import { conversationReducer } from './redux/reducers/conversation.reducer';
       user: userReducer,
       groupList: groupReducer,
       peopleList: peopleReducer,
-      conversationIds: conversationReducer,
+      conversationList: conversationReducer,
     }),
     EffectsModule.forRoot([UserEffects, GroupEffects, PeopleEffects, ConversationEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),

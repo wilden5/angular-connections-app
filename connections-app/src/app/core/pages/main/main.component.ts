@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { GroupService } from '../../services/group.service';
 import { loadGroupList, loadGroupListDirectHttp } from '../../../redux/actions/group.actions';
 import { selectGroupList } from '../../../redux/selectors/group.selectors';
@@ -8,7 +9,10 @@ import { ModalService } from '../../services/modal.service';
 import { selectPeopleList } from '../../../redux/selectors/people.selectors';
 import { loadPeopleList, loadPeopleListDirectHttp } from '../../../redux/actions/people.actions';
 import { PeopleService } from '../../services/people.service';
-import { createNewConversation } from '../../../redux/actions/conversation.actions';
+import {
+  createNewConversation,
+  loadConversationList,
+} from '../../../redux/actions/conversation.actions';
 
 @Component({
   selector: 'app-main',
@@ -25,6 +29,8 @@ export class MainComponent implements OnInit {
 
   protected readonly ProjectPages = ProjectPages;
 
+  companionIDs$: Observable<string[]> | undefined;
+
   constructor(
     protected store: Store,
     protected groupService: GroupService,
@@ -35,6 +41,7 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(loadGroupList());
     this.store.dispatch(loadPeopleList());
+    this.store.dispatch(loadConversationList());
   }
 
   onUpdateButtonClick(): void {
@@ -58,5 +65,6 @@ export class MainComponent implements OnInit {
   onUserNameClick(companionId: string): void {
     this.store.dispatch(createNewConversation({ companionId }));
     console.log(companionId);
+    console.log(this.companionIDs$);
   }
 }

@@ -62,9 +62,12 @@
       <div class="people-list">
         <h2 class="people-header">Available users:</h2>
         <div class="people-wrapper">
-          <div class="specific-group" *ngFor="let item of peopleList; let i = index">
-            <span (click)="onUserNameClick(item.uid)" class="specific-link"
-              >{{i + 1}}: {{item.name}}</span
+          <div
+            [ngClass]="{'active-conversation': (companionIDs$ | async)?.includes(item.uid)}"
+            class="specific-conversation"
+            *ngFor="let item of peopleList; let i = index">
+            <a (click)="onUserNameClick(item.uid)" class="specific-link-conversation"
+              >{{i + 1}}: {{item.name}}</a
             >
           </div>
         </div>

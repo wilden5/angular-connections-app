@@ -8,6 +8,9 @@ import {
   createNewConversation,
   createNewConversationFailure,
   createNewConversationSuccess,
+  loadConversationList,
+  loadConversationListFailure,
+  loadConversationListSuccess,
 } from '../actions/conversation.actions';
 
 @Injectable()
@@ -18,6 +21,50 @@ export class ConversationEffects {
     private conversationService: ConversationService,
     private snackBarService: SnackBarService
   ) {}
+
+  loadConversationList$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(loadConversationList),
+      concatMap(() =>
+        this.conversationService.getConversationList().pipe(
+          map((conversationList) =>
+            loadConversationListSuccess({
+              conversationList: this.conversationService.transformConversationInformation(
+                conversationList.Items
+              ),
+            })
+          ),
+          catchError((error) => {
+            return of(loadConversationListFailure({ error }));
+          })
+        )
+      )
+    );
+  });
+
+  loadConversationListSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(loadConversationListSuccess),
+        tap(() => {
+          this.snackBarService.setSnackBar('Conversation list was loaded!');
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  loadConversationListFailure$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(loadConversationListFailure),
+        tap((action) => {
+          this.snackBarService.setSnackBar(action.error.error.message);
+        })
+      );
+    },
+    { dispatch: false }
+  );
 
   createNewConversation$ = createEffect(() => {
     return this.actions$.pipe(

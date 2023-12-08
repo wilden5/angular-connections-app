@@ -6,12 +6,17 @@ export interface IConversationList {
     totalRetryDelay: number;
   };
   Count: number;
-  Items: IConversation[];
+  Items: IConversationItem[];
 }
 
-export interface IConversation {
+export interface IConversationItem {
   id: { S: string };
   companionID: { S: string };
+}
+
+export interface IConversationItemTransformed {
+  id: string;
+  companionID: string;
 }
 
 export interface IConversationId {
