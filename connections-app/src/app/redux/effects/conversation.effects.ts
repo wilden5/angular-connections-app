@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, concatMap, map, of, tap } from 'rxjs';
+import { Router } from '@angular/router';
 import { ConversationService } from '../../core/services/conversation.service';
 import { SnackBarService } from '../../core/services/snackbar.service';
 import {
@@ -12,6 +13,7 @@ import {
   loadConversationListFailure,
   loadConversationListSuccess,
 } from '../actions/conversation.actions';
+import { ProjectPages } from '../../../environment/environment';
 
 @Injectable()
 export class ConversationEffects {
@@ -19,7 +21,8 @@ export class ConversationEffects {
     private actions$: Actions,
     private store: Store,
     private conversationService: ConversationService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private router: Router
   ) {}
 
   loadConversationList$ = createEffect(() => {
@@ -84,7 +87,8 @@ export class ConversationEffects {
     () => {
       return this.actions$.pipe(
         ofType(createNewConversationSuccess),
-        tap(() => {
+        tap((action) => {
+          this.router.navigate([ProjectPages.Conversation, action.conversationId.conversationID]);
           this.snackBarService.setSnackBar('New Conversation was created!');
         })
       );
