@@ -1,0 +1,33 @@
+<div class="main-container">
+  <div class="control-buttons">
+    <button mat-raised-button color="primary" class="update-button">UPDATE CHAT MESSAGES</button>
+    <button mat-raised-button color="warn" class="delete-button">DELETE CHAT</button>
+  </div>
+  <div class="message-container">
+    <ng-container *ngIf="store.select(selectDialogById({groupID})) | async as groupResponse">
+      <div
+        [ngClass]="isAuthorMessage(message)"
+        class="wrapper"
+        *ngFor="let message of groupResponse.messages">
+        <div class="author-wrapper">
+          <span class="author item">{{message.authorID}}</span>
+        </div>
+        <span class="message item">{{message.message}}</span>
+        <div class="created-at-wrapper">
+          <span class="created-at item">{{message.createdAt | date: 'short'}}</span>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="form-wrapper">
+    <form class="chat-form" [formGroup]="chatForm">
+      <mat-form-field class="message-form">
+        <mat-label>Message</mat-label>
+        <mat-error *ngIf="message.invalid">Please enter your message</mat-error>
+        <textarea matInput class="message-input" type="text" formControlName="message"></textarea>
+      </mat-form-field>
+    </form>
+    <button mat-raised-button color="primary" class="send-button">SEND NEW MESSAGE</button>
+  </div>
+  <a class="main-page-link" [routerLink]="ProjectPages.Empty">RETURN TO THE MAIN PAGE</a>
+</div>

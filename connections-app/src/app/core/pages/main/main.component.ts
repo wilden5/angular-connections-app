@@ -82,6 +82,7 @@ export class MainComponent implements OnInit {
 
   onUserNameClick(companionId: string, isConversationCreated: boolean): void {
     if (!isConversationCreated) {
+      // todo: add spinner here to prevent user to click several times before new con is created
       this.store.dispatch(createNewConversation({ companionId }));
     }
   }

@@ -29,6 +29,8 @@ import { peopleReducer } from './redux/reducers/people.reducer';
 import { PeopleEffects } from './redux/effects/people.effects';
 import { ConversationEffects } from './redux/effects/conversation.effects';
 import { conversationReducer } from './redux/reducers/conversation.reducer';
+import { DialogEffects } from './redux/effects/dialog.effects';
+import { dialogReducer } from './redux/reducers/dialog.reducer';
 
 @NgModule({
   declarations: [
@@ -48,8 +50,15 @@ import { conversationReducer } from './redux/reducers/conversation.reducer';
       groupList: groupReducer,
       peopleList: peopleReducer,
       conversationList: conversationReducer,
+      dialogList: dialogReducer,
     }),
-    EffectsModule.forRoot([UserEffects, GroupEffects, PeopleEffects, ConversationEffects]),
+    EffectsModule.forRoot([
+      UserEffects,
+      GroupEffects,
+      PeopleEffects,
+      ConversationEffects,
+      DialogEffects,
+    ]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     MatButtonModule,
     MatIconModule,

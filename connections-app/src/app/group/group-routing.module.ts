@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProjectPages } from '../../environment/environment';
-import { GroupComponent } from './pages/group/group.component';
+import { DialogComponent } from './pages/dialog/dialog.component';
 
-const routes: Routes = [{ path: `${ProjectPages.GroupId}`, component: GroupComponent }];
+const routes: Routes = [{ path: `${ProjectPages.GroupId}`, component: DialogComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
