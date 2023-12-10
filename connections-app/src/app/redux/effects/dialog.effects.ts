@@ -31,7 +31,9 @@ export class DialogEffects {
               );
               return loadGroupDialogHttpSuccess({
                 since: lastMessageTime,
-                groupMessages: this.dialogService.transformGroupMessage(groupDialog.Items),
+                groupMessages: this.dialogService.transformGroupMessage(
+                  groupDialog.Items.sort((a, b) => Number(a.createdAt.S) - Number(b.createdAt.S))
+                ),
                 groupID: action.groupID,
               });
             }
