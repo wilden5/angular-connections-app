@@ -1,5 +1,5 @@
 <div class="main-container">
-  <ng-container *ngIf="store.select(selectDialogById({groupID})) | async as groupResponse">
+  <ng-container *ngIf="groupResponse$ | async as groupResponse">
     <div class="control-buttons">
       <button mat-raised-button color="primary" class="update-button">UPDATE CHAT MESSAGES</button>
       <button

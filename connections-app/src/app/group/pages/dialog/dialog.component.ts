@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, take, tap } from 'rxjs';
 import { ProjectPages } from '../../../../environment/environment';
 import { loadGroupDialog } from '../../../redux/actions/dialog.actions';
 import { selectDialogById } from '../../../redux/selectors/dialog.selectors';
@@ -16,8 +17,6 @@ import { selectGroupById } from '../../../redux/selectors/group.selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogComponent implements OnInit {
-  protected readonly selectDialogById = selectDialogById;
-
   protected readonly selectUserById = selectUserById;
 
   protected readonly selectGroupById = selectGroupById;
@@ -32,6 +31,13 @@ export class DialogComponent implements OnInit {
     message: ['', Validators.required],
   });
 
+  protected groupResponse$:
+    | Observable<{
+        messages: IGroupMessageTransformed[];
+        since: number;
+      }>
+    | undefined;
+
   constructor(
     private fb: FormBuilder,
     protected store: Store,
@@ -41,12 +47,25 @@ export class DialogComponent implements OnInit {
     this.groupID = this.activatedRoute.snapshot.paramMap.get('id') as string;
   }
 
-  get message(): AbstractControl {
-    return this.chatForm.get('message')!;
+  ngOnInit(): void {
+    const group$ = this.store.select(selectDialogById({ groupID: this.groupID }));
+    group$
+      .pipe(
+        take(1),
+        tap((item) => {
+          if (item) {
+            this.store.dispatch(loadGroupDialog({ groupID: this.groupID, since: item.since }));
+          } else {
+            this.store.dispatch(loadGroupDialog({ groupID: this.groupID, since: 0 }));
+          }
+        })
+      )
+      .subscribe();
+    this.groupResponse$ = group$;
   }
 
-  ngOnInit(): void {
-    this.store.dispatch(loadGroupDialog({ groupID: this.groupID, since: 0 }));
+  get message(): AbstractControl {
+    return this.chatForm.get('message')!;
   }
 
   isAuthorMessage(message: IGroupMessageTransformed): string {

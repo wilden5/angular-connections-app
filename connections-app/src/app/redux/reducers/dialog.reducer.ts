@@ -13,12 +13,13 @@ export const initialDialogState: DialogState = {
 export const dialogReducer = createReducer(
   initialDialogState,
   on(loadGroupDialogHttpSuccess, (state, { groupMessages, groupID, since }): DialogState => {
+    const existingMessageHistory = state.dialogList[groupID]?.messages || [];
     return {
       ...state,
       dialogList: {
         ...state.dialogList,
         [groupID]: {
-          messages: groupMessages,
+          messages: [...existingMessageHistory, ...groupMessages],
           since,
         },
       },

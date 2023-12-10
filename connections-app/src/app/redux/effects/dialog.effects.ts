@@ -25,7 +25,7 @@ export class DialogEffects {
       concatMap((action) =>
         this.dialogService.getGroupDialog(action.groupID, action.since).pipe(
           map((groupDialog) => {
-            if (groupDialog.Items.length > 0) {
+            if (groupDialog.Count !== 0) {
               const lastMessageTime = Number(
                 groupDialog.Items[groupDialog.Items.length - 1].createdAt.S
               );
@@ -38,7 +38,7 @@ export class DialogEffects {
               });
             }
             return loadGroupDialogHttpSuccess({
-              since: 0,
+              since: action.since,
               groupMessages: [],
               groupID: action.groupID,
             });
