@@ -1,7 +1,14 @@
 <div class="main-container">
   <ng-container *ngIf="groupResponse$ | async as groupResponse">
     <div class="control-buttons">
-      <button mat-raised-button color="primary" class="update-button">UPDATE CHAT MESSAGES</button>
+      <button
+        (click)="onUpdateButtonClick()"
+        [disabled]="(dialogService.isExceptionSubject | async) === true"
+        mat-raised-button
+        color="primary"
+        class="update-button">
+        UPDATE CHAT MESSAGES
+      </button>
       <button
         *ngIf="(store.select(selectGroupById(groupID, authorUid)) | async)"
         mat-raised-button

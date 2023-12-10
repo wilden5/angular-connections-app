@@ -9,6 +9,7 @@ import { selectDialogById } from '../../../redux/selectors/dialog.selectors';
 import { IGroupMessageTransformed } from '../../../core/models/group.model';
 import { selectUserById } from '../../../redux/selectors/people.selectors';
 import { selectGroupById } from '../../../redux/selectors/group.selectors';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-group',
@@ -41,13 +42,18 @@ export class DialogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     protected store: Store,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    protected dialogService: DialogService
   ) {
     this.authorUid = JSON.parse(localStorage.getItem('userObject')!).uid;
     this.groupID = this.activatedRoute.snapshot.paramMap.get('id') as string;
   }
 
   ngOnInit(): void {
+    this.synchronizeGroupMessages();
+  }
+
+  synchronizeGroupMessages(): void {
     const group$ = this.store.select(selectDialogById({ groupID: this.groupID }));
     group$
       .pipe(
@@ -70,5 +76,10 @@ export class DialogComponent implements OnInit {
 
   isAuthorMessage(message: IGroupMessageTransformed): string {
     return this.authorUid === message.authorID ? 'author-message' : '';
+  }
+
+  onUpdateButtonClick(): void {
+    this.synchronizeGroupMessages();
+    this.dialogService.isExceptionSubject.next(true);
   }
 }

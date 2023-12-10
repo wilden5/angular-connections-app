@@ -57,6 +57,7 @@ export class DialogEffects {
         ofType(loadGroupDialogHttpSuccess),
         tap(() => {
           this.snackBarService.setSnackBar('Group messages was loaded!');
+          this.dialogService.isExceptionSubject.next(false);
         })
       );
     },
@@ -69,6 +70,7 @@ export class DialogEffects {
         ofType(loadGroupDialogHttpFailure),
         tap((action) => {
           this.snackBarService.setSnackBar(action.error.error.message);
+          this.dialogService.isExceptionSubject.next(false);
         })
       );
     },
