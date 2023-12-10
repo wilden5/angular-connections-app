@@ -6,6 +6,8 @@ import { ProjectPages } from '../../../../environment/environment';
 import { loadGroupDialog } from '../../../redux/actions/dialog.actions';
 import { selectDialogById } from '../../../redux/selectors/dialog.selectors';
 import { IGroupMessageTransformed } from '../../../core/models/group.model';
+import { selectUserById } from '../../../redux/selectors/people.selectors';
+import { selectGroupById } from '../../../redux/selectors/group.selectors';
 
 @Component({
   selector: 'app-group',
@@ -15,6 +17,10 @@ import { IGroupMessageTransformed } from '../../../core/models/group.model';
 })
 export class DialogComponent implements OnInit {
   protected readonly selectDialogById = selectDialogById;
+
+  protected readonly selectUserById = selectUserById;
+
+  protected readonly selectGroupById = selectGroupById;
 
   protected readonly ProjectPages = ProjectPages;
 
@@ -33,7 +39,6 @@ export class DialogComponent implements OnInit {
   ) {
     this.authorUid = JSON.parse(localStorage.getItem('userObject')!).uid;
     this.groupID = this.activatedRoute.snapshot.paramMap.get('id') as string;
-    console.log(this.authorUid);
   }
 
   get message(): AbstractControl {

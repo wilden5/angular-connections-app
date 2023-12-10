@@ -25,12 +25,19 @@ export class DialogEffects {
       concatMap((action) =>
         this.dialogService.getGroupDialog(action.groupID, action.since).pipe(
           map((groupDialog) => {
-            const lastMessageTime = Number(
-              groupDialog.Items[groupDialog.Items.length - 1].createdAt.S
-            );
+            if (groupDialog.Items.length > 0) {
+              const lastMessageTime = Number(
+                groupDialog.Items[groupDialog.Items.length - 1].createdAt.S
+              );
+              return loadGroupDialogHttpSuccess({
+                since: lastMessageTime,
+                groupMessages: this.dialogService.transformGroupMessage(groupDialog.Items),
+                groupID: action.groupID,
+              });
+            }
             return loadGroupDialogHttpSuccess({
-              since: lastMessageTime,
-              groupMessages: this.dialogService.transformGroupMessage(groupDialog.Items),
+              since: 0,
+              groupMessages: [],
               groupID: action.groupID,
             });
           }),
