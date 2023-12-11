@@ -3,13 +3,17 @@
     <div class="control-buttons">
       <button
         (click)="onUpdateButtonClick()"
-        [disabled]="(dialogService.isExceptionSubject | async) === true"
+        [disabled]="(dialogService.isExceptionSubject | async) === true
+          || (modalService.isExceptionSubject | async) === true"
         mat-raised-button
         color="primary"
         class="update-button">
         UPDATE CHAT MESSAGES
       </button>
       <button
+        (click)="onDeleteGroupButtonClick()"
+        [disabled]="(dialogService.isExceptionSubject | async) === true
+          || (modalService.isExceptionSubject | async) === true"
         *ngIf="(store.select(selectGroupById(groupID, authorUid)) | async)"
         mat-raised-button
         color="warn"
@@ -47,7 +51,7 @@
         </mat-form-field>
       </form>
       <button
-        [disabled]="chatForm.invalid"
+        [disabled]="chatForm.invalid || (modalService.isExceptionSubject | async) === true"
         (click)="onSendNewMessageButtonClick(textInput.value)"
         mat-raised-button
         color="primary"

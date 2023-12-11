@@ -10,6 +10,7 @@ import { IGroupMessageTransformed } from '../../../core/models/group.model';
 import { selectUserById } from '../../../redux/selectors/people.selectors';
 import { selectGroupById } from '../../../redux/selectors/group.selectors';
 import { DialogService } from '../../services/dialog.service';
+import { ModalService } from '../../../core/services/modal.service';
 
 @Component({
   selector: 'app-group',
@@ -43,7 +44,8 @@ export class DialogComponent implements OnInit {
     private fb: FormBuilder,
     protected store: Store,
     private activatedRoute: ActivatedRoute,
-    protected dialogService: DialogService
+    protected dialogService: DialogService,
+    protected modalService: ModalService
   ) {
     this.authorUid = JSON.parse(localStorage.getItem('userObject')!).uid;
     this.groupID = this.activatedRoute.snapshot.paramMap.get('id') as string;
@@ -84,9 +86,18 @@ export class DialogComponent implements OnInit {
     // todo: Implement timer3
   }
 
-  onSendNewMessageButtonClick(abc: string): void {
-    this.store.dispatch(sendNewMessage({ newMessage: { groupID: this.groupID, message: abc } }));
+  onSendNewMessageButtonClick(message: string): void {
+    this.dialogService.isExceptionSubject.next(true);
+    this.store.dispatch(sendNewMessage({ newMessage: { groupID: this.groupID, message } }));
     this.chatForm.reset();
-    // 2. synchronizeGroupMessages
+
+    setTimeout(() => {
+      this.synchronizeGroupMessages();
+      this.dialogService.isExceptionSubject.next(false);
+    }, 1000);
+  }
+
+  onDeleteGroupButtonClick(): void {
+    this.modalService.openConfirmationDialog(this.groupID);
   }
 }

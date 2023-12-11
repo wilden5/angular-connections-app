@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, concatMap, map, of, switchMap, tap } from 'rxjs';
+import { Router } from '@angular/router';
 import { SnackBarService } from '../../core/services/snackbar.service';
 import {
   createGroup,
@@ -20,6 +21,7 @@ import { GroupService } from '../../core/services/group.service';
 import { loadProfileHttpFailure } from '../actions/user.actions';
 import { selectGroupList } from '../selectors/group.selectors';
 import { ModalService } from '../../core/services/modal.service';
+import { ProjectPages } from '../../../environment/environment';
 
 @Injectable()
 export class GroupEffects {
@@ -28,7 +30,8 @@ export class GroupEffects {
     private store: Store,
     private groupService: GroupService,
     private snackBarService: SnackBarService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private router: Router
   ) {}
 
   loadGroupList$ = createEffect(() => {
@@ -118,6 +121,7 @@ export class GroupEffects {
         tap(() => {
           this.modalService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar('Group was Deleted successfully!');
+          this.router.navigate([ProjectPages.Empty]);
         })
       );
     },
