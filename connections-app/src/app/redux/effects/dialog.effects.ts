@@ -7,6 +7,9 @@ import {
   loadGroupDialog,
   loadGroupDialogHttpFailure,
   loadGroupDialogHttpSuccess,
+  sendNewMessage,
+  sendNewMessageFailure,
+  sendNewMessageSuccess,
 } from '../actions/dialog.actions';
 import { DialogService } from '../../group/services/dialog.service';
 
@@ -68,6 +71,46 @@ export class DialogEffects {
     () => {
       return this.actions$.pipe(
         ofType(loadGroupDialogHttpFailure),
+        tap((action) => {
+          this.snackBarService.setSnackBar(action.error.error.message);
+          this.dialogService.isExceptionSubject.next(false);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  sendNewMessage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(sendNewMessage),
+      concatMap((action) =>
+        this.dialogService
+          .sendNewMessageToDialog(action.newMessage)
+          .pipe(map(() => sendNewMessageSuccess({ newMessage: action.newMessage })))
+      ),
+      catchError((error) => {
+        return of(sendNewMessageFailure({ error }));
+      })
+    );
+  });
+
+  sendNewMessageSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(sendNewMessageSuccess),
+        tap(() => {
+          this.snackBarService.setSnackBar('New message was sent!');
+          this.dialogService.isExceptionSubject.next(false);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  sendNewMessageFailure$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(sendNewMessageFailure),
         tap((action) => {
           this.snackBarService.setSnackBar(action.error.error.message);
           this.dialogService.isExceptionSubject.next(false);

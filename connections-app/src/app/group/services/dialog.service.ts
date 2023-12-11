@@ -5,6 +5,7 @@ import {
   IGroupDialogResponse,
   IGroupMessage,
   IGroupMessageTransformed,
+  INewMessage,
 } from '../../core/models/group.model';
 
 @Injectable({
@@ -27,5 +28,9 @@ export class DialogService {
     return this.http.get<IGroupDialogResponse>(
       `https://tasks.app.rs.school/angular/groups/read?groupID=${groupId}&since=${since}`
     );
+  }
+
+  sendNewMessageToDialog(message: INewMessage): Observable<void> {
+    return this.http.post<void>('https://tasks.app.rs.school/angular/groups/append', message);
   }
 }

@@ -38,10 +38,20 @@
         <mat-form-field class="message-form">
           <mat-label>Message</mat-label>
           <mat-error *ngIf="message.invalid">Please enter your message</mat-error>
-          <textarea matInput class="message-input" type="text" formControlName="message"></textarea>
+          <textarea
+            #textInput
+            matInput
+            class="message-input"
+            type="text"
+            formControlName="message"></textarea>
         </mat-form-field>
       </form>
-      <button [disabled]="chatForm.invalid" mat-raised-button color="primary" class="send-button">
+      <button
+        [disabled]="chatForm.invalid"
+        (click)="onSendNewMessageButtonClick(textInput.value)"
+        mat-raised-button
+        color="primary"
+        class="send-button">
         SEND NEW MESSAGE
       </button>
     </div>

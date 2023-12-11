@@ -56,3 +56,8 @@ export interface IDialogList {
     since: number;
   };
 }
+
+export interface INewMessage {
+  groupID: string;
+  message: string;
+}

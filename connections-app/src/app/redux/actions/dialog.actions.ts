@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IGroupMessageTransformed } from '../../core/models/group.model';
+import { IGroupMessageTransformed, INewMessage } from '../../core/models/group.model';
 import { IServerError } from '../../core/models/server-error.model';
 
 export const loadGroupDialog = createAction(
@@ -14,5 +14,24 @@ export const loadGroupDialogHttpSuccess = createAction(
 
 export const loadGroupDialogHttpFailure = createAction(
   '[DIALOG] Load Group Dialog Http Failure',
+  props<{ error: IServerError }>()
+);
+
+export const sendNewMessage = createAction(
+  '[DIALOG] Send New Message Request',
+  props<{
+    newMessage: INewMessage;
+  }>()
+);
+
+export const sendNewMessageSuccess = createAction(
+  '[DIALOG] Send New Message Success',
+  props<{
+    newMessage: INewMessage;
+  }>()
+);
+
+export const sendNewMessageFailure = createAction(
+  '[DIALOG] Send New Message Failure',
   props<{ error: IServerError }>()
 );

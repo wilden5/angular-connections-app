@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, take, tap } from 'rxjs';
 import { ProjectPages } from '../../../../environment/environment';
-import { loadGroupDialog } from '../../../redux/actions/dialog.actions';
+import { loadGroupDialog, sendNewMessage } from '../../../redux/actions/dialog.actions';
 import { selectDialogById } from '../../../redux/selectors/dialog.selectors';
 import { IGroupMessageTransformed } from '../../../core/models/group.model';
 import { selectUserById } from '../../../redux/selectors/people.selectors';
@@ -81,5 +81,12 @@ export class DialogComponent implements OnInit {
   onUpdateButtonClick(): void {
     this.synchronizeGroupMessages();
     this.dialogService.isExceptionSubject.next(true);
+    // todo: Implement timer3
+  }
+
+  onSendNewMessageButtonClick(abc: string): void {
+    this.store.dispatch(sendNewMessage({ newMessage: { groupID: this.groupID, message: abc } }));
+    this.chatForm.reset();
+    // 2. synchronizeGroupMessages
   }
 }
