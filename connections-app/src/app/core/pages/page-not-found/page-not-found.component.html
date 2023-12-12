@@ -1,0 +1,14 @@
+<div class="wrapper">
+  <h3 class="header">Look like you're lost</h3>
+  <img
+    class="app-logo"
+    [ngSrc]="'./assets/not-found.png'"
+    alt="app-logo"
+    height="336"
+    width="500"
+    priority="true" />
+  <p class="message">
+    the page <span class="page-url">{{pageUrl}}</span> you are looking for not available!
+  </p>
+  <a class="main-link" [routerLink]="ProjectPages.Empty">Navigate Back!</a>
+</div>

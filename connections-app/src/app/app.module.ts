@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { NgOptimizedImage } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserEffects } from './redux/effects/user.effects';
@@ -32,6 +33,7 @@ import { conversationReducer } from './redux/reducers/conversation.reducer';
 import { DialogEffects } from './redux/effects/dialog.effects';
 import { dialogReducer } from './redux/reducers/dialog.reducer';
 import { specificConversationReducer } from './redux/reducers/specificConversation.reducer';
+import { PageNotFoundComponent } from './core/pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { specificConversationReducer } from './redux/reducers/specificConversati
     MainComponent,
     ConfirmationModalComponent,
     CreateGroupModalComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,7 @@ import { specificConversationReducer } from './redux/reducers/specificConversati
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    NgOptimizedImage,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }],
   bootstrap: [AppComponent],
