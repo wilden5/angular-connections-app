@@ -5,7 +5,6 @@ import { ConversationComponent } from './pages/conversation/conversation.compone
 import { authGuard } from '../core/guards/auth.guard';
 
 const routes: Routes = [
-  { path: `${ProjectPages.Empty}`, component: ConversationComponent, canActivate: [authGuard] },
   {
     path: `${ProjectPages.ConversationId}`,
     component: ConversationComponent,

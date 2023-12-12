@@ -53,6 +53,7 @@ export class MainComponent implements OnInit {
   isInConversationList(uid: string): Observable<boolean> | undefined {
     return this.conversationList$?.pipe(
       map((conversationList) => conversationList.some((item) => item.companionID === uid))
+      // todo: update this after conversation was deleted on the specific page
     );
   }
 
@@ -68,7 +69,7 @@ export class MainComponent implements OnInit {
   }
 
   onDeleteGroupButtonClick(id: string): void {
-    this.modalService.openConfirmationDialog(id);
+    this.modalService.openConfirmationDialog(id, true);
   }
 
   onCreateGroupButtonClick(): void {

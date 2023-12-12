@@ -1,7 +1,10 @@
 import { IUserProfileInformation } from '../auth/models/user.model';
 import { IDialogList, IGroupItemTransformed } from '../core/models/group.model';
 import { IPersonTransformed } from '../core/models/people.model';
-import { IConversationItemTransformed } from '../core/models/conversation.model';
+import {
+  IConversationItemTransformed,
+  IConversationListObject,
+} from '../core/models/conversation.model';
 
 export interface RootState {
   readonly user: IUserProfileInformation;
@@ -9,4 +12,5 @@ export interface RootState {
   readonly peopleList: IPersonTransformed[];
   readonly conversationList: IConversationItemTransformed[];
   readonly dialogList: IDialogList;
+  readonly conversationHistoryList: IConversationListObject;
 }

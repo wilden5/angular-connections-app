@@ -94,10 +94,10 @@ export class DialogComponent implements OnInit {
     setTimeout(() => {
       this.synchronizeGroupMessages();
       this.dialogService.isExceptionSubject.next(false);
-    }, 1000);
+    }, 1500);
   }
 
   onDeleteGroupButtonClick(): void {
-    this.modalService.openConfirmationDialog(this.groupID);
+    this.modalService.openConfirmationDialog(this.groupID, true);
   }
 }

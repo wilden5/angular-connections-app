@@ -7,6 +7,7 @@ import { ConfirmationModalComponent } from '../components/confirmation-modal/con
 import { createGroup, deleteGroup } from '../../redux/actions/group.actions';
 // eslint-disable-next-line max-len
 import { CreateGroupModalComponent } from '../components/create-group-modal/create-group-modal.component';
+import { deleteConversation } from '../../redux/actions/conversation.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -19,13 +20,17 @@ export class ModalService {
     private store: Store
   ) {}
 
-  openConfirmationDialog(id: string): void {
+  openConfirmationDialog(id: string, isGroup: boolean): void {
     const dialogRef = this.dialog.open(ConfirmationModalComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.isExceptionSubject.next(true);
-        this.store.dispatch(deleteGroup({ id }));
+        if (isGroup) {
+          this.store.dispatch(deleteGroup({ id }));
+        } else {
+          this.store.dispatch(deleteConversation({ id }));
+        }
       }
     });
   }

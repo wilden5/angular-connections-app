@@ -31,6 +31,7 @@ import { ConversationEffects } from './redux/effects/conversation.effects';
 import { conversationReducer } from './redux/reducers/conversation.reducer';
 import { DialogEffects } from './redux/effects/dialog.effects';
 import { dialogReducer } from './redux/reducers/dialog.reducer';
+import { specificConversationReducer } from './redux/reducers/specificConversation.reducer';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { dialogReducer } from './redux/reducers/dialog.reducer';
       peopleList: peopleReducer,
       conversationList: conversationReducer,
       dialogList: dialogReducer,
+      conversationHistoryList: specificConversationReducer,
     }),
     EffectsModule.forRoot([
       UserEffects,
