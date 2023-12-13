@@ -1,0 +1,33 @@
+<div *ngIf="userService.isUserLoggedIn(); else unAuthUser">
+  <mat-toolbar class="toolbar" color="primary">
+    <nav class="navbar">
+      <ul class="navbar-list">
+        <li class="nav-item"><a [routerLink]="ProjectPages.Empty" class="navbar-link">Main</a></li>
+        <li class="nav-item">
+          <a [routerLink]="[ProjectPages.Auth, ProjectPages.Profile]" class="navbar-link"
+            >Profile</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <button mat-button (click)="switchTheme()" class="theme-button">Switch Theme</button>
+  </mat-toolbar>
+</div>
+
+<ng-template #unAuthUser>
+  <mat-toolbar class="toolbar" color="primary">
+    <nav class="navbar">
+      <ul class="navbar-list">
+        <li class="nav-item">
+          <a [routerLink]="[ProjectPages.Auth, ProjectPages.Login]" class="navbar-link">Login</a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="[ProjectPages.Auth, ProjectPages.Registration]" class="navbar-link"
+            >Registration</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <button mat-button (click)="switchTheme()" class="theme-button">Switch Theme</button>
+  </mat-toolbar>
+</ng-template>
