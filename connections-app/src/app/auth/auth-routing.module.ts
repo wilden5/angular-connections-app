@@ -5,10 +5,11 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { authGuard } from '../core/guards/auth.guard';
+import { userGuard } from '../core/guards/user.guard';
 
 const routes: Routes = [
-  { path: ProjectPages.Login, component: LoginComponent },
-  { path: ProjectPages.Registration, component: RegistrationComponent },
+  { path: ProjectPages.Login, component: LoginComponent, canActivate: [userGuard] },
+  { path: ProjectPages.Registration, component: RegistrationComponent, canActivate: [userGuard] },
   { path: ProjectPages.Profile, component: ProfileComponent, canActivate: [authGuard] },
 ];
 
