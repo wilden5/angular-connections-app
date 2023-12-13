@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject, Renderer2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { ProjectPages } from '../../../../environment/environment';
 import { UserService } from '../../../auth/services/user.service';
 
@@ -10,7 +11,29 @@ import { UserService } from '../../../auth/services/user.service';
 export class HeaderComponent {
   protected readonly ProjectPages = ProjectPages;
 
-  constructor(protected userService: UserService) {}
+  private theme = localStorage.getItem('theme') || 'light-theme';
 
-  switchTheme(): void {}
+  private backgroundColor = localStorage.getItem('backgroundColor') || 'white';
+
+  constructor(
+    protected userService: UserService,
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private document: Document
+  ) {
+    this.renderer.addClass(this.document.body, this.theme);
+    this.renderer.setStyle(this.document.body, 'background-color', this.backgroundColor);
+  }
+
+  switchTheme(): void {
+    this.theme = this.theme === 'light-theme' ? 'dark-theme' : 'light-theme';
+    this.backgroundColor = this.theme === 'dark-theme' ? 'black' : 'white';
+    localStorage.setItem('theme', this.theme);
+    localStorage.setItem('backgroundColor', this.backgroundColor);
+
+    const oldTheme = this.theme === 'light-theme' ? 'dark-theme' : 'light-theme';
+    this.renderer.removeClass(this.document.body, oldTheme);
+
+    this.renderer.addClass(this.document.body, this.theme);
+    this.renderer.setStyle(this.document.body, 'background-color', this.backgroundColor);
+  }
 }

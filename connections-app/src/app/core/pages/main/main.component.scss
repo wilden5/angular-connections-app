@@ -1,126 +1,246 @@
-.main-container {
-  display: flex;
-  justify-content: center;
-  font-size: 5rem;
-  padding: 5rem;
-}
-
-.links {
-  display: flex;
-  justify-content: center;
-  gap: 5rem;
-
-  & a {
+:host-context(.light-theme) {
+  .main-container {
+    display: flex;
+    justify-content: center;
     font-size: 5rem;
-    text-decoration: none;
-    color: red;
+    padding: 5rem;
   }
-}
 
-.main {
-  display: flex;
-  margin-top: 5rem;
-}
+  .links {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
 
-.group-list-container,
-.people-list-container {
-  width: 75rem;
-  padding: 1rem;
-  margin: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: antiquewhite;
-  border: #3f51b5 solid 0.7rem;
-  border-radius: 1rem;
-}
+    & a {
+      font-size: 5rem;
+      text-decoration: none;
+      color: red;
+    }
+  }
 
-.group-list,
-.people-list {
-  width: 75%;
-}
+  .main {
+    display: flex;
+    margin-top: 5rem;
+  }
 
-.group-header,
-.people-header {
-  font-size: 5rem;
-  padding: 1rem;
-  font-weight: 800;
-  text-align: center;
-  font-family: "Agency FB", serif;
-}
+  .group-list-container,
+  .people-list-container {
+    width: 75rem;
+    padding: 1rem;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: antiquewhite;
+    border: #3f51b5 solid 0.7rem;
+    border-radius: 1rem;
+  }
 
-.people-header {
-  margin-top: 6rem;
-}
+  .group-list,
+  .people-list {
+    width: 75%;
+  }
 
-.group-wrapper,
-.people-wrapper {
-  max-height: 50rem;
-  width: 60rem;
-  overflow: auto;
-}
+  .group-header,
+  .people-header {
+    font-size: 5rem;
+    padding: 1rem;
+    font-weight: 800;
+    text-align: center;
+    font-family: "Agency FB", serif;
+  }
 
-.buttons-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  width: 75%;
+  .people-header {
+    margin-top: 6rem;
+  }
 
-  & button {
-    margin: 0.5rem;
+  .group-wrapper,
+  .people-wrapper {
+    max-height: 50rem;
+    width: 60rem;
+    overflow: auto;
+  }
+
+  .buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    width: 75%;
+
+    & button {
+      margin: 0.5rem;
+      font-family: "Rockwell", serif;
+      letter-spacing: 0.1rem;
+      font-weight: 800;
+    }
+  }
+
+  .specific-group,
+  .specific-conversation {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: "Rockwell", serif;
+
+    & button {
+      width: 2rem !important;
+      height: 2rem !important;
+      margin-top: 0.5rem;
+      font-family: "Rockwell", serif;
+
+      &:hover {
+        background-color: red !important;
+      }
+    }
+  }
+
+  .specific-link,
+  .specific-link-conversation {
+    display: block;
+    text-decoration: none;
+    font-size: 3rem;
+    color: #3f51b5;
+    transition: ease-in-out 0.5s;
+    cursor: pointer;
+
+    &:hover {
+      color: red;
+    }
+  }
+
+  .update-people-button {
+    margin: 0.5rem 0.5rem 2rem;
     font-family: "Rockwell", serif;
     letter-spacing: 0.1rem;
     font-weight: 800;
+    width: 75%;
+  }
+
+  .new-conversation-button {
+    width: 10rem !important;
+  }
+
+  .active-conversation {
+    background-color: white;
   }
 }
 
-.specific-group,
-.specific-conversation {
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-family: "Rockwell", serif;
+:host-context(.dark-theme) {
+  .main {
+    display: flex;
+    margin-top: 5rem;
+  }
 
-  & button {
-    width: 2rem !important;
-    height: 2rem !important;
-    margin-top: 0.5rem;
-    font-family: "Rockwell", serif;
+  .group-list-container,
+  .people-list-container {
+    width: 75rem;
+    padding: 1rem;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    border: antiquewhite solid 0.7rem;
+    border-radius: 1rem;
+  }
 
-    &:hover {
-      background-color: red !important;
+  .group-list,
+  .people-list {
+    width: 75%;
+  }
+
+  .group-header,
+  .people-header {
+    color: white;
+    font-size: 5rem;
+    padding: 1rem;
+    font-weight: 800;
+    text-align: center;
+    font-family: "Agency FB", serif;
+  }
+
+  .people-header {
+    margin-top: 6rem;
+  }
+
+  .group-wrapper,
+  .people-wrapper {
+    max-height: 50rem;
+    width: 60rem;
+    overflow: auto;
+    background-color: #898989;
+  }
+
+  .buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    width: 75%;
+
+    & button {
+      background-color: white !important;
+      color: black !important;
+      margin: 0.5rem;
+      font-family: "Rockwell", serif;
+      letter-spacing: 0.1rem;
+      font-weight: 800;
     }
   }
-}
 
-.specific-link,
-.specific-link-conversation {
-  display: block;
-  text-decoration: none;
-  font-size: 3rem;
-  color: #3f51b5;
-  transition: ease-in-out 0.5s;
-  cursor: pointer;
+  .specific-group,
+  .specific-conversation {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: "Rockwell", serif;
 
-  &:hover {
-    color: red;
+    & button {
+      width: 2rem !important;
+      height: 2rem !important;
+      background-color: white !important;
+      color: black !important;
+      margin-top: 0.5rem;
+      font-family: "Rockwell", serif;
+
+      &:hover {
+        background-color: red !important;
+      }
+    }
   }
-}
 
-.update-people-button {
-  margin: 0.5rem 0.5rem 2rem;
-  font-family: "Rockwell", serif;
-  letter-spacing: 0.1rem;
-  font-weight: 800;
-  width: 75%;
-}
+  .specific-link,
+  .specific-link-conversation {
+    display: block;
+    text-decoration: none;
+    font-size: 3rem;
+    color: white;
+    transition: ease-in-out 0.5s;
+    cursor: pointer;
 
-.new-conversation-button {
-  width: 10rem!important;
-}
+    &:hover {
+      color: red;
+    }
+  }
 
-.active-conversation {
-  background-color: white;
+  .update-people-button {
+    background-color: white !important;
+    color: black !important;
+    margin: 0.5rem 0.5rem 2rem;
+    font-family: "Rockwell", serif;
+    letter-spacing: 0.1rem;
+    font-weight: 800;
+    width: 75%;
+  }
+
+  .new-conversation-button {
+    width: 10rem !important;
+  }
+
+  .active-conversation {
+    background-color: #5b5377;
+  }
 }
