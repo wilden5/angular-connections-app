@@ -5,17 +5,12 @@
   (ngSubmit)="onSubmitRegistrationForm()">
   <mat-form-field class="registration-field">
     <mat-label>Name</mat-label>
-    <mat-error
-      >{{name.invalid && !name.dirty ? 'Field is required' : 'Should consist of ' +
-      'letters'}}</mat-error
-    >
+    <mat-error>{{displayNameValidationMessage()}}</mat-error>
     <input matInput type="text" formControlName="name" placeholder="Your Name Here" />
   </mat-form-field>
   <mat-form-field class="registration-field">
     <mat-label>Email</mat-label>
-    <mat-error
-      >{{email.invalid && !email.dirty ? 'Field is required' : 'Should be a valid ' + 'email'}}
-    </mat-error>
+    <mat-error>{{displayEmailValidationMessage()}} </mat-error>
     <span
       class="duplicate-error"
       [hidden]="(userService.previousEnteredEmail | async) !== userEmail.value"
@@ -45,7 +40,8 @@
     class="registration-button"
     mat-raised-button
     color="primary"
-    [disabled]="registrationForm.invalid || (userService.previousEnteredEmail | async) === userEmail.value || (userService.isExceptionSubject | async) === true">
+    [disabled]="registrationForm.invalid
+      || (userService.previousEnteredEmail | async) === userEmail.value">
     Submit Form
   </button>
 </form>

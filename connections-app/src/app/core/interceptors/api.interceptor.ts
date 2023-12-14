@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { finalize, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { startLoading, stopLoading } from '../../redux/actions/spinner.actions';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
+  constructor(private store: Store) {}
+
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const userObject = localStorage.getItem('userObject');
     if (userObject) {
@@ -15,8 +19,10 @@ export class ApiInterceptor implements HttpInterceptor {
           authorization: `Bearer ${userHeaders.token}`,
         },
       });
-      return next.handle(apiRequest);
+      this.store.dispatch(startLoading());
+      return next.handle(apiRequest).pipe(finalize(() => this.store.dispatch(stopLoading())));
     }
-    return next.handle(req);
+    this.store.dispatch(startLoading());
+    return next.handle(req).pipe(finalize(() => this.store.dispatch(stopLoading())));
   }
 }

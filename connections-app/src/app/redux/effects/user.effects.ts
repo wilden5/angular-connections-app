@@ -59,7 +59,6 @@ export class UserEffects {
         tap(() => {
           this.snackBarService.setSnackBar(projectConstants.userRegisterSuccess);
           this.router.navigate([`/${ProjectPages.Auth}/${ProjectPages.Login}`]);
-          this.userService.isExceptionSubject.next(false);
         })
       );
     },
@@ -107,7 +106,6 @@ export class UserEffects {
         tap(() => {
           this.snackBarService.setSnackBar(projectConstants.userLoginSuccess);
           this.router.navigate([`/${ProjectPages.Empty}`]);
-          this.userService.isExceptionSubject.next(false);
         })
       );
     },
@@ -192,7 +190,6 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(updateUserNameSuccess),
         tap(() => {
-          this.userService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar('User name was updated!');
         })
       );
@@ -205,7 +202,6 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(updateUserNameFailure),
         tap((action) => {
-          this.userService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar(action.error.error.message);
         })
       );
@@ -232,7 +228,6 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(logoutSuccess),
         tap(() => {
-          this.userService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar('User has been logout successfully!');
           localStorage.clear();
           // todo: try to delete cookies here
@@ -248,7 +243,6 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(logoutFailure),
         tap((action) => {
-          this.userService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar(action.error.error.message);
         })
       );

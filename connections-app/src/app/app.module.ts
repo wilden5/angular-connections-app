@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NgOptimizedImage } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserEffects } from './redux/effects/user.effects';
@@ -36,6 +37,8 @@ import { dialogReducer } from './redux/reducers/dialog.reducer';
 import { specificConversationReducer } from './redux/reducers/specificConversation.reducer';
 import { PageNotFoundComponent } from './core/pages/page-not-found/page-not-found.component';
 import { HeaderComponent } from './core/components/header/header.component';
+import { SpinnerComponent } from './core/components/spinner/spinner.component';
+import { spinnerReducer } from './redux/reducers/spinner.reducer';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,7 @@ import { HeaderComponent } from './core/components/header/header.component';
     CreateGroupModalComponent,
     PageNotFoundComponent,
     HeaderComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +63,7 @@ import { HeaderComponent } from './core/components/header/header.component';
       conversationList: conversationReducer,
       dialogList: dialogReducer,
       conversationHistoryList: specificConversationReducer,
+      isLoading: spinnerReducer,
     }),
     EffectsModule.forRoot([
       UserEffects,
@@ -76,8 +81,10 @@ import { HeaderComponent } from './core/components/header/header.component';
     MatInputModule,
     NgOptimizedImage,
     MatToolbarModule,
+    MatProgressSpinnerModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }],
   bootstrap: [AppComponent],
+  exports: [SpinnerComponent],
 })
 export class AppModule {}

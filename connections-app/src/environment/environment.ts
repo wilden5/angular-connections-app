@@ -17,4 +17,8 @@ export enum ProjectPages {
 export const projectConstants = {
   userRegisterSuccess: 'You have been registered!',
   userLoginSuccess: 'You have been logged in!',
+  formFieldRequired: 'This field is required',
+  formNameLength: 'Cannot have more than 40 symbols',
+  formNameRegex: 'Should consist of letters/spaces only',
+  formEmail: 'Should be a valid email',
 };

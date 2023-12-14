@@ -5,8 +5,10 @@ import {
   IConversationItemTransformed,
   IConversationListObject,
 } from '../core/models/conversation.model';
+import { ISpinnerStatus } from '../core/models/spinner.model';
 
 export interface RootState {
+  readonly isLoading: ISpinnerStatus;
   readonly user: IUserProfileInformation;
   readonly groupList: IGroupItemTransformed[];
   readonly peopleList: IPersonTransformed[];

@@ -6,10 +6,11 @@ import {
   customPasswordValidationMessages,
   customPasswordValidator,
 } from '../../validators/password.validator';
-import { ProjectPages } from '../../../../environment/environment';
+import { projectConstants, ProjectPages } from '../../../../environment/environment';
 import { registerNewUser } from '../../../redux/actions/user.actions';
 import { IUser } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
+import { startLoading } from '../../../redux/actions/spinner.actions';
 
 @Component({
   selector: 'app-registration',
@@ -23,8 +24,7 @@ export class RegistrationComponent {
   protected readonly ProjectPages = ProjectPages;
 
   registrationForm = this.fb.group({
-    name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
-    // todo: implement maxLength 40 (as for profile page)
+    name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$'), Validators.maxLength(40)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, customPasswordValidator]],
   });
@@ -53,7 +53,25 @@ export class RegistrationComponent {
   }
 
   onSubmitRegistrationForm(): void {
-    this.userService.isExceptionSubject.next(true);
+    this.store.dispatch(startLoading());
     this.store.dispatch(registerNewUser({ user: this.registrationForm.value as IUser }));
+  }
+
+  displayNameValidationMessage(): string {
+    switch (true) {
+      case this.name.hasError('required'):
+        return projectConstants.formFieldRequired;
+      case this.name.hasError('maxlength'):
+        return projectConstants.formNameLength;
+      default:
+        return projectConstants.formNameRegex;
+    }
+  }
+
+  displayEmailValidationMessage(): string {
+    if (this.email.hasError('required')) {
+      return projectConstants.formFieldRequired;
+    }
+    return projectConstants.formEmail;
   }
 }
