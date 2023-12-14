@@ -4,12 +4,12 @@ import { Store } from '@ngrx/store';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { merge } from 'rxjs';
 import {
-  customPasswordValidationMessages,
+  displayPasswordValidationMessage,
   customPasswordValidator,
 } from '../../validators/password.validator';
-import { ProjectPages } from '../../../../environment/environment';
-import { loginUser } from '../../../redux/actions/user.actions';
-import { IUser } from '../../models/user.model';
+import { projectConstants, ProjectPages } from '../../../../environment/environment';
+import { loginUser } from '../../state/user.actions';
+import { IUserRegistration } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -19,7 +19,7 @@ import { UserService } from '../../services/user.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
-  protected readonly customPasswordValidationMessages = customPasswordValidationMessages;
+  protected readonly customPasswordValidationMessages = displayPasswordValidationMessage;
 
   protected readonly ProjectPages = ProjectPages;
 
@@ -49,6 +49,13 @@ export class LoginComponent {
 
   onSubmitLoginForm(): void {
     this.userService.isExceptionSubject.next(true);
-    this.store.dispatch(loginUser({ user: this.loginForm.value as IUser }));
+    this.store.dispatch(loginUser({ user: this.loginForm.value as IUserRegistration }));
+  }
+
+  displayEmailValidationMessage(): string {
+    if (this.email.hasError('required')) {
+      return projectConstants.formFieldRequired;
+    }
+    return projectConstants.formEmail;
   }
 }

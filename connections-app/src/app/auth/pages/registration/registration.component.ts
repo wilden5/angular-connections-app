@@ -3,12 +3,12 @@ import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
-  customPasswordValidationMessages,
+  displayPasswordValidationMessage,
   customPasswordValidator,
 } from '../../validators/password.validator';
 import { projectConstants, ProjectPages } from '../../../../environment/environment';
-import { registerNewUser } from '../../../redux/actions/user.actions';
-import { IUser } from '../../models/user.model';
+import { registerNewUser } from '../../state/user.actions';
+import { IUserRegistration } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { startLoading } from '../../../redux/actions/spinner.actions';
 
@@ -19,7 +19,7 @@ import { startLoading } from '../../../redux/actions/spinner.actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationComponent {
-  protected readonly customPasswordValidationMessages = customPasswordValidationMessages;
+  protected readonly customPasswordValidationMessages = displayPasswordValidationMessage;
 
   protected readonly ProjectPages = ProjectPages;
 
@@ -54,7 +54,9 @@ export class RegistrationComponent {
 
   onSubmitRegistrationForm(): void {
     this.store.dispatch(startLoading());
-    this.store.dispatch(registerNewUser({ user: this.registrationForm.value as IUser }));
+    this.store.dispatch(
+      registerNewUser({ user: this.registrationForm.value as IUserRegistration })
+    );
   }
 
   displayNameValidationMessage(): string {

@@ -10,7 +10,7 @@
   </mat-form-field>
   <mat-form-field class="registration-field">
     <mat-label>Email</mat-label>
-    <mat-error>{{displayEmailValidationMessage()}} </mat-error>
+    <mat-error>{{displayEmailValidationMessage()}}</mat-error>
     <span
       class="duplicate-error"
       [hidden]="(userService.previousEnteredEmail | async) !== userEmail.value"

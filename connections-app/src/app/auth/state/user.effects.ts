@@ -20,12 +20,12 @@ import {
   logoutUser,
   logoutFailure,
   logoutSuccess,
-} from '../actions/user.actions';
-import { UserService } from '../../auth/services/user.service';
+} from './user.actions';
+import { UserService } from '../services/user.service';
 import { projectConstants, ProjectPages } from '../../../environment/environment';
 import { SnackBarService } from '../../core/services/snackbar.service';
-import { IUserProfileHeaders } from '../../auth/models/user.model';
-import { selectUser } from '../selectors/user.selectors';
+import { IUserProfileHeaders } from '../models/user.model';
+import { selectUser } from './user.selectors';
 
 @Injectable()
 export class UserEffects {
@@ -152,7 +152,7 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(loadProfileHttpSuccess),
         tap(() => {
-          this.snackBarService.setSnackBar('Profile information was received!');
+          this.snackBarService.setSnackBar(projectConstants.profileUpdateSuccess);
         })
       );
     },
@@ -190,7 +190,7 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(updateUserNameSuccess),
         tap(() => {
-          this.snackBarService.setSnackBar('User name was updated!');
+          this.snackBarService.setSnackBar(projectConstants.userNameUpdateSuccess);
         })
       );
     },
@@ -228,9 +228,8 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(logoutSuccess),
         tap(() => {
-          this.snackBarService.setSnackBar('User has been logout successfully!');
+          this.snackBarService.setSnackBar(projectConstants.userLogoutSuccess);
           localStorage.clear();
-          // todo: try to delete cookies here
           this.router.navigate([`/${ProjectPages.Auth}/${ProjectPages.Login}`]);
         })
       );

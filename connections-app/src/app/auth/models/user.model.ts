@@ -1,4 +1,4 @@
-export interface IUser {
+export interface IUserRegistration {
   name?: string;
   email: string;
   password: string;
@@ -15,14 +15,14 @@ export interface IUserProfileHeaders {
   token: string;
 }
 
-export interface IServerProfileInformation {
+export interface IUserProfileInformation {
   createdAt: { S: string };
   uid: { S: string };
   email: { S: string };
   name: { S: string };
 }
 
-export interface IUserProfileInformation {
+export interface IUserProfileInformationTransformed {
   createdAt: string;
   uid: string;
   email: string;

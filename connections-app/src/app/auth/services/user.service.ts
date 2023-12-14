@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {
-  IServerProfileInformation,
-  IUser,
-  IUserAuthenticated,
   IUserProfileInformation,
+  IUserRegistration,
+  IUserAuthenticated,
+  IUserProfileInformationTransformed,
 } from '../models/user.model';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  transformProfileInformation(data: IServerProfileInformation): IUserProfileInformation {
+  transformProfileInformation(data: IUserProfileInformation): IUserProfileInformationTransformed {
     return {
       createdAt: data.createdAt.S,
       uid: data.uid.S,
@@ -27,16 +27,19 @@ export class UserService {
     };
   }
 
-  register(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>('https://tasks.app.rs.school/angular/registration', user);
+  register(user: IUserRegistration): Observable<IUserRegistration> {
+    return this.http.post<IUserRegistration>(
+      'https://tasks.app.rs.school/angular/registration',
+      user
+    );
   }
 
-  login(user: IUser): Observable<IUserAuthenticated> {
+  login(user: IUserRegistration): Observable<IUserAuthenticated> {
     return this.http.post<IUserAuthenticated>('https://tasks.app.rs.school/angular/login', user);
   }
 
-  getProfileInformation(): Observable<IServerProfileInformation> {
-    return this.http.get<IServerProfileInformation>('https://tasks.app.rs.school/angular/profile');
+  getProfileInformation(): Observable<IUserProfileInformation> {
+    return this.http.get<IUserProfileInformation>('https://tasks.app.rs.school/angular/profile');
   }
 
   updateProfileName(name: string): Observable<void> {

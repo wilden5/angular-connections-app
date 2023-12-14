@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { RootState } from '../root.state';
+import { RootState } from '../../redux/root.state';
 
 export const selectRootState = createFeatureSelector<RootState>('user');
 

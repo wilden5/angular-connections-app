@@ -21,4 +21,7 @@ export const projectConstants = {
   formNameLength: 'Cannot have more than 40 symbols',
   formNameRegex: 'Should consist of letters/spaces only',
   formEmail: 'Should be a valid email',
+  profileUpdateSuccess: 'Profile information was received!',
+  userNameUpdateSuccess: 'User name was updated!',
+  userLogoutSuccess: 'User has been logout successfully!',
 };

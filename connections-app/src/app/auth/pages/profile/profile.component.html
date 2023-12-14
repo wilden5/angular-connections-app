@@ -25,7 +25,6 @@
       <button
         *ngIf="name.disabled"
         (click)="onEditButtonClick()"
-        [disabled]="(userService.isExceptionSubject | async) === true"
         class="edit-button"
         type="button"
         mat-raised-button
@@ -53,12 +52,7 @@
       </button>
     </div>
   </form>
-  <button
-    (click)="onLogoutButtonClick()"
-    [disabled]="(userService.isExceptionSubject | async) === true"
-    mat-raised-button
-    color="primary"
-    class="logout-button">
+  <button (click)="onLogoutButtonClick()" mat-raised-button color="primary" class="logout-button">
     Logout
   </button>
 </ng-container>

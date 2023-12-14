@@ -21,7 +21,7 @@ export function customPasswordValidator(control: AbstractControl): ValidationErr
   return null;
 }
 
-export function customPasswordValidationMessages(passwordField: AbstractControl): string {
+export function displayPasswordValidationMessage(passwordField: AbstractControl): string {
   if (passwordField.hasError('required')) {
     return 'Password field is required';
   }

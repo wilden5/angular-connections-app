@@ -1,17 +1,27 @@
 import { createAction, props } from '@ngrx/store';
-import { IUser, IUserAuthenticated, IUserProfileInformation } from '../../auth/models/user.model';
+import {
+  IUserRegistration,
+  IUserAuthenticated,
+  IUserProfileInformationTransformed,
+} from '../models/user.model';
 import { IServerError } from '../../core/models/server-error.model';
 
-export const registerNewUser = createAction('[USER] Register New User', props<{ user: IUser }>());
+export const registerNewUser = createAction(
+  '[USER] Register New User',
+  props<{ user: IUserRegistration }>()
+);
 
-export const registerSuccess = createAction('[USER] Register Success', props<{ user: IUser }>());
+export const registerSuccess = createAction(
+  '[USER] Register Success',
+  props<{ user: IUserRegistration }>()
+);
 
 export const registerFailure = createAction(
   '[USER] Register Failure',
   props<{ error: IServerError }>()
 );
 
-export const loginUser = createAction('[USER] Login user', props<{ user: IUser }>());
+export const loginUser = createAction('[USER] Login user', props<{ user: IUserRegistration }>());
 
 export const loginSuccess = createAction(
   '[USER] Login Success',
@@ -24,7 +34,7 @@ export const loadProfile = createAction('[USER] Load Profile Request');
 
 export const loadProfileHttpSuccess = createAction(
   '[USER] Load Profile HTTP Request Success',
-  props<{ profileInformation: IUserProfileInformation }>()
+  props<{ profileInformation: IUserProfileInformationTransformed }>()
 );
 
 export const loadProfileHttpFailure = createAction(

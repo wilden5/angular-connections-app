@@ -1,4 +1,4 @@
-import { IUserProfileInformation } from '../auth/models/user.model';
+import { IUserProfileInformationTransformed } from '../auth/models/user.model';
 import { IDialogList, IGroupItemTransformed } from '../core/models/group.model';
 import { IPersonTransformed } from '../core/models/people.model';
 import {
@@ -9,7 +9,7 @@ import { ISpinnerStatus } from '../core/models/spinner.model';
 
 export interface RootState {
   readonly isLoading: ISpinnerStatus;
-  readonly user: IUserProfileInformation;
+  readonly user: IUserProfileInformationTransformed;
   readonly groupList: IGroupItemTransformed[];
   readonly peopleList: IPersonTransformed[];
   readonly conversationList: IConversationItemTransformed[];

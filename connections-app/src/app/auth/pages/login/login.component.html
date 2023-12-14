@@ -1,16 +1,9 @@
 <h2 class="login-header">Login form:</h2>
-<form
-  class="login-form"
-  [formGroup]="loginForm"
-  (ngSubmit)="
-onSubmitLoginForm()">
+<form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmitLoginForm()">
   <mat-form-field class="login-field">
     <mat-label>Email</mat-label>
-    <mat-error
-      >{{email.invalid && !email.dirty ? 'Field is required' : 'Should be a valid ' + 'email'}}
-    </mat-error>
+    <mat-error>{{displayEmailValidationMessage()}}</mat-error>
     <input
-      #userEmail
       matInput
       type="text"
       formControlName="email"

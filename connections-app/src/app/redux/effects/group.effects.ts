@@ -18,7 +18,7 @@ import {
   loadGroupListStore,
 } from '../actions/group.actions';
 import { GroupService } from '../../core/services/group.service';
-import { loadProfileHttpFailure } from '../actions/user.actions';
+import { loadProfileHttpFailure } from '../../auth/state/user.actions';
 import { selectGroupList } from '../selectors/group.selectors';
 import { ModalService } from '../../core/services/modal.service';
 import { ProjectPages } from '../../../environment/environment';

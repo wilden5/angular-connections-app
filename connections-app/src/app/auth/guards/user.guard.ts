@@ -1,6 +1,6 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
-import { UserService } from '../../auth/services/user.service';
+import { UserService } from '../services/user.service';
 import { ProjectPages } from '../../../environment/environment';
 
 export const userGuard: CanActivateFn = (route, state) => {

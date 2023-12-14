@@ -4,11 +4,11 @@ import {
   loadProfileStore,
   logoutSuccess,
   updateUserNameSuccess,
-} from '../actions/user.actions';
-import { IUserProfileInformation } from '../../auth/models/user.model';
+} from './user.actions';
+import { IUserProfileInformationTransformed } from '../models/user.model';
 
 export interface UserState {
-  user: IUserProfileInformation;
+  user: IUserProfileInformationTransformed;
 }
 
 export const initialUserState: UserState = {
