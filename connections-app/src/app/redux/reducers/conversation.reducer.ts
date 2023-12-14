@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { IConversationItemTransformed } from '../../core/models/conversation.model';
 import {
   createNewConversationSuccess,
+  deleteConversationSuccess,
   loadConversationListStore,
   loadConversationListSuccess,
 } from '../actions/conversation.actions';
@@ -25,6 +26,12 @@ export const conversationReducer = createReducer(
     return {
       ...state,
       conversationList: [...state.conversationList, conversation],
+    };
+  }),
+  on(deleteConversationSuccess, (state, { id }) => {
+    return {
+      ...state,
+      conversationList: [...state.conversationList.filter((item) => item.id !== id)],
     };
   })
 );
