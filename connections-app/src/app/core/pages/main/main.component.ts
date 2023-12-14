@@ -53,7 +53,6 @@ export class MainComponent implements OnInit {
   isInConversationList(uid: string): Observable<boolean> | undefined {
     return this.conversationList$?.pipe(
       map((conversationList) => conversationList.some((item) => item.companionID === uid))
-      // todo: update this after conversation was deleted on the specific page
     );
   }
 
@@ -65,7 +64,6 @@ export class MainComponent implements OnInit {
 
   onUpdateButtonClick(): void {
     this.store.dispatch(loadGroupListDirectHttp());
-    this.groupService.isExceptionSubject.next(true);
   }
 
   onDeleteGroupButtonClick(id: string): void {
@@ -78,12 +76,10 @@ export class MainComponent implements OnInit {
 
   onUpdatePeopleListButtonClick(): void {
     this.store.dispatch(loadPeopleListDirectHttp());
-    this.peopleService.isExceptionSubject.next(true);
   }
 
   onUserNameClick(companionId: string, isConversationCreated: boolean): void {
     if (!isConversationCreated) {
-      // todo: add spinner here to prevent user to click several times before new con is created
       this.store.dispatch(createNewConversation({ companionId }));
     }
   }

@@ -20,7 +20,10 @@
 
   .main {
     display: flex;
+    flex-wrap: wrap;
     margin-top: 5rem;
+    justify-content: center;
+    min-width: 80rem
   }
 
   .group-list-container,
@@ -130,7 +133,10 @@
 :host-context(.dark-theme) {
   .main {
     display: flex;
+    flex-wrap: wrap;
     margin-top: 5rem;
+    justify-content: center;
+    min-width: 80rem
   }
 
   .group-list-container,

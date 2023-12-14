@@ -1,4 +1,8 @@
 :host-context(.light-theme) {
+  .wrapper {
+    min-width: 80rem;
+  }
+
   .toolbar {
     display: flex;
     justify-content: center;
@@ -34,6 +38,10 @@
 }
 
 :host-context(.dark-theme) {
+  .wrapper {
+    min-width: 80rem;
+  }
+
   .toolbar {
     display: flex;
     justify-content: center;

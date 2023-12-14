@@ -112,10 +112,8 @@ export class ConversationEffects {
       return this.actions$.pipe(
         ofType(createNewConversationSuccess),
         tap((action) => {
-          setTimeout(() => {
-            this.router.navigate([ProjectPages.Conversation, action.conversation.id]);
-            this.snackBarService.setSnackBar('New Conversation was created!');
-          }, 8000);
+          this.router.navigate([ProjectPages.Conversation, action.conversation.id]);
+          this.snackBarService.setSnackBar('New Conversation was created!');
         })
       );
     },

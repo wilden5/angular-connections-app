@@ -14,7 +14,6 @@ import {
 } from '../../../redux/actions/conversation.actions';
 // eslint-disable-next-line max-len
 import { selectSpecificConversationById } from '../../../redux/selectors/specificConversation.selectors';
-import { sendNewMessage } from '../../../redux/actions/dialog.actions';
 
 @Component({
   selector: 'app-conversation',
