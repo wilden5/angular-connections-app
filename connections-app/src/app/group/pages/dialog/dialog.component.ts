@@ -7,9 +7,11 @@ import { ProjectPages } from '../../../../environment/environment';
 import { loadGroupDialog, sendNewMessage } from '../../state/dialog/dialog.actions';
 import { selectDialogById } from '../../state/dialog/dialog.selectors';
 import { IGroupMessageTransformed } from '../../model/dialog.model';
-import { selectUserById } from '../../../redux/selectors/people.selectors';
+import { selectPeopleList, selectUserById } from '../../../redux/selectors/people.selectors';
 import { selectGroupById } from '../../state/group.selectors';
 import { ModalService } from '../../../core/services/modal.service';
+import { loadPeopleList } from '../../../redux/actions/people.actions';
+import { loadGroupList } from '../../state/group.actions';
 
 @Component({
   selector: 'app-group',
@@ -51,6 +53,16 @@ export class DialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.synchronizeGroupMessages();
+
+    this.store
+      .select(selectPeopleList)
+      .pipe(take(1))
+      .subscribe((list) => {
+        if (list.length === 0) {
+          this.store.dispatch(loadPeopleList());
+          this.store.dispatch(loadGroupList());
+        }
+      });
   }
 
   synchronizeGroupMessages(): void {
