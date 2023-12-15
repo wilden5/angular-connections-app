@@ -5,12 +5,11 @@ import { Observable, take, tap } from 'rxjs';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ProjectPages } from '../../../../environment/environment';
 import { ModalService } from '../../../core/services/modal.service';
-import { ConversationService } from '../../services/conversation.service';
-import { selectUserById } from '../../../redux/selectors/people.selectors';
+import { selectPeopleList, selectUserById } from '../../../redux/selectors/people.selectors';
 import { IDiscussionMessageTransformed } from '../../model/discussion.model';
 import { loadDiscussion, sendDiscussionMessage } from '../../state/discussion/discussion.actions';
 import { selectSpecificConversationById } from '../../state/discussion/discussion.selectors';
-// eslint-disable-next-line max-len
+import { loadPeopleList } from '../../../redux/actions/people.actions';
 
 @Component({
   selector: 'app-conversation',
@@ -43,7 +42,6 @@ export class DiscussionComponent implements OnInit {
   constructor(
     protected store: Store,
     protected modalService: ModalService,
-    protected conversationService: ConversationService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {
@@ -53,6 +51,15 @@ export class DiscussionComponent implements OnInit {
 
   ngOnInit(): void {
     this.synchronizeConversationMessages();
+
+    this.store
+      .select(selectPeopleList)
+      .pipe(take(1))
+      .subscribe((list) => {
+        if (list.length === 0) {
+          this.store.dispatch(loadPeopleList());
+        }
+      });
   }
 
   get message(): AbstractControl {
