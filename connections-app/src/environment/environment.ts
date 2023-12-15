@@ -24,4 +24,9 @@ export const projectConstants = {
   profileUpdateSuccess: 'Profile information was received!',
   userNameUpdateSuccess: 'User name was updated!',
   userLogoutSuccess: 'User has been logout successfully!',
+  groupListLoadSuccess: 'Group list was received!',
+  groupDeletedSuccess: 'Group was Deleted successfully!',
+  groupCreatedSuccess: 'Group was Created successfully!',
+  dialogLoadSuccess: 'Group messages was loaded!',
+  dialogNewMessageSuccess: 'New message was sent!',
 };

@@ -22,8 +22,8 @@ import { UserEffects } from './auth/state/user.effects';
 import { userReducer } from './auth/state/user.reducer';
 import { MainComponent } from './core/pages/main/main.component';
 import { ApiInterceptor } from './core/interceptors/api.interceptor';
-import { groupReducer } from './redux/reducers/group.reducer';
-import { GroupEffects } from './redux/effects/group.effects';
+import { groupReducer } from './group/state/group.reducer';
+import { GroupEffects } from './group/state/group.effects';
 // eslint-disable-next-line max-len
 import { ConfirmationModalComponent } from './core/components/confirmation-modal/confirmation-modal.component';
 // eslint-disable-next-line max-len
@@ -32,8 +32,8 @@ import { peopleReducer } from './redux/reducers/people.reducer';
 import { PeopleEffects } from './redux/effects/people.effects';
 import { ConversationEffects } from './redux/effects/conversation.effects';
 import { conversationReducer } from './redux/reducers/conversation.reducer';
-import { DialogEffects } from './redux/effects/dialog.effects';
-import { dialogReducer } from './redux/reducers/dialog.reducer';
+import { DialogEffects } from './group/state/dialog/dialog.effects';
+import { dialogReducer } from './group/state/dialog/dialog.reducer';
 import { specificConversationReducer } from './redux/reducers/specificConversation.reducer';
 import { PageNotFoundComponent } from './core/pages/page-not-found/page-not-found.component';
 import { HeaderComponent } from './core/components/header/header.component';

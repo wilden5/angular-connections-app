@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
-import { GroupService } from '../../services/group.service';
-import { loadGroupList, loadGroupListDirectHttp } from '../../../redux/actions/group.actions';
-import { selectGroupList } from '../../../redux/selectors/group.selectors';
+import { GroupService } from '../../../group/services/group.service';
+import { loadGroupList, loadGroupListDirectHttp } from '../../../group/state/group.actions';
+import { selectGroupList } from '../../../group/state/group.selectors';
 import { ProjectPages } from '../../../../environment/environment';
 import { ModalService } from '../../services/modal.service';
 import { selectPeopleList } from '../../../redux/selectors/people.selectors';

@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
 // eslint-disable-next-line max-len
 import { ConfirmationModalComponent } from '../components/confirmation-modal/confirmation-modal.component';
-import { createGroup, deleteGroup } from '../../redux/actions/group.actions';
+import { createGroup, deleteGroup } from '../../group/state/group.actions';
 // eslint-disable-next-line max-len
 import { CreateGroupModalComponent } from '../components/create-group-modal/create-group-modal.component';
 import { deleteConversation } from '../../redux/actions/conversation.actions';

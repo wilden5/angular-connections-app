@@ -4,12 +4,11 @@ import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, take, tap } from 'rxjs';
 import { ProjectPages } from '../../../../environment/environment';
-import { loadGroupDialog, sendNewMessage } from '../../../redux/actions/dialog.actions';
-import { selectDialogById } from '../../../redux/selectors/dialog.selectors';
-import { IGroupMessageTransformed } from '../../../core/models/group.model';
+import { loadGroupDialog, sendNewMessage } from '../../state/dialog/dialog.actions';
+import { selectDialogById } from '../../state/dialog/dialog.selectors';
+import { IGroupMessageTransformed } from '../../model/dialog.model';
 import { selectUserById } from '../../../redux/selectors/people.selectors';
-import { selectGroupById } from '../../../redux/selectors/group.selectors';
-import { DialogService } from '../../services/dialog.service';
+import { selectGroupById } from '../../state/group.selectors';
 import { ModalService } from '../../../core/services/modal.service';
 
 @Component({
@@ -44,7 +43,6 @@ export class DialogComponent implements OnInit {
     private fb: FormBuilder,
     protected store: Store,
     private activatedRoute: ActivatedRoute,
-    protected dialogService: DialogService,
     protected modalService: ModalService
   ) {
     this.authorUid = JSON.parse(localStorage.getItem('userObject')!).uid;
@@ -82,18 +80,14 @@ export class DialogComponent implements OnInit {
 
   onUpdateButtonClick(): void {
     this.synchronizeGroupMessages();
-    this.dialogService.isExceptionSubject.next(true);
-    // todo: Implement timer3
   }
 
   onSendNewMessageButtonClick(message: string): void {
-    this.dialogService.isExceptionSubject.next(true);
     this.store.dispatch(sendNewMessage({ newMessage: { groupID: this.groupID, message } }));
     this.chatForm.reset();
 
     setTimeout(() => {
       this.synchronizeGroupMessages();
-      this.dialogService.isExceptionSubject.next(false);
     }, 1500);
   }
 

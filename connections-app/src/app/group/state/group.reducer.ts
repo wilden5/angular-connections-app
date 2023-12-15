@@ -1,11 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
-import { IGroupItemTransformed } from '../../core/models/group.model';
+import { IGroupItemTransformed } from '../model/group.model';
 import {
   createGroupSuccess,
   deleteGroupSuccess,
   loadGroupListHttpSuccess,
   loadGroupListStore,
-} from '../actions/group.actions';
+} from './group.actions';
 
 export interface GroupState {
   groupList: IGroupItemTransformed[];

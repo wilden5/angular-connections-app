@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { IDialogList } from '../../core/models/group.model';
-import { loadGroupDialogHttpSuccess } from '../actions/dialog.actions';
+import { IDialogList } from '../../model/dialog.model';
+import { loadGroupDialogHttpSuccess } from './dialog.actions';
 
 export interface DialogState {
   dialogList: IDialogList;

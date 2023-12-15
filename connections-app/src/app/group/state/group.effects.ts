@@ -16,12 +16,12 @@ import {
   loadGroupListHttpFailure,
   loadGroupListHttpSuccess,
   loadGroupListStore,
-} from '../actions/group.actions';
-import { GroupService } from '../../core/services/group.service';
+} from './group.actions';
+import { GroupService } from '../services/group.service';
 import { loadProfileHttpFailure } from '../../auth/state/user.actions';
-import { selectGroupList } from '../selectors/group.selectors';
+import { selectGroupList } from './group.selectors';
 import { ModalService } from '../../core/services/modal.service';
-import { ProjectPages } from '../../../environment/environment';
+import { projectConstants, ProjectPages } from '../../../environment/environment';
 
 @Injectable()
 export class GroupEffects {
@@ -61,8 +61,7 @@ export class GroupEffects {
       return this.actions$.pipe(
         ofType(loadGroupListHttpSuccess),
         tap(() => {
-          this.groupService.isExceptionSubject.next(false);
-          this.snackBarService.setSnackBar('Group list was received!');
+          this.snackBarService.setSnackBar(projectConstants.groupListLoadSuccess);
         })
       );
     },
@@ -74,7 +73,6 @@ export class GroupEffects {
       return this.actions$.pipe(
         ofType(loadGroupListHttpFailure),
         tap((action) => {
-          this.groupService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar(action.error.error.message);
         })
       );
@@ -119,8 +117,7 @@ export class GroupEffects {
       return this.actions$.pipe(
         ofType(deleteGroupSuccess),
         tap(() => {
-          this.modalService.isExceptionSubject.next(false);
-          this.snackBarService.setSnackBar('Group was Deleted successfully!');
+          this.snackBarService.setSnackBar(projectConstants.groupDeletedSuccess);
           this.router.navigate([ProjectPages.Empty]);
         })
       );
@@ -133,7 +130,6 @@ export class GroupEffects {
       return this.actions$.pipe(
         ofType(deleteGroupFailure),
         tap((action) => {
-          this.modalService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar(action.error.error.message);
         })
       );
@@ -160,9 +156,7 @@ export class GroupEffects {
       return this.actions$.pipe(
         ofType(createGroupSuccess),
         tap(() => {
-          this.modalService.isExceptionSubject.next(false);
-          this.snackBarService.setSnackBar('Group was Created successfully!');
-          // todo: move plain text to constants object
+          this.snackBarService.setSnackBar(projectConstants.groupCreatedSuccess);
         })
       );
     },
@@ -174,7 +168,6 @@ export class GroupEffects {
       return this.actions$.pipe(
         ofType(createGroupFailure),
         tap((action) => {
-          this.modalService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar(action.error.error.message);
         })
       );

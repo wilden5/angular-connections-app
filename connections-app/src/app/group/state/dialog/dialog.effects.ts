@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { catchError, concatMap, map, of, tap } from 'rxjs';
-import { SnackBarService } from '../../core/services/snackbar.service';
+import { SnackBarService } from '../../../core/services/snackbar.service';
 import {
   loadGroupDialog,
   loadGroupDialogHttpFailure,
@@ -10,14 +9,14 @@ import {
   sendNewMessage,
   sendNewMessageFailure,
   sendNewMessageSuccess,
-} from '../actions/dialog.actions';
-import { DialogService } from '../../group/services/dialog.service';
+} from './dialog.actions';
+import { DialogService } from '../../services/dialog.service';
+import { projectConstants } from '../../../../environment/environment';
 
 @Injectable()
 export class DialogEffects {
   constructor(
     private actions$: Actions,
-    private store: Store,
     private snackBarService: SnackBarService,
     private dialogService: DialogService
   ) {}
@@ -59,8 +58,7 @@ export class DialogEffects {
       return this.actions$.pipe(
         ofType(loadGroupDialogHttpSuccess),
         tap(() => {
-          this.snackBarService.setSnackBar('Group messages was loaded!');
-          this.dialogService.isExceptionSubject.next(false);
+          this.snackBarService.setSnackBar(projectConstants.dialogLoadSuccess);
         })
       );
     },
@@ -73,7 +71,6 @@ export class DialogEffects {
         ofType(loadGroupDialogHttpFailure),
         tap((action) => {
           this.snackBarService.setSnackBar(action.error.error.message);
-          this.dialogService.isExceptionSubject.next(false);
         })
       );
     },
@@ -99,8 +96,7 @@ export class DialogEffects {
       return this.actions$.pipe(
         ofType(sendNewMessageSuccess),
         tap(() => {
-          this.snackBarService.setSnackBar('New message was sent!');
-          this.dialogService.isExceptionSubject.next(false);
+          this.snackBarService.setSnackBar(projectConstants.dialogNewMessageSuccess);
         })
       );
     },
@@ -113,7 +109,6 @@ export class DialogEffects {
         ofType(sendNewMessageFailure),
         tap((action) => {
           this.snackBarService.setSnackBar(action.error.error.message);
-          this.dialogService.isExceptionSubject.next(false);
         })
       );
     },

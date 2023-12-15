@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
   IGroupDialogResponse,
   IGroupMessage,
   IGroupMessageTransformed,
   INewMessage,
-} from '../../core/models/group.model';
+} from '../model/dialog.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DialogService {
-  public isExceptionSubject = new BehaviorSubject<boolean>(false);
-
   constructor(private http: HttpClient) {}
 
   transformGroupMessage(groupItem: IGroupMessage[]): IGroupMessageTransformed[] {

@@ -1,11 +1,12 @@
 import { IUserProfileInformationTransformed } from '../auth/models/user.model';
-import { IDialogList, IGroupItemTransformed } from '../core/models/group.model';
+import { IGroupItemTransformed } from '../group/model/group.model';
 import { IPersonTransformed } from '../core/models/people.model';
 import {
   IConversationItemTransformed,
   IConversationListObject,
 } from '../core/models/conversation.model';
 import { ISpinnerStatus } from '../core/models/spinner.model';
+import { IDialogList } from '../group/model/dialog.model';
 
 export interface RootState {
   readonly isLoading: ISpinnerStatus;

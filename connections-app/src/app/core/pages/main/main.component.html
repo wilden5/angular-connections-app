@@ -8,7 +8,6 @@
         class="update-button">
         UPDATE GROUP LIST
       </button>
-      <!--todo: try to implement fucking timer-->
       <button
         (click)="onCreateGroupButtonClick()"
         mat-raised-button
@@ -45,7 +44,6 @@
       class="update-people-button">
       UPDATE PEOPLE LIST
     </button>
-    <!--todo: try to implement fucking timer2-->
     <ng-container *ngIf="peopleList$ | async as peopleList">
       <div class="people-list">
         <h2 class="people-header">Available users:</h2>

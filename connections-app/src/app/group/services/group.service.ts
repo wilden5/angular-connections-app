@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { GroupResponse, IGroup, IGroupItem, IGroupItemTransformed } from '../models/group.model';
+import { Observable } from 'rxjs';
+import {
+  IGroupCreationResponse,
+  IGroupResponse,
+  IGroupItem,
+  IGroupItemTransformed,
+} from '../model/group.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GroupService {
-  public isExceptionSubject = new BehaviorSubject<boolean>(false);
-
   constructor(private http: HttpClient) {}
 
   transformProfileInformation(groupItem: IGroupItem[]): IGroupItemTransformed[] {
@@ -20,8 +23,8 @@ export class GroupService {
     }));
   }
 
-  getGroupList(): Observable<IGroup> {
-    return this.http.get<IGroup>('https://tasks.app.rs.school/angular/groups/list');
+  getGroupList(): Observable<IGroupResponse> {
+    return this.http.get<IGroupResponse>('https://tasks.app.rs.school/angular/groups/list');
   }
 
   deleteGroup(id: string): Observable<void> {
@@ -30,9 +33,12 @@ export class GroupService {
     );
   }
 
-  createNewGroup(name: string): Observable<GroupResponse> {
-    return this.http.post<GroupResponse>('https://tasks.app.rs.school/angular/groups/create', {
-      name,
-    });
+  createNewGroup(name: string): Observable<IGroupCreationResponse> {
+    return this.http.post<IGroupCreationResponse>(
+      'https://tasks.app.rs.school/angular/groups/create',
+      {
+        name,
+      }
+    );
   }
 }

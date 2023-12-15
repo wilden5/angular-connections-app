@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { IGroupMessageTransformed, INewMessage } from '../../core/models/group.model';
-import { IServerError } from '../../core/models/server-error.model';
+import { IGroupMessageTransformed, INewMessage } from '../../model/dialog.model';
+import { IServerError } from '../../../core/models/server-error.model';
 
 export const loadGroupDialog = createAction(
   '[DIALOG] Load Group Dialog Request',
