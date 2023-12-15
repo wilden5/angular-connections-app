@@ -1,4 +1,4 @@
-export interface IPeopleList {
+export interface IPeopleListResponse {
   $metadata: {
     httpStatusCode: number;
     requestId: string;

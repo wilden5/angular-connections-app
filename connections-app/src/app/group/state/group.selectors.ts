@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { RootState } from '../../redux/root.state';
+import { RootState } from '../../core/state/root.state';
 
 export const selectRootState = createFeatureSelector<RootState>('groupList');
 

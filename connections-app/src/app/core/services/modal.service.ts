@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject } from 'rxjs';
 // eslint-disable-next-line max-len
 import { ConfirmationModalComponent } from '../components/confirmation-modal/confirmation-modal.component';
 import { createGroup, deleteGroup } from '../../group/state/group.actions';
@@ -13,8 +12,6 @@ import { deleteDiscussion } from '../../conversation/state/discussion/discussion
   providedIn: 'root',
 })
 export class ModalService {
-  public isExceptionSubject = new BehaviorSubject<boolean>(false);
-
   constructor(
     private dialog: MatDialog,
     private store: Store
@@ -25,7 +22,6 @@ export class ModalService {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.isExceptionSubject.next(true);
         if (isGroup) {
           this.store.dispatch(deleteGroup({ id }));
         } else {
@@ -40,7 +36,6 @@ export class ModalService {
     // todo: modal window should be closed only if http-request succeeded
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.isExceptionSubject.next(true);
         this.store.dispatch(createGroup({ name: result }));
       }
     });

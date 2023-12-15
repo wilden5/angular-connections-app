@@ -5,11 +5,11 @@ import { Observable, take, tap } from 'rxjs';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ProjectPages } from '../../../../environment/environment';
 import { ModalService } from '../../../core/services/modal.service';
-import { selectPeopleList, selectUserById } from '../../../redux/selectors/people.selectors';
+import { selectPeopleList, selectUserById } from '../../../core/state/people/people.selectors';
 import { IDiscussionMessageTransformed } from '../../model/discussion.model';
 import { loadDiscussion, sendDiscussionMessage } from '../../state/discussion/discussion.actions';
 import { selectSpecificConversationById } from '../../state/discussion/discussion.selectors';
-import { loadPeopleList } from '../../../redux/actions/people.actions';
+import { loadPeopleList } from '../../../core/state/people/people.actions';
 
 @Component({
   selector: 'app-conversation',

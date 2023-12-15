@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { IPeopleList, IPerson, IPersonTransformed } from '../models/people.model';
+import { Observable } from 'rxjs';
+import { IPeopleListResponse, IPerson, IPersonTransformed } from '../models/people.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PeopleService {
-  public isExceptionSubject = new BehaviorSubject<boolean>(false);
-
   constructor(private http: HttpClient) {}
 
   transformPersonInformation(peopleList: IPerson[]): IPersonTransformed[] {
@@ -18,7 +16,7 @@ export class PeopleService {
     }));
   }
 
-  getPeopleList(): Observable<IPeopleList> {
-    return this.http.get<IPeopleList>('https://tasks.app.rs.school/angular/users');
+  getPeopleList(): Observable<IPeopleListResponse> {
+    return this.http.get<IPeopleListResponse>('https://tasks.app.rs.school/angular/users');
   }
 }

@@ -147,7 +147,6 @@ export class DiscussionEffects {
       return this.actions$.pipe(
         ofType(deleteDiscussionSuccess),
         tap(() => {
-          this.modalService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar('Conversation was Deleted successfully!');
           this.router.navigate([ProjectPages.Empty]);
         })

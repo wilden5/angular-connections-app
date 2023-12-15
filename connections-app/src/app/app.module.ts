@@ -28,8 +28,8 @@ import { GroupEffects } from './group/state/group.effects';
 import { ConfirmationModalComponent } from './core/components/confirmation-modal/confirmation-modal.component';
 // eslint-disable-next-line max-len
 import { CreateGroupModalComponent } from './core/components/create-group-modal/create-group-modal.component';
-import { peopleReducer } from './redux/reducers/people.reducer';
-import { PeopleEffects } from './redux/effects/people.effects';
+import { peopleReducer } from './core/state/people/people.reducer';
+import { PeopleEffects } from './core/state/people/people.effects';
 import { ConversationEffects } from './conversation/state/conversation.effects';
 import { conversationReducer } from './conversation/state/conversation.reducer';
 import { DialogEffects } from './group/state/dialog/dialog.effects';
@@ -38,7 +38,7 @@ import { discussionReducer } from './conversation/state/discussion/discussion.re
 import { PageNotFoundComponent } from './core/pages/page-not-found/page-not-found.component';
 import { HeaderComponent } from './core/components/header/header.component';
 import { SpinnerComponent } from './core/components/spinner/spinner.component';
-import { spinnerReducer } from './redux/reducers/spinner.reducer';
+import { spinnerReducer } from './core/state/spinner/spinner.reducer';
 import { DiscussionEffects } from './conversation/state/discussion/discussion.effects';
 
 @NgModule({

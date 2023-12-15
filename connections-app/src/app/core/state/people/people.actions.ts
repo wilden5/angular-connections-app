@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { IPersonTransformed } from '../../core/models/people.model';
-import { IServerError } from '../../core/models/server-error.model';
+import { IPersonTransformed } from '../../models/people.model';
+import { IServerError } from '../../models/server-error.model';
 
 export const loadPeopleList = createAction('[PEOPLE] Load People List Request');
 

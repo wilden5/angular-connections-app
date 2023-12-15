@@ -7,10 +7,10 @@ import { ProjectPages } from '../../../../environment/environment';
 import { loadGroupDialog, sendNewMessage } from '../../state/dialog/dialog.actions';
 import { selectDialogById } from '../../state/dialog/dialog.selectors';
 import { IGroupMessageTransformed } from '../../model/dialog.model';
-import { selectPeopleList, selectUserById } from '../../../redux/selectors/people.selectors';
+import { selectPeopleList, selectUserById } from '../../../core/state/people/people.selectors';
 import { selectGroupById } from '../../state/group.selectors';
 import { ModalService } from '../../../core/services/modal.service';
-import { loadPeopleList } from '../../../redux/actions/people.actions';
+import { loadPeopleList } from '../../../core/state/people/people.actions';
 import { loadGroupList } from '../../state/group.actions';
 
 @Component({

@@ -1,14 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
-import { GroupService } from '../../../group/services/group.service';
 import { loadGroupList, loadGroupListDirectHttp } from '../../../group/state/group.actions';
 import { selectGroupList } from '../../../group/state/group.selectors';
 import { ProjectPages } from '../../../../environment/environment';
 import { ModalService } from '../../services/modal.service';
-import { selectPeopleList } from '../../../redux/selectors/people.selectors';
-import { loadPeopleList, loadPeopleListDirectHttp } from '../../../redux/actions/people.actions';
-import { PeopleService } from '../../services/people.service';
+import { selectPeopleList } from '../../state/people/people.selectors';
+import { loadPeopleList, loadPeopleListDirectHttp } from '../../state/people/people.actions';
 import {
   createNewConversation,
   loadConversationList,
@@ -36,9 +34,7 @@ export class MainComponent implements OnInit {
 
   constructor(
     protected store: Store,
-    protected groupService: GroupService,
-    protected modalService: ModalService,
-    protected peopleService: PeopleService
+    protected modalService: ModalService
   ) {}
 
   ngOnInit(): void {

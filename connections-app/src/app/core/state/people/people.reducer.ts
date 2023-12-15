@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { IPersonTransformed } from '../../core/models/people.model';
-import { loadPeopleListHttpSuccess, loadPeopleListStore } from '../actions/people.actions';
+import { IPersonTransformed } from '../../models/people.model';
+import { loadPeopleListHttpSuccess, loadPeopleListStore } from './people.actions';
 
 export interface PeopleState {
   peopleList: IPersonTransformed[];

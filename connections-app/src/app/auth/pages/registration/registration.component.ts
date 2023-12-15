@@ -10,7 +10,7 @@ import { projectConstants, ProjectPages } from '../../../../environment/environm
 import { registerNewUser } from '../../state/user.actions';
 import { IUserRegistration } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
-import { startLoading } from '../../../redux/actions/spinner.actions';
+import { startLoading } from '../../../core/state/spinner/spinner.actions';
 
 @Component({
   selector: 'app-registration',

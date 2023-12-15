@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
-import { PeopleService } from '../../core/services/people.service';
-import { SnackBarService } from '../../core/services/snackbar.service';
+import { PeopleService } from '../../services/people.service';
+import { SnackBarService } from '../../services/snackbar.service';
 import {
   loadPeopleList,
   loadPeopleListDirectHttp,
   loadPeopleListHttpFailure,
   loadPeopleListHttpSuccess,
   loadPeopleListStore,
-} from '../actions/people.actions';
-import { selectPeopleList } from '../selectors/people.selectors';
+} from './people.actions';
+import { selectPeopleList } from './people.selectors';
 
 @Injectable()
 export class PeopleEffects {
@@ -49,7 +49,6 @@ export class PeopleEffects {
       return this.actions$.pipe(
         ofType(loadPeopleListHttpSuccess),
         tap(() => {
-          this.peopleService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar('People list was received!');
         })
       );
@@ -62,7 +61,6 @@ export class PeopleEffects {
       return this.actions$.pipe(
         ofType(loadPeopleListHttpFailure),
         tap((action) => {
-          this.peopleService.isExceptionSubject.next(false);
           this.snackBarService.setSnackBar(action.error.error.message);
         })
       );
