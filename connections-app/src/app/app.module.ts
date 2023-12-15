@@ -30,15 +30,16 @@ import { ConfirmationModalComponent } from './core/components/confirmation-modal
 import { CreateGroupModalComponent } from './core/components/create-group-modal/create-group-modal.component';
 import { peopleReducer } from './redux/reducers/people.reducer';
 import { PeopleEffects } from './redux/effects/people.effects';
-import { ConversationEffects } from './redux/effects/conversation.effects';
-import { conversationReducer } from './redux/reducers/conversation.reducer';
+import { ConversationEffects } from './conversation/state/conversation.effects';
+import { conversationReducer } from './conversation/state/conversation.reducer';
 import { DialogEffects } from './group/state/dialog/dialog.effects';
 import { dialogReducer } from './group/state/dialog/dialog.reducer';
-import { specificConversationReducer } from './redux/reducers/specificConversation.reducer';
+import { discussionReducer } from './conversation/state/discussion/discussion.reducer';
 import { PageNotFoundComponent } from './core/pages/page-not-found/page-not-found.component';
 import { HeaderComponent } from './core/components/header/header.component';
 import { SpinnerComponent } from './core/components/spinner/spinner.component';
 import { spinnerReducer } from './redux/reducers/spinner.reducer';
+import { DiscussionEffects } from './conversation/state/discussion/discussion.effects';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { spinnerReducer } from './redux/reducers/spinner.reducer';
       peopleList: peopleReducer,
       conversationList: conversationReducer,
       dialogList: dialogReducer,
-      conversationHistoryList: specificConversationReducer,
+      conversationHistoryList: discussionReducer,
       isLoading: spinnerReducer,
     }),
     EffectsModule.forRoot([
@@ -71,6 +72,7 @@ import { spinnerReducer } from './redux/reducers/spinner.reducer';
       PeopleEffects,
       ConversationEffects,
       DialogEffects,
+      DiscussionEffects,
     ]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     MatButtonModule,

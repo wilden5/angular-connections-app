@@ -4,10 +4,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConversationRoutingModule } from './conversation-routing.module';
-import { ConversationComponent } from './pages/conversation/conversation.component';
+import { DiscussionComponent } from './pages/discussion/discussion.component';
 
 @NgModule({
-  declarations: [ConversationComponent],
+  declarations: [DiscussionComponent],
   imports: [
     CommonModule,
     ConversationRoutingModule,

@@ -5,23 +5,20 @@ import { Observable, take, tap } from 'rxjs';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ProjectPages } from '../../../../environment/environment';
 import { ModalService } from '../../../core/services/modal.service';
-import { ConversationService } from '../../../core/services/conversation.service';
-import { IConversationMessageTransformed } from '../../../core/models/conversation.model';
+import { ConversationService } from '../../services/conversation.service';
 import { selectUserById } from '../../../redux/selectors/people.selectors';
-import {
-  loadSpecificConversation,
-  sendConversationMessage,
-} from '../../../redux/actions/conversation.actions';
+import { IDiscussionMessageTransformed } from '../../model/discussion.model';
+import { loadDiscussion, sendDiscussionMessage } from '../../state/discussion/discussion.actions';
+import { selectSpecificConversationById } from '../../state/discussion/discussion.selectors';
 // eslint-disable-next-line max-len
-import { selectSpecificConversationById } from '../../../redux/selectors/specificConversation.selectors';
 
 @Component({
   selector: 'app-conversation',
-  templateUrl: './conversation.component.html',
-  styleUrls: ['./conversation.component.scss'],
+  templateUrl: './discussion.component.html',
+  styleUrls: ['./discussion.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConversationComponent implements OnInit {
+export class DiscussionComponent implements OnInit {
   protected readonly selectUserById = selectUserById;
 
   protected readonly selectSpecificConversationById = selectSpecificConversationById;
@@ -34,7 +31,7 @@ export class ConversationComponent implements OnInit {
 
   protected conversationResponse$:
     | Observable<{
-        messages: IConversationMessageTransformed[];
+        messages: IDiscussionMessageTransformed[];
         since: number;
       }>
     | undefined;
@@ -72,12 +69,10 @@ export class ConversationComponent implements OnInit {
         tap((item) => {
           if (item) {
             this.store.dispatch(
-              loadSpecificConversation({ conversationID: this.conversationID, since: item.since })
+              loadDiscussion({ conversationID: this.conversationID, since: item.since })
             );
           } else {
-            this.store.dispatch(
-              loadSpecificConversation({ conversationID: this.conversationID, since: 0 })
-            );
+            this.store.dispatch(loadDiscussion({ conversationID: this.conversationID, since: 0 }));
           }
         })
       )
@@ -87,8 +82,6 @@ export class ConversationComponent implements OnInit {
 
   onUpdateButtonClick(): void {
     this.synchronizeConversationMessages();
-    this.conversationService.isExceptionSubject.next(true);
-    // todo: Implement timer4
   }
 
   onDeleteConversationButtonClick(): void {
@@ -96,9 +89,8 @@ export class ConversationComponent implements OnInit {
   }
 
   onSendNewMessageButtonClick(message: string): void {
-    this.conversationService.isExceptionSubject.next(true);
     this.store.dispatch(
-      sendConversationMessage({
+      sendDiscussionMessage({
         conversationMessage: { conversationID: this.conversationID, message },
       })
     );
@@ -106,11 +98,10 @@ export class ConversationComponent implements OnInit {
 
     setTimeout(() => {
       this.synchronizeConversationMessages();
-      this.conversationService.isExceptionSubject.next(false);
     }, 1500);
   }
 
-  isAuthorMessage(message: IConversationMessageTransformed): string {
+  isAuthorMessage(message: IDiscussionMessageTransformed): string {
     return this.authorUid === message.authorID ? 'author-message' : '';
   }
 }

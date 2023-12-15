@@ -1,22 +1,19 @@
 import { createReducer, on } from '@ngrx/store';
-import { IConversationListObject } from '../../core/models/conversation.model';
-import {
-  deleteConversationSuccess,
-  loadSpecificConversationSuccess,
-} from '../actions/conversation.actions';
+import { IDiscussionList } from '../../model/discussion.model';
+import { deleteDiscussionSuccess, loadDiscussionSuccess } from './discussion.actions';
 
 export interface ConversationHistoryState {
-  conversationHistoryList: IConversationListObject;
+  conversationHistoryList: IDiscussionList;
 }
 
 export const initialConversationHistoryState: ConversationHistoryState = {
   conversationHistoryList: {},
 };
 
-export const specificConversationReducer = createReducer(
+export const discussionReducer = createReducer(
   initialConversationHistoryState,
   on(
-    loadSpecificConversationSuccess,
+    loadDiscussionSuccess,
     (state, { conversationMessages, conversationID, since }): ConversationHistoryState => {
       const existingMessageHistory = state.conversationHistoryList[conversationID]?.messages || [];
       return {
@@ -31,7 +28,7 @@ export const specificConversationReducer = createReducer(
       };
     }
   ),
-  on(deleteConversationSuccess, (state, { id }): ConversationHistoryState => {
+  on(deleteDiscussionSuccess, (state, { id }): ConversationHistoryState => {
     const { [id]: removeItem, ...remainingItems } = state.conversationHistoryList;
     return { ...state, conversationHistoryList: remainingItems };
   })

@@ -12,10 +12,10 @@ import { PeopleService } from '../../services/people.service';
 import {
   createNewConversation,
   loadConversationList,
-} from '../../../redux/actions/conversation.actions';
+} from '../../../conversation/state/conversation.actions';
 import { IPersonTransformed } from '../../models/people.model';
-import { selectConversationList } from '../../../redux/selectors/conversation.selectors';
-import { IConversationItemTransformed } from '../../models/conversation.model';
+import { selectConversationList } from '../../../conversation/state/conversation.selectors';
+import { IConversationItemTransformed } from '../../../conversation/model/conversation.model';
 
 @Component({
   selector: 'app-main',

@@ -4,8 +4,6 @@
     <div class="control-buttons">
       <button
         (click)="onUpdateButtonClick()"
-        [disabled]="(conversationService.isExceptionSubject | async) === true
-          || (modalService.isExceptionSubject | async) === true"
         mat-raised-button
         color="primary"
         class="update-button">
@@ -13,8 +11,6 @@
       </button>
       <button
         (click)="onDeleteConversationButtonClick()"
-        [disabled]="(conversationService.isExceptionSubject | async) === true
-          || (modalService.isExceptionSubject | async) === true"
         mat-raised-button
         color="warn"
         class="delete-button">
@@ -51,7 +47,7 @@
         </mat-form-field>
       </form>
       <button
-        [disabled]="chatForm.invalid || (modalService.isExceptionSubject | async) === true"
+        [disabled]="chatForm.invalid"
         (click)="onSendNewMessageButtonClick(textInput.value)"
         mat-raised-button
         color="primary"

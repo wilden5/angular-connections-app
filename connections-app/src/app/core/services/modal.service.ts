@@ -7,7 +7,7 @@ import { ConfirmationModalComponent } from '../components/confirmation-modal/con
 import { createGroup, deleteGroup } from '../../group/state/group.actions';
 // eslint-disable-next-line max-len
 import { CreateGroupModalComponent } from '../components/create-group-modal/create-group-modal.component';
-import { deleteConversation } from '../../redux/actions/conversation.actions';
+import { deleteDiscussion } from '../../conversation/state/discussion/discussion.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +29,7 @@ export class ModalService {
         if (isGroup) {
           this.store.dispatch(deleteGroup({ id }));
         } else {
-          this.store.dispatch(deleteConversation({ id }));
+          this.store.dispatch(deleteDiscussion({ id }));
         }
       }
     });

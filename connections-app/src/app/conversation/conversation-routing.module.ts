@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProjectPages } from '../../environment/environment';
-import { ConversationComponent } from './pages/conversation/conversation.component';
+import { DiscussionComponent } from './pages/discussion/discussion.component';
 import { authGuard } from '../auth/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: `${ProjectPages.ConversationId}`,
-    component: ConversationComponent,
+    component: DiscussionComponent,
     canActivate: [authGuard],
   },
 ];

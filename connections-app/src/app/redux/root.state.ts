@@ -1,12 +1,10 @@
 import { IUserProfileInformationTransformed } from '../auth/models/user.model';
 import { IGroupItemTransformed } from '../group/model/group.model';
 import { IPersonTransformed } from '../core/models/people.model';
-import {
-  IConversationItemTransformed,
-  IConversationListObject,
-} from '../core/models/conversation.model';
+import { IConversationItemTransformed } from '../conversation/model/conversation.model';
 import { ISpinnerStatus } from '../core/models/spinner.model';
 import { IDialogList } from '../group/model/dialog.model';
+import { IDiscussionList } from '../conversation/model/discussion.model';
 
 export interface RootState {
   readonly isLoading: ISpinnerStatus;
@@ -15,5 +13,5 @@ export interface RootState {
   readonly peopleList: IPersonTransformed[];
   readonly conversationList: IConversationItemTransformed[];
   readonly dialogList: IDialogList;
-  readonly conversationHistoryList: IConversationListObject;
+  readonly conversationHistoryList: IDiscussionList;
 }
