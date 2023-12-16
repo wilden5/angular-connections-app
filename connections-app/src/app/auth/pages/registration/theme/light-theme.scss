@@ -1,0 +1,43 @@
+@mixin light-theme {
+  :host,
+  .registration-form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .registration-header {
+    margin-top: 3rem;
+    font-size: 4rem;
+  }
+
+  .registration-form {
+    margin: 3rem;
+  }
+
+  .registration-field {
+    min-width: 35rem;
+  }
+
+  .registration-button {
+    width: 100%;
+  }
+
+  .login-page-link {
+    font-size: 2rem;
+    text-decoration: none;
+    color: red;
+    transition: 0.7s;
+
+    &:hover {
+      color: black;
+    }
+  }
+
+  .duplicate-error {
+    color: red;
+    font-size: 1.2rem;
+  }
+
+}

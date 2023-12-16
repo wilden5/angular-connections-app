@@ -1,0 +1,46 @@
+@mixin light-theme {
+  :host,
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .profile-header {
+    margin-top: 3rem;
+    font-size: 4rem;
+  }
+
+  .profile-field {
+    min-width: 35rem;
+  }
+
+  .profile-error-container {
+    display: flex;
+    max-width: 90rem;
+    flex-direction: column;
+  }
+
+  .profile-error-text {
+    text-align: center;
+    font-size: 4rem;
+    line-height: 1.5;
+  }
+
+  .logout-button {
+    width: 15rem !important;
+    margin-top: 5rem;
+    align-self: center;
+    background-color: #e77b0e !important;
+  }
+
+  .name-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cancel-button {
+    margin-bottom: 2rem;
+  }
+}

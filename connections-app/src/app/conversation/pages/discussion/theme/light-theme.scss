@@ -1,0 +1,146 @@
+@mixin light-theme {
+  :host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+  }
+
+  .control-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    gap: 1rem;
+    align-self: center;
+    margin-bottom: 2rem;
+  }
+
+  .update-button,
+  .delete-button,
+  .send-button{
+    font-family: "Agency FB", serif;
+    font-size: 2.5rem;
+  }
+
+
+  .message-container {
+    display: flex;
+    flex-direction: column;
+    width: 90rem;
+    background-color: antiquewhite;
+    padding: 2rem;
+    overflow: auto;
+    height: 50rem;
+  }
+
+  .message-form {
+    width: 100%;
+    align-self: center;
+  }
+
+  .message-input {
+    resize: none;
+  }
+
+  .item-info {
+    display: flex;
+  }
+
+  .wrapper {
+    padding: 1rem;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & .item-info {
+      align-self: flex-end;
+    }
+
+    & .author {
+      order: 1;
+    }
+  }
+
+  .author {
+    font-family: "Agency FB", serif;
+    margin-right: 1rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    font-size: 1.7rem;
+  }
+
+  .message {
+    display: block;
+    min-width: 10rem;
+    max-width: 700px;
+    padding: 14px 18px;
+    margin: 6px 8px;
+    background-color: #6C8EA4;
+    border-radius: 0 16px 16px 16px;
+    border: 1px solid #54788e;
+    color: white;
+    font-size: 2rem;
+  }
+
+  .author-message {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+
+    & .message {
+      font-size: 2rem;
+      min-width: 60px;
+      max-width: 700px;
+      padding: 14px 18px;
+      margin: 6px 8px;
+      background-color: #5b5377;
+      border-radius: 16px 16px 0 16px;
+      border: 1px solid #443f56;
+    }
+
+    & .item-info {
+      align-self: flex-end;
+    }
+
+    & .author {
+      order: 0;
+    }
+  }
+
+  .main-page-link {
+    margin-top: 5rem;
+    font-size: 3rem;
+    font-weight: 800;
+    text-decoration: none;
+    color: red;
+    transition: 0.7s;
+    align-self: center;
+    font-family: "Agency FB", serif;
+
+    &:hover {
+      color: black;
+    }
+  }
+
+  .chat-form {
+    margin-top: 2rem;
+    display: flex;
+  }
+
+  .created-at {
+    color: #4F4F4F;
+  }
+
+  .form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 90%;
+  }
+}

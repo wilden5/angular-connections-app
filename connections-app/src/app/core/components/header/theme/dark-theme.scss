@@ -1,0 +1,40 @@
+@mixin dark-theme {
+  .wrapper {
+    min-width: 80rem;
+  }
+
+  .toolbar {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    background-color: white !important;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: center;
+  }
+
+  .navbar-list {
+    display: flex;
+    gap: 5rem;
+    list-style: none;
+  }
+
+  .navbar-link {
+    color: black;
+    padding: 1.6rem 1.6rem;
+    text-decoration: none;
+    font-size: 3rem;
+
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  }
+
+  .theme-button {
+    font-size: 1.5rem;
+    color: black;
+  }
+}

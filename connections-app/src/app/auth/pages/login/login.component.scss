@@ -1,35 +1,10 @@
-:host,
-.login-form {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
+@import './theme/light-theme.scss';
+@import './theme/dark-theme.scss';
+
+:host-context(.light-theme) {
+  @include light-theme();
 }
 
-.login-header {
-  margin-top: 3rem;
-  font-size: 4rem;
-}
-
-.login-form {
-  margin: 3rem;
-}
-
-.login-field {
-  min-width: 35rem;
-}
-
-.login-button {
-  width: 100%;
-}
-
-.registration-page-link {
-  font-size: 2rem;
-  text-decoration: none;
-  color: red;
-  transition: 0.7s;
-
-  &:hover {
-    color: black;
-  }
+:host-context(.dark-theme) {
+  @include dark-theme();
 }

@@ -1,0 +1,51 @@
+@mixin dark-theme {
+  :host,
+  .registration-form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .registration-header {
+    margin-top: 3rem;
+    font-size: 4rem;
+    color: white;
+  }
+
+  .registration-form {
+    margin: 3rem;
+  }
+
+  .registration-field {
+    min-width: 35rem;
+  }
+
+  .registration-button {
+    width: 100%;
+    background-color: white;
+    color: black;
+
+    &:disabled {
+      background-color: gray;
+      color: white;
+    }
+  }
+
+  .login-page-link {
+    font-size: 2rem;
+    text-decoration: none;
+    color: white;
+    transition: 0.7s;
+
+    &:hover {
+      color: yellow;
+    }
+  }
+
+  .duplicate-error {
+    color: red;
+    font-size: 1.2rem;
+  }
+
+}

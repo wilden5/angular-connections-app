@@ -1,0 +1,45 @@
+@mixin dark-theme {
+  :host,
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .login-header {
+    margin-top: 3rem;
+    font-size: 4rem;
+    color: white;
+  }
+
+  .login-form {
+    margin: 3rem;
+  }
+
+  .login-field {
+    min-width: 35rem;
+  }
+
+  .login-button {
+    width: 100%;
+    background-color: white;
+    color: black;
+
+    &:disabled {
+      background-color: gray;
+      color: white;
+    }
+  }
+
+  .registration-page-link {
+    font-size: 2rem;
+    text-decoration: none;
+    color: white;
+    transition: 0.7s;
+
+    &:hover {
+      color: yellow;
+    }
+  }
+}
