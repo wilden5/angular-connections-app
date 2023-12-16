@@ -22,6 +22,7 @@ import { loadProfileHttpFailure } from '../../auth/state/user.actions';
 import { selectGroupList } from './group.selectors';
 import { ModalService } from '../../core/services/modal.service';
 import { projectConstants, ProjectPages } from '../../../environment/environment';
+import { transformGroupInformation } from '../../utils/data-transformer';
 
 @Injectable()
 export class GroupEffects {
@@ -45,7 +46,7 @@ export class GroupEffects {
         return this.groupService.getGroupList().pipe(
           map((groupListHttp) =>
             loadGroupListHttpSuccess({
-              groupList: this.groupService.transformProfileInformation(groupListHttp.Items),
+              groupList: transformGroupInformation(groupListHttp.Items),
             })
           ),
           catchError((error) => {
@@ -87,7 +88,7 @@ export class GroupEffects {
         this.groupService.getGroupList().pipe(
           map((groupListHttp) =>
             loadGroupListHttpSuccess({
-              groupList: this.groupService.transformProfileInformation(groupListHttp.Items),
+              groupList: transformGroupInformation(groupListHttp.Items),
             })
           ),
           catchError((error) => {

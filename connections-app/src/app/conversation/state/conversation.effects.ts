@@ -17,6 +17,7 @@ import {
 import { ProjectPages } from '../../../environment/environment';
 import { selectConversationList } from './conversation.selectors';
 import { IConversationItemTransformed } from '../model/conversation.model';
+import { transformConversationInformation } from '../../utils/data-transformer';
 
 @Injectable()
 export class ConversationEffects {
@@ -39,9 +40,7 @@ export class ConversationEffects {
         return this.conversationService.getConversationList().pipe(
           map((conversationListHttp) =>
             loadConversationListSuccess({
-              conversationList: this.conversationService.transformConversationInformation(
-                conversationListHttp.Items
-              ),
+              conversationList: transformConversationInformation(conversationListHttp.Items),
             })
           ),
           catchError((error) => {

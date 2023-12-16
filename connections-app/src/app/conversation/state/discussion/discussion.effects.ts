@@ -17,6 +17,7 @@ import {
   sendDiscussionMessageFailure,
   sendDiscussionMessageSuccess,
 } from './discussion.actions';
+import { transformDiscussionMessage } from '../../../utils/data-transformer';
 
 @Injectable()
 export class DiscussionEffects {
@@ -40,7 +41,7 @@ export class DiscussionEffects {
               );
               return loadDiscussionSuccess({
                 since: lastMessageTime,
-                conversationMessages: this.discussionService.transformDiscussionMessage(
+                conversationMessages: transformDiscussionMessage(
                   conversationResponse.Items.sort(
                     (a, b) => Number(a.createdAt.S) - Number(b.createdAt.S)
                   )

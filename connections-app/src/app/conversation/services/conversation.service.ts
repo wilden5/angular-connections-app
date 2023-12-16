@@ -3,8 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {
   ICreateConversationResponse,
-  IConversationItem,
-  IConversationItemTransformed,
   IConversationListResponse,
 } from '../model/conversation.model';
 
@@ -13,13 +11,6 @@ import {
 })
 export class ConversationService {
   constructor(private http: HttpClient) {}
-
-  transformConversationInformation(groupItem: IConversationItem[]): IConversationItemTransformed[] {
-    return groupItem.map((item) => ({
-      id: item.id.S,
-      companionID: item.companionID.S,
-    }));
-  }
 
   createConversation(companion: string): Observable<ICreateConversationResponse> {
     return this.http.post<ICreateConversationResponse>(

@@ -33,7 +33,6 @@ export class ModalService {
 
   openCreateGroupDialog(): void {
     const dialogRef = this.dialog.open(CreateGroupModalComponent);
-    // todo: modal window should be closed only if http-request succeeded
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.store.dispatch(createGroup({ name: result }));

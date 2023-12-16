@@ -12,6 +12,7 @@ import {
 } from './dialog.actions';
 import { DialogService } from '../../services/dialog.service';
 import { projectConstants } from '../../../../environment/environment';
+import { transformGroupMessage } from '../../../utils/data-transformer';
 
 @Injectable()
 export class DialogEffects {
@@ -33,7 +34,7 @@ export class DialogEffects {
               );
               return loadGroupDialogHttpSuccess({
                 since: lastMessageTime,
-                groupMessages: this.dialogService.transformGroupMessage(
+                groupMessages: transformGroupMessage(
                   groupDialog.Items.sort((a, b) => Number(a.createdAt.S) - Number(b.createdAt.S))
                 ),
                 groupID: action.groupID,

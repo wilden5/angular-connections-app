@@ -5,7 +5,6 @@ import {
   IUserProfileInformation,
   IUserRegistration,
   IUserAuthenticated,
-  IUserProfileInformationTransformed,
 } from '../models/user.model';
 
 @Injectable({
@@ -17,15 +16,6 @@ export class UserService {
   public previousEnteredEmail = new BehaviorSubject<string>('initialValue');
 
   constructor(private http: HttpClient) {}
-
-  transformProfileInformation(data: IUserProfileInformation): IUserProfileInformationTransformed {
-    return {
-      createdAt: data.createdAt.S,
-      uid: data.uid.S,
-      email: data.email.S,
-      name: data.name.S,
-    };
-  }
 
   register(user: IUserRegistration): Observable<IUserRegistration> {
     return this.http.post<IUserRegistration>(

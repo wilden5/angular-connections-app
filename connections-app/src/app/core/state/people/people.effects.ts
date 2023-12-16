@@ -12,6 +12,7 @@ import {
   loadPeopleListStore,
 } from './people.actions';
 import { selectPeopleList } from './people.selectors';
+import { transformPersonInformation } from '../../../utils/data-transformer';
 
 @Injectable()
 export class PeopleEffects {
@@ -33,7 +34,7 @@ export class PeopleEffects {
         return this.peopleService.getPeopleList().pipe(
           map((peopleList) =>
             loadPeopleListHttpSuccess({
-              peopleList: this.peopleService.transformPersonInformation(peopleList.Items),
+              peopleList: transformPersonInformation(peopleList.Items),
             })
           ),
           catchError((error) => {
@@ -75,7 +76,7 @@ export class PeopleEffects {
         this.peopleService.getPeopleList().pipe(
           map((peopleList) =>
             loadPeopleListHttpSuccess({
-              peopleList: this.peopleService.transformPersonInformation(peopleList.Items),
+              peopleList: transformPersonInformation(peopleList.Items),
             })
           ),
           catchError((error) => {

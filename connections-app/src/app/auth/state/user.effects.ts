@@ -26,6 +26,7 @@ import { projectConstants, ProjectPages } from '../../../environment/environment
 import { SnackBarService } from '../../core/services/snackbar.service';
 import { IUserProfileHeaders } from '../models/user.model';
 import { selectUser } from './user.selectors';
+import { transformProfileInformation } from '../../utils/data-transformer';
 
 @Injectable()
 export class UserEffects {
@@ -135,8 +136,7 @@ export class UserEffects {
         return this.userService.getProfileInformation().pipe(
           map((profileInformationHttp) =>
             loadProfileHttpSuccess({
-              profileInformation:
-                this.userService.transformProfileInformation(profileInformationHttp),
+              profileInformation: transformProfileInformation(profileInformationHttp),
             })
           ),
           catchError((error) => {
