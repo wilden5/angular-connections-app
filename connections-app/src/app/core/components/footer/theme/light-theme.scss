@@ -1,0 +1,38 @@
+@mixin light-theme {
+  .toolbar {
+    display: flex;
+    justify-content: center;
+  }
+
+  .wrapper {
+    display: flex;
+    font-size: 4.2rem;
+    letter-spacing: 0.1rem;
+    font-weight: 800;
+    font-family: "Agency FB", serif;
+  }
+
+  .right-biceps {
+    display: inline-block;
+    font-size: 3.3rem;
+    transform:scale(-1, 1);
+    width:fit-content;
+    margin-left: -0.5rem;
+  }
+
+  .left-biceps {
+    font-size: 3.3rem;
+    margin-right: -0.7rem;
+  }
+
+  .footer-link {
+    text-decoration: none;
+    color: inherit;
+    transition: ease-in-out .7s;
+
+    &:hover {
+      color: gold;
+    }
+  }
+
+}

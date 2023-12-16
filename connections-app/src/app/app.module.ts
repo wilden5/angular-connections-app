@@ -40,6 +40,7 @@ import { HeaderComponent } from './core/components/header/header.component';
 import { SpinnerComponent } from './core/components/spinner/spinner.component';
 import { spinnerReducer } from './core/state/spinner/spinner.reducer';
 import { DiscussionEffects } from './conversation/state/discussion/discussion.effects';
+import { FooterComponent } from './core/components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { DiscussionEffects } from './conversation/state/discussion/discussion.ef
     PageNotFoundComponent,
     HeaderComponent,
     SpinnerComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
