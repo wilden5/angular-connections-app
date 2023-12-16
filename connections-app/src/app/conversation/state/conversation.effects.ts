@@ -18,6 +18,7 @@ import { ProjectPages } from '../../../environment/environment';
 import { selectConversationList } from './conversation.selectors';
 import { IConversationItemTransformed } from '../model/conversation.model';
 import { transformConversationInformation } from '../../utils/data-transformer';
+import { selectPeopleList } from '../../core/state/people/people.selectors';
 
 @Injectable()
 export class ConversationEffects {
@@ -32,9 +33,12 @@ export class ConversationEffects {
   loadConversationList$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loadConversationList),
-      concatLatestFrom(() => this.store.select(selectConversationList)),
-      switchMap(([actions, conversationList]) => {
-        if (conversationList.length > 0) {
+      concatLatestFrom(() => [
+        this.store.select(selectConversationList),
+        this.store.select(selectPeopleList),
+      ]),
+      switchMap(([actions, conversationList, peopleList]) => {
+        if (conversationList.length > 0 || peopleList.length > 0) {
           return of(loadConversationListStore());
         }
         return this.conversationService.getConversationList().pipe(

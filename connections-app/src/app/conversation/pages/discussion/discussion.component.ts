@@ -10,6 +10,7 @@ import { IDiscussionMessageTransformed } from '../../model/discussion.model';
 import { loadDiscussion, sendDiscussionMessage } from '../../state/discussion/discussion.actions';
 import { selectSpecificConversationById } from '../../state/discussion/discussion.selectors';
 import { loadPeopleList } from '../../../core/state/people/people.actions';
+import { loadConversationList } from '../../state/conversation.actions';
 
 @Component({
   selector: 'app-conversation',
@@ -58,6 +59,7 @@ export class DiscussionComponent implements OnInit {
       .subscribe((list) => {
         if (list.length === 0) {
           this.store.dispatch(loadPeopleList());
+          this.store.dispatch(loadConversationList());
         }
       });
   }

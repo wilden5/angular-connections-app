@@ -12,6 +12,7 @@ import { selectGroupById } from '../../state/group.selectors';
 import { ModalService } from '../../../core/services/modal.service';
 import { loadPeopleList } from '../../../core/state/people/people.actions';
 import { loadGroupList } from '../../state/group.actions';
+import { loadConversationList } from '../../../conversation/state/conversation.actions';
 
 @Component({
   selector: 'app-group',
@@ -61,6 +62,7 @@ export class DialogComponent implements OnInit {
         if (list.length === 0) {
           this.store.dispatch(loadPeopleList());
           this.store.dispatch(loadGroupList());
+          this.store.dispatch(loadConversationList());
         }
       });
   }
