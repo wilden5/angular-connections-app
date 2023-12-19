@@ -1,0 +1,50 @@
+<h2 class="registration-header">Registration form:</h2>
+<form
+  class="registration-form"
+  [formGroup]="registrationForm"
+  (ngSubmit)="onSubmitRegistrationForm()">
+  <mat-form-field class="registration-field">
+    <mat-label>Name</mat-label>
+    <mat-error>{{displayNameValidationMessage()}}</mat-error>
+    <input matInput type="text" formControlName="name" placeholder="Your Name Here" />
+  </mat-form-field>
+  <mat-form-field class="registration-field">
+    <mat-label>Email</mat-label>
+    <mat-error>{{displayEmailValidationMessage()}}</mat-error>
+    <span
+      class="duplicate-error"
+      [hidden]="(userService.previousEnteredEmail | async) !== userEmail.value"
+      >User with such email already exists</span
+    >
+    <input
+      #userEmail
+      matInput
+      type="text"
+      formControlName="email"
+      placeholder="Your Email Here"
+      autocomplete="user-email" />
+  </mat-form-field>
+  <mat-form-field class="registration-field">
+    <mat-label>Password</mat-label>
+    <mat-error *ngIf="password.invalid">
+      <span>{{customPasswordValidationMessages(password)}}</span>
+    </mat-error>
+    <input
+      matInput
+      type="text"
+      formControlName="password"
+      placeholder="Your Password Here"
+      autocomplete="user-password" />
+  </mat-form-field>
+  <button
+    class="registration-button"
+    mat-raised-button
+    color="primary"
+    [disabled]="registrationForm.invalid
+      || (userService.previousEnteredEmail | async) === userEmail.value">
+    Submit Form
+  </button>
+</form>
+<a class="login-page-link" [routerLink]="['/' + ProjectPages.Auth, ProjectPages.Login]"
+  >Already Registered?</a
+>

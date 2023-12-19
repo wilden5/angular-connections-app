@@ -3,7 +3,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { SharedModule } from '../shared/shared.module';
-import { CustomButtonComponent } from '../shared/components/custom-button.component';
+import { CustomButtonComponent } from '../shared/components/custom-button/custom-button.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { MainComponent } from './pages/main/main.component';
 import { LoggerService } from './services/logger/logger.service';

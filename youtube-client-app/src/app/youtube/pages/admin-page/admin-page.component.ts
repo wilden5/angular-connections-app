@@ -15,6 +15,8 @@ import { customURLValidator } from '../../validators/url.validator';
   styleUrls: ['./admin-page.component.scss'],
 })
 export class AdminPageComponent {
+  protected readonly ProjectPath = ProjectPath;
+
   adminForm = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     description: ['', Validators.maxLength(255)],

@@ -1,0 +1,11 @@
+@import './theme/light-theme.scss';
+@import './theme/dark-theme.scss';
+
+:host-context(.light-theme) {
+  @include light-theme();
+}
+
+:host-context(.dark-theme) {
+  @include dark-theme();
+}
+

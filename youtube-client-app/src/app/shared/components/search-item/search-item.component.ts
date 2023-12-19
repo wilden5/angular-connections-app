@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
-import { ISearchItem, IVideoId } from '../../models/search-item.model';
+import { ISearchItem, IVideoId } from '../../../youtube/models/search-item.model';
 import { AppState } from '../../../redux/app.state';
 import { deleteCustomItem } from '../../../redux/actions/custom-item.actions';
 import { addYoutubeItemToFavoriteList } from '../../../redux/actions/youtube-items.actions';

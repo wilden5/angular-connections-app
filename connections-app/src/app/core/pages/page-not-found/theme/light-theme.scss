@@ -1,0 +1,40 @@
+@mixin light-theme {
+  .wrapper {
+    font-family: "Agency FB", serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-width: 90rem;
+  }
+
+  .header {
+    font-family: "Agency FB", serif;
+    font-size: 10rem;
+    margin-bottom: 3rem;
+  }
+
+  .message {
+    font-size: 5rem;
+    margin-bottom: 10rem;
+  }
+
+  .main-link {
+    font-size: 5rem;
+    font-weight: 800;
+    text-decoration: none;
+    color: red;
+    transition: 0.7s;
+    align-self: center;
+
+    &:hover {
+      color: black;
+    }
+  }
+
+  .page-url {
+    color: red;
+    font-weight: 800;
+  }
+}

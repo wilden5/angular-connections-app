@@ -4,11 +4,14 @@ import { NgOptimizedImage } from '@angular/common';
 import { Router } from '@angular/router';
 import { HeaderComponent } from './header.component';
 import { SharedModule } from '../../../shared/shared.module';
-import { CustomButtonComponent } from '../../../shared/components/custom-button.component';
+import { CustomButtonComponent } from '../../../shared/components/custom-button/custom-button.component';
 import { FiltersVisibilityService } from '../../../youtube/services/filters-visibility.service';
 import { LoginService } from '../../../auth/services/login.service';
 import { SearchService } from '../../../youtube/services/search.service';
 import { ProjectPath } from '../../../utils/project-constants';
+import { Store, StoreModule } from '@ngrx/store';
+import { AppState } from '../../../redux/app.state';
+import { itemsReducer } from '../../../redux/reducers/items.reducer';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -17,12 +20,21 @@ describe('HeaderComponent', () => {
   let loginService: LoginService;
   let searchService: SearchService;
   let router: Router;
+  let store: Store<AppState>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [HeaderComponent],
-      imports: [SharedModule, CustomButtonComponent, NgOptimizedImage],
+      imports: [
+        SharedModule,
+        CustomButtonComponent,
+        NgOptimizedImage,
+        StoreModule.forRoot({
+          appState: itemsReducer,
+        }),
+      ],
     });
+    store = TestBed.inject(Store);
     router = TestBed.inject(Router);
     filtersVisibilityService = TestBed.inject(FiltersVisibilityService);
     loginService = TestBed.inject(LoginService);

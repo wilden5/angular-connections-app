@@ -1,0 +1,67 @@
+<div class="main">
+  <div class="group-list-container">
+    <div class="buttons-container">
+      <button
+        (click)="onUpdateButtonClick()"
+        mat-raised-button
+        color="primary"
+        class="update-button">
+        UPDATE GROUP LIST
+      </button>
+      <button
+        (click)="onCreateGroupButtonClick()"
+        mat-raised-button
+        color="primary"
+        class="update-button">
+        CREATE A NEW GROUP
+      </button>
+    </div>
+    <ng-container *ngIf="store.select(selectGroupList) | async as groupList">
+      <div class="group-list">
+        <h2 class="group-header">Available groups:</h2>
+        <div class="group-wrapper">
+          <div class="specific-group" *ngFor="let item of groupList; let i = index">
+            <a class="specific-link" [routerLink]="[ProjectPages.Group, item.id]"
+              >{{i + 1}}: {{item.name}}</a
+            >
+            <button
+              *ngIf="userUid === item.createdBy"
+              mat-raised-button
+              color="accent"
+              (click)="onDeleteGroupButtonClick(item.id)">
+              DELETE
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="people-list-container">
+    <button
+      (click)="onUpdatePeopleListButtonClick()"
+      mat-raised-button
+      color="primary"
+      class="update-people-button">
+      UPDATE PEOPLE LIST
+    </button>
+    <ng-container *ngIf="peopleList$ | async as peopleList">
+      <div class="people-list">
+        <h2 class="people-header">Available users:</h2>
+        <div class="people-wrapper">
+          <div
+            #specificConversation
+            class="specific-conversation"
+            [ngClass]="{'active-conversation': isInConversationList(user.uid) | async}"
+            *ngFor="let user of peopleList; let i = index">
+            <a
+              [routerLink]="(isInConversationList(user.uid) | async) ? [ProjectPages.Conversation, (getConversationId(user.uid) | async)] : null"
+              (click)="onUserNameClick(user.uid, specificConversation.classList.contains('active-conversation'))"
+              class="specific-link-conversation"
+              >{{i + 1}}: {{user.name}}</a
+            >
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<h2 class="profile-header">Profile Information</h2>
+<ng-container *ngIf="store.select(selectUser) | async as user; else emptyForm">
+  <form class="profile-form" [formGroup]="profileForm">
+    <mat-form-field class="profile-field">
+      <mat-label>Creation Date</mat-label>
+      <input matInput type="text" [value]="(user.createdAt | date: 'medium') ?? ''" disabled />
+    </mat-form-field>
+    <mat-form-field class="profile-field">
+      <mat-label>ID</mat-label>
+      <input matInput type="text" [value]="user.uid" disabled />
+    </mat-form-field>
+    <mat-form-field class="profile-field">
+      <mat-label>Email</mat-label>
+      <input matInput type="text" [value]="user.email" disabled />
+    </mat-form-field>
+    <div class="name-container">
+      <mat-form-field class="profile-field">
+        <mat-label>Name</mat-label>
+        <mat-error
+          >{{name.invalid && !name.dirty ? 'Field is required' : 'Should consist of ' +
+          'letters'}}</mat-error
+        >
+        <input matInput type="text" formControlName="name" [value]="user.name" #inputName />
+      </mat-form-field>
+      <button
+        *ngIf="name.disabled"
+        (click)="onEditButtonClick()"
+        class="edit-button"
+        type="button"
+        mat-raised-button
+        color="primary">
+        Edit
+      </button>
+      <button
+        *ngIf="!name.disabled"
+        (click)="onCancelButtonClick()"
+        class="cancel-button"
+        mat-raised-button
+        color="warn"
+        type="button">
+        Cancel
+      </button>
+      <button
+        [disabled]="profileForm.invalid"
+        *ngIf="!name.disabled"
+        (click)="onSaveButtonClick()"
+        class="save-button"
+        mat-raised-button
+        color="primary"
+        type="button">
+        Save
+      </button>
+    </div>
+  </form>
+  <button (click)="onLogoutButtonClick()" mat-raised-button color="primary" class="logout-button">
+    Logout
+  </button>
+</ng-container>
+
+<ng-template #emptyForm>
+  <img
+    class="app-logo"
+    [ngSrc]="'./assets/user-profile-error.jpg'"
+    alt="app-logo"
+    height="350"
+    width="350"
+    priority="true" />
+  <div class="profile-error-container">
+    <p class="profile-error-text">
+      Cannot get user profile information, please restore localStorage, and try to login one more
+      time!
+    </p>
+  </div>
+</ng-template>

@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login.component';
 import { SharedModule } from '../../../shared/shared.module';
-import { CustomButtonComponent } from '../../../shared/components/custom-button.component';
+import { CustomButtonComponent } from '../../../shared/components/custom-button/custom-button.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

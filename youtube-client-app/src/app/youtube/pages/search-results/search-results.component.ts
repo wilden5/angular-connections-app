@@ -1,16 +1,13 @@
-import { Component, DestroyRef, OnInit } from '@angular/core';
-import { debounceTime, distinctUntilChanged, filter, Observable, take } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component } from '@angular/core';
+import { Observable, take } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ISearchItem } from '../../models/search-item.model';
 import { FiltersVisibilityService } from '../../services/filters-visibility.service';
-import { SearchService } from '../../services/search.service';
 import { projectConstants } from '../../../utils/project-constants';
 import { SnackBarService } from '../../../core/services/snack-bar.service';
 import {
   loadNextYoutubeItemsPage,
   loadPrevYoutubeItemsPage,
-  searchYoutubeItems,
   sortYoutubeItems,
 } from '../../../redux/actions/youtube-items.actions';
 import {
@@ -28,7 +25,7 @@ import { YoutubeItemService } from '../../services/youtube-item.service';
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss'],
 })
-export class SearchResultsComponent implements OnInit {
+export class SearchResultsComponent {
   protected readonly selectAllItems = selectAllItems;
 
   isSortAscViews = true;
@@ -42,25 +39,9 @@ export class SearchResultsComponent implements OnInit {
   constructor(
     private snackBarService: SnackBarService,
     protected filtersVisibilityService: FiltersVisibilityService,
-    protected searchService: SearchService,
-    private destroyRef: DestroyRef,
     protected store: Store<AppState>,
     protected youtubeItemService: YoutubeItemService
   ) {}
-
-  ngOnInit(): void {
-    this.searchService
-      .getSearchQueryObservable()
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        debounceTime(1000),
-        filter((searchQuery) => searchQuery.length > 2),
-        distinctUntilChanged()
-      )
-      .subscribe((query) => {
-        this.store.dispatch(searchYoutubeItems({ query }));
-      });
-  }
 
   sortByViewsCount(): void {
     if (this.isSortAscViews) {

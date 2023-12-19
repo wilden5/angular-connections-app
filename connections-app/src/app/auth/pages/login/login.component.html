@@ -1,0 +1,37 @@
+<h2 class="login-header">Login form:</h2>
+<form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmitLoginForm()">
+  <mat-form-field class="login-field">
+    <mat-label>Email</mat-label>
+    <mat-error>{{displayEmailValidationMessage()}}</mat-error>
+    <input
+      matInput
+      type="text"
+      formControlName="email"
+      placeholder="Your Email Here"
+      autocomplete="user-email" />
+  </mat-form-field>
+  <mat-form-field class="login-field">
+    <mat-label>Password</mat-label>
+    <mat-error *ngIf="password.invalid">
+      <span>{{customPasswordValidationMessages(password)}}</span>
+    </mat-error>
+    <input
+      matInput
+      type="text"
+      formControlName="password"
+      placeholder="Your Password Here"
+      autocomplete="user-password" />
+  </mat-form-field>
+  <button
+    class="login-button"
+    mat-raised-button
+    color="primary"
+    [disabled]="loginForm.invalid || (userService.isExceptionSubject | async) === true">
+    Submit Form
+  </button>
+</form>
+<a
+  class="registration-page-link"
+  [routerLink]="['/' + ProjectPages.Auth, ProjectPages.Registration]"
+  >Create a new account</a
+>

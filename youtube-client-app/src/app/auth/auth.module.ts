@@ -5,7 +5,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
-import { CustomButtonComponent } from '../shared/components/custom-button.component';
+import { CustomButtonComponent } from '../shared/components/custom-button/custom-button.component';
 
 @NgModule({
   declarations: [LoginComponent, RegistrationComponent],
